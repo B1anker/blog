@@ -27,6 +27,7 @@ const EditorStyle = styled.div`
 
 const RendererStyle = styled.div`
   width: 50%;
+  height: 100%;
   border: 1px solid #d3d3d3;
   box-shadow: 0 0 3px rgba(0, 0, 0, .4);
   border-radius: 0 5px 5px 0;

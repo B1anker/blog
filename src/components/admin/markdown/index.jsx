@@ -19,8 +19,9 @@ export default class MarkDown extends Component {
         <Editor value={this.state.value}
           onChange={(value) => this.setState({value})} />
         <Renderer value={this.state.value}
+          parsable={this.state.parsable}
           onChange={(parsable) => this.setState({parsable})}/>
-        <SubmitStyle type='primary' disabled={this.state.parsable}>提交</SubmitStyle>
+        <SubmitStyle type='primary' disabled={!this.state.parsable}>提交</SubmitStyle>
       </MarkDownStyle>
     )
   }
