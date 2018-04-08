@@ -3,6 +3,12 @@ const user = {
   login: '/admin/login'
 }
 
+const post = {
+  list: '/post/list',
+  add: '/post/add'
+}
+
 export default {
-  user
+  user,
+  post
 }

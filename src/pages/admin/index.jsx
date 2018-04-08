@@ -15,9 +15,9 @@ export default class Login extends Component {
   }
 
   componentDidMount () {
-    // React.$http.get(api.user.info).then((res) => {
-    //   console.log(res)
-    // })
+    React.$http.get(api.user.info).then((res) => {
+      console.log(res)
+    })
     setTimeout(() => {
       this.contentEl.style.height = this.contentEl.parentNode.getBoundingClientRect().height - 2 * 24 + 'px'
     })

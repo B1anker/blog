@@ -60,19 +60,26 @@ const convertValue = (value) => {
           o.value.push(cur.match(/(?!-)\s*(.*)/)[1])
         }
       }
-      arrLike.push(Object.assign({}, o))
+      o.name && arrLike.push(Object.assign({}, o))
 
       result = result.map((r) => {
         return {
           name: r.split(':')[0],
           value: r.split(':')[1]
         }
-      }).concat(arrLike)
+      }).concat(arrLike).concat({
+        name: 'summary',
+        value: summary
+      })
     }
+    const headers = {}
+    result.forEach((r) => {
+      headers[r.name] = r.value
+    })
     return {
       renderValue: removeMore.replace(/---(.|\n)*---/g, ''),
       parsable: true,
-      headers: result
+      headers
     }
   } catch (err) {
     console.log(err)
@@ -97,7 +104,10 @@ export default class Renderer extends Component {
   static getDerivedStateFromProps (nextProps, prevState) {
     const { renderValue, headers, parsable } = convertValue(nextProps.value)
     if (parsable !== nextProps.parsable) {
-      nextProps.onChange(parsable)
+      nextProps.onChange({
+        parsable,
+        headers
+      })
     }
     return {
       renderValue
