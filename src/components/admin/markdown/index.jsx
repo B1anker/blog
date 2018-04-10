@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
-import Prism from 'prismjs'
 import Editor from './editor'
 import Renderer from './renderer'
 import { MarkDownStyle, SubmitStyle } from './style'
 import { message } from 'antd'
-import api from '@/http/api'
 
 export default class MarkDown extends Component {
   constructor (props) {

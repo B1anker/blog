@@ -1,7 +1,6 @@
 import { Avatar, Col, Dropdown, Icon, Layout, Menu, Row } from 'antd'
 import React, { Component } from 'react'
 import MarkDown from '../../components/admin/markdown'
-import api from '../../http/api'
 import styles from './style.less'
 const { Header, Sider, Content } = Layout
 

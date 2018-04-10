@@ -1,6 +1,5 @@
 import { Alert, message } from 'antd'
 import React, { Component } from 'react'
-import api from '../../http/api'
 import LoginForm from './login-form'
 import style from './style.less'
 
