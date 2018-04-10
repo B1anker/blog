@@ -30,7 +30,7 @@ export default class Login extends Component {
 
   login (username, password, remember) {
     return new Promise ((resolve, reject) => {
-      React.$http.post(api.user.login, {
+      this.$models.user.login({
         username,
         password
       }).then((res) => {

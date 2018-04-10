@@ -39,7 +39,7 @@ export default class MarkDown extends Component {
   }
 
   handleSubmit () {
-    React.$http.post(api.post.add, {
+    this.$models.post.addPost({
       ...this.headers,
       ...{
         content: this.state.value

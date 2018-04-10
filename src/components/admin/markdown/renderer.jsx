@@ -77,7 +77,7 @@ const convertValue = (value) => {
       headers[r.name] = r.value
     })
     return {
-      renderValue: removeMore.replace(/---(.|\n)*---/g, ''),
+      renderValue: removeMore.replace(/---\n(.|\n)*\n---/g, ''),
       parsable: true,
       headers
     }

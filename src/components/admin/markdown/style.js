@@ -69,6 +69,10 @@ const RendererStyle = styled.div`
   table tr:nth-child(2n) {
     background: #f6f8fa;
   }
+
+  img {
+    max-width: 100%;
+  }
 `
 
 export {
