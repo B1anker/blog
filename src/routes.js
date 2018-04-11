@@ -1,4 +1,4 @@
-import AC from './components/asyncComponent'
+import AC from './components/AsyncComponent'
 
 export default [
   {
