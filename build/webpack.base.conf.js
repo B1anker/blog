@@ -1,16 +1,17 @@
-const webpack = require("webpack");
-const HtmlWebPackPlugin = require("html-webpack-plugin");
-const path = require("path");
-const config = require("../config");
-const utils = require("./utils");
+const webpack = require("webpack")
+const HtmlWebPackPlugin = require("html-webpack-plugin")
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const path = require("path")
+const config = require("../config")
+const utils = require("./utils")
 
 const resolve = dir => {
-  return path.join(__dirname, "..", dir);
-};
+  return path.join(__dirname, "..", dir)
+}
 
 module.exports = {
   entry: [resolve("src/entry.jsx")],
-  devtool: 'source-map',
+  devtool: "source-map",
   output: {
     path: config.build.assetsRoot,
     publicPath:
@@ -38,39 +39,41 @@ module.exports = {
       {
         test: /\.(css|less)$/,
         use: [
-          'style-loader',
+          MiniCssExtractPlugin.loader,
           {
-            loader: 'css-loader',
+            loader: "css-loader",
             options: {
               importLoaders: 1,
               modules: true,
-              localIdentName: '[name]__[local]-[hash:base64:5]'
+              localIdentName: "[name]__[local]-[hash:base64:5]"
             }
           },
           {
-            loader: 'less-loader',
+            loader: "less-loader",
             options: {
               javascriptEnabled: true
             }
           }
         ],
-        exclude: [resolve('node_modules'), resolve('src/styles/lib')]
+        exclude: [resolve("node_modules"), resolve("src/styles/lib")]
       },
       {
         test: /\.(css|less)$/,
         use: [
-          'style-loader',
+          MiniCssExtractPlugin.loader,
           {
-            loader: 'css-loader'
+            loader: "css-loader"
           },
           {
-            loader: 'less-loader',
+            loader: "less-loader",
             options: {
               javascriptEnabled: true
             }
           }
         ],
-        include: ['highlightjs', 'codemirror', 'antd', ].map((path) => resolve(`node_modules/${path}`)).concat(resolve('src/styles/lib'))
+        include: ["highlightjs", "codemirror", "antd"]
+          .map(path => resolve(`node_modules/${path}`))
+          .concat(resolve("src/styles/lib"))
       },
       {
         test: /\.(png|jpe?g|gif|svg|ico)(\?.*)?$/,
@@ -89,21 +92,5 @@ module.exports = {
         }
       }
     ]
-  },
-  plugins: [
-    new HtmlWebPackPlugin({
-      template: "index.html",
-      filename: "index.html",
-      inject: true
-    })
-  ],
-  devServer: {
-    contentBase: resolve(__dirname, "dist"),
-    port: 8080,
-    host: "localhost",
-    overlay: true,
-    compress: true,
-    historyApiFallback: true,
-    proxy: config.dev.proxyTable
   }
-};
+}
