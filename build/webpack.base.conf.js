@@ -9,13 +9,6 @@ const resolve = dir => {
   return path.join(__dirname, '..', dir)
 }
 
-const genCssLoader = (loaders) => {
-  if (process.env.NODE_ENV === 'production') {
-    loaders.unshift(MiniCssExtractPlugin.loader)
-  }
-  return loaders
-}
-
 module.exports = {
   entry: [resolve('src/entry.jsx')],
   devtool: 'source-map',
@@ -46,7 +39,7 @@ module.exports = {
       },
       {
         test: /\.(css|less)$/,
-        use: genCssLoader([
+        use: [
           'style-loader',
           {
             loader: 'css-loader',
@@ -62,12 +55,12 @@ module.exports = {
               javascriptEnabled: true
             }
           }
-        ]),
+        ],
         exclude: [resolve('node_modules'), resolve('src/styles/lib')]
       },
       {
         test: /\.(css|less)$/,
-        use: genCssLoader([
+        use: [
           'style-loader',
           'css-loader',
           {
@@ -76,7 +69,7 @@ module.exports = {
               javascriptEnabled: true
             }
           }
-        ]),
+        ],
         include: ['highlightjs', 'codemirror', 'antd']
           .map(path => resolve(`node_modules/${path}`))
           .concat(resolve('src/styles/lib'))
