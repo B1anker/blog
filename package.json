@@ -5,8 +5,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build": "webpack --config build/webpack.prod.conf.js",
-    "dev": "webpack-dev-server --config build/webpack.dev.conf.js"
+    "build": "cross-env NODE_ENV=production webpack --config build/webpack.prod.conf.js",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.conf.js"
   },
   "dependencies": {
     "antd": "^3.4.0",
