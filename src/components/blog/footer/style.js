@@ -273,6 +273,10 @@ const FooterStyle = styled.footer`
 
   p {
     margin: 5px 0;
+
+    a {
+      color: #795548;
+    }
   }
 
   .face {

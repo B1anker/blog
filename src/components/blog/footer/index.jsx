@@ -29,8 +29,8 @@ export default class MyFooter extends Component {
       <FooterStyle>
         <div className="footer-image"></div>
         <p>博客已萌萌哒运行{this.convertGap(this.state.gap)}<span className="face">(●'◡'●)ﾉ♥</span></p>
-        <p>托管于vps. 七牛云 提供 CDN 服务. Google Analytics 提供网站统计服务.</p>
-        <p>© 2018 Hi, B1anker. 抄袭于Diygod. Theme By Sagiri v0.0.16.站点地图. 粤ICP备16024121号.</p>
+        <p>托管于vps. <a href="https://qiniu.com" target="_blank" ref="nofollow">七牛云</a> 提供 CDN 服务. <a href="https://www.google.com/analytics/" target="_blank" ref="nofollow">Google Analytics</a> 提供网站统计服务.</p>
+        <p>© 2018 Hi, B1anker. 抄袭于<a href="https://diygod.me/" target="_blank" ref="nofollow">Diygod</a>. Theme By <a href="https://github.com/DIYgod/hexo-theme-sagiri" target="_blank" ref="nofollow"></a>Sagiri v0.0.16.站点地图. 粤ICP备16024121号.</p>
         <p>Made with by B1anker.</p>
       </FooterStyle>
     )

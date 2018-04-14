@@ -1,6 +1,15 @@
 import React, { Component } from 'react'
+import styled from 'styled-components'
+import { Spin } from 'antd'
 
-export default (loadComponent, placeholder = '拼命加载中') => {
+const BodySpin = styled(Spin)`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`
+
+export default (loadComponent) => {
   return class AsyncComponent extends Component {
     constructor (props) {
       super(props)
@@ -33,7 +42,7 @@ export default (loadComponent, placeholder = '拼命加载中') => {
           <Child {...this.props} />
         )
       }
-      return placeholder
+      return <BodySpin size="large"/>
     }
   }
 }
