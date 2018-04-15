@@ -62,20 +62,9 @@ const Blur = styled.div`
   background-position: top;
   background-repeat: no-repeat;
 `
-
-const Poster = styled.div`
-  width: 100%;
-  height: 650px;
-  background-image: url('/src/assets/poster.png');
-  background-size: cover;
-  background-position: top;
-  background-repeat: no-repeat;
-`
-
 export {
   Navigator,
   Menu,
   MenuItem,
-  Blur,
-  Poster
+  Blur
 }

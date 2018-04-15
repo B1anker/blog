@@ -77,7 +77,10 @@ module.exports = {
       {
         test: /\.(png|jpe?g|gif|svg|ico)(\?.*)?$/,
         loader: 'url-loader',
-        options: {
+        options: process.env.NODE_ENV === 'development' ? {
+          limit: 10000,
+          name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
+        } : {
           limit: 10000,
           name: '/[name].[ext]',
           publicPath: 'https://cdn.b1anker.com/'
@@ -92,5 +95,11 @@ module.exports = {
         }
       }
     ]
-  }
+  },
+  plugins: [
+    new webpack.ContextReplacementPlugin(
+      /moment[\/\\]locale/,
+      /(zh-cn)\.js/
+    )
+  ]
 }

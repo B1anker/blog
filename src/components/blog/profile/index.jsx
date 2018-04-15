@@ -25,7 +25,9 @@ export default class Profile extends Component {
           {
             this.socials.map((social, index) => (
               <li className='social-item' key={index}>
-                <i className={`icon iconfont icon-${social.icon}`}></i>
+                <a href={social.url} target='_blank'>
+                  <i className={`icon iconfont icon-${social.icon}`}></i>
+                </a>
               </li>
             ))
           }

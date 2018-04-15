@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import hljs from 'highlightjs'
+import { highlightBlock } from 'highlightjs'
 import 'highlightjs/styles/solarized_light.css'
 
 export default class CodeBlock extends Component {
@@ -17,7 +17,7 @@ export default class CodeBlock extends Component {
   }
 
   highlightCode() {
-    hljs.highlightBlock(this.el)
+    highlightBlock(this.el)
   }
 
   render () {

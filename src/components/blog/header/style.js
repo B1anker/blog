@@ -22,6 +22,14 @@ const Poster = styled.div`
   background-size: cover;
   background-position: top;
   background-repeat: no-repeat;
+
+  @media only screen and (min-width: 1600px) {
+    height: 700px;
+  }
+
+  @media only screen and (min-width: 1920px) {
+    height: 800px;
+  }
 `
 
 export {

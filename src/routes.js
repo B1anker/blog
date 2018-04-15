@@ -9,6 +9,13 @@ export default [
     component: AC(() => import('./pages/home'))
   },
   {
+    name: '文章页',
+    icon: 'home',
+    path: '/post/:pid',
+    exact: true,
+    component: AC(() => import('./pages/post'))
+  },
+  {
     name: '登录页',
     path: '/login',
     component: AC(() => import('./pages/login'))

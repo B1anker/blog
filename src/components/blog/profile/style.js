@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import variable from '@/styles/styled/variable'
 
 const AVATAR_SIZE = '200px'
 const SOCIAL_ITEM_SIZE = '40px'
@@ -23,10 +24,13 @@ const ProfileStyle  = styled.div`
   }
 
   .social {
+    width: 200px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin: 0 auto;
     margin-top: 24px;
+    padding: 0;
 
     .social-item {
       display: flex;
@@ -37,12 +41,23 @@ const ProfileStyle  = styled.div`
       height: ${SOCIAL_ITEM_SIZE};
       background-color: #eee;
       cursor: pointer;
-    }
+      transition: background-color ease .3s;
 
-    .icon {
-      font-size: 20px;
-      color: #333;
+      .icon {
+        font-size: 20px;
+        color: #333;
+        transition: color ease .3s;
+      }
+
+      &:hover {
+        background-color: ${variable.BLUE};
+
+        .icon {
+          color: #ffffff;
+        }
+      }
     }
+  }
 `
 
 export {

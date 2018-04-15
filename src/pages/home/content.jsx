@@ -5,26 +5,12 @@ import { ContentStyle } from './style'
 import pick from 'lodash/pick'
 
 export default class Content extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      posts: []
-    }
-  }
-
-  async componentDidMount () {
-    const { data } = await this.$models.post.fetchPostList()
-    this.setState({
-      posts: data
-    })
-  }
-
   render () {
     return (
       <ContentStyle>
         <div className="posts">
           {
-            this.state.posts.map((post, index) => {
+            this.props.posts.map((post, index) => {
               const _post = pick(post, [
                 'title',
                 'tags',
@@ -33,11 +19,11 @@ export default class Content extends Component {
               ])
               Object.assign(_post, {
                 id: post._id,
-                render: post.summary,
+                render: this.props.type === 'summary' ? post.summary : post.content,
                 createTime: post.meta.createAt,
                 updateTime: post.meta.updateAt
               })
-              return <Post post={_post} key={index} />
+              return <Post post={_post} key={index} type={this.props.type} />
             })
           }
         </div>

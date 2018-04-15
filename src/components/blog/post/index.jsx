@@ -12,6 +12,13 @@ export default class Post extends Component {
 
   render () {
     const date = moment(this.post.createTime)
+    const readMore = (
+      <div className="read-all">
+        <Link className="btn" to={`/post/${this.post.id}`}>
+          阅读全文 &raquo;
+        </Link>
+      </div>
+    )
     return (
       <PostStyle>
         <div className="post-header">
@@ -63,11 +70,9 @@ export default class Post extends Component {
         <div className="post-badage">
           <span>{ this.post.catagory }</span>
         </div>
-        <div className="read-all">
-          <Link className="btn" to={`/post/${this.post.id}`}>
-            阅读全文 &raquo;
-          </Link>
-        </div>
+        {
+          this.props.type === 'summary' ? readMore : null
+        }
       </PostStyle>
     )
   }

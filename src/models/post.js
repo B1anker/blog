@@ -7,6 +7,10 @@ class Post extends Model {
     return this.fetch.get(`${this.modelName}/list`)
   }
 
+  fetchPost (pid) {
+    return this.fetch.get(`${this.modelName}/${pid}`)
+  }
+
   addPost (data) {
     return this.fetch.post(`${this.modelName}/add`, data)
   }
