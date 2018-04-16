@@ -1,7 +1,8 @@
 import { Avatar, Col, Dropdown, Icon, Layout, Menu, Row } from 'antd'
 import React, { Component } from 'react'
-import MarkDown from '../../components/admin/markdown'
+import { Route, Switch } from 'react-router-dom'
 import styles from './style.less'
+import routes from './routes'
 const { Header, Sider, Content } = Layout
 
 export default class Login extends Component {
@@ -39,18 +40,15 @@ export default class Login extends Component {
         >
           <div className={styles.logo} />
           <Menu theme='dark' mode='inline' defaultSelectedKeys={['1']}>
-            <Menu.Item key='1'>
-              <Icon type='user' />
-              <span>nav 1</span>
-            </Menu.Item>
-            <Menu.Item key='2'>
-              <Icon type='video-camera' />
-              <span>nav 2</span>
-            </Menu.Item>
-            <Menu.Item key='3'>
-              <Icon type='upload' />
-              <span>nav 3</span>
-            </Menu.Item>
+            {
+              routes.map((route) => (
+                <Menu.Item key='1'>
+                  <Icon type='edit' />
+                  <span>{ route.name }</span>
+                </Menu.Item>
+                )
+              )
+            }
           </Menu>
         </Sider>
         <Layout>
@@ -82,7 +80,13 @@ export default class Login extends Component {
               ref={(el) => {
                 this.contentEl = el
               }}>
-              <MarkDown />
+              <Switch>
+                {
+                  routes.map(({ name, path, exact = true, component }) => {
+                    return <Route path={path} exact={exact} component={component} key={name}/>
+                  })
+                }
+              </Switch>
             </div>
           </Content>
         </Layout>

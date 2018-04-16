@@ -22,7 +22,9 @@ export default [
   },
   {
     name: '管理员页',
+    icon: 'admin',
     path: '/admin',
+    exact: false,
     component: AC(() => import('./pages/admin'))
   }
 ]
