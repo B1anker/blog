@@ -1,6 +1,6 @@
 import { Avatar, Col, Dropdown, Icon, Layout, Menu, Row } from 'antd'
 import React, { Component } from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Redirect, Switch } from 'react-router-dom'
 import styles from './style.less'
 import routes from './routes'
 const { Header, Sider, Content } = Layout
@@ -39,15 +39,30 @@ export default class Login extends Component {
           collapsed={this.state.collapsed}
         >
           <div className={styles.logo} />
-          <Menu theme='dark' mode='inline' defaultSelectedKeys={['1']}>
+          <Menu theme='dark' mode='inline' defaultOpenKeys={['/admin/post']}>
             {
-              routes.map((route) => (
-                <Menu.Item key='1'>
-                  <Icon type='edit' />
-                  <span>{ route.name }</span>
-                </Menu.Item>
+              routes.map((route, index) => {
+                if (route.children) {
+                  return (
+                    <Menu.SubMenu title={<span><Icon type={route.icon} /><span>{ route.name }</span></span>} key={route.path} >
+                      {
+                        route.children.map((child, i)=>
+                          <Menu.Item key={child.path}>
+                            <Icon type={ child.icon } />
+                            <span>{ child.name }</span>
+                          </Menu.Item>
+                        )
+                      }
+                    </Menu.SubMenu>
+                  )
+                }
+                return (
+                  <Menu.Item key={index}>
+                    <Icon type={ route.icon } />
+                    <span>{ route.name }</span>
+                  </Menu.Item>
                 )
-              )
+              })
             }
           </Menu>
         </Sider>
@@ -82,8 +97,8 @@ export default class Login extends Component {
               }}>
               <Switch>
                 {
-                  routes.map(({ name, path, exact = true, component }) => {
-                    return <Route path={path} exact={exact} component={component} key={name}/>
+                  routes.map(({ name, path, exact = true, component, redirect, children }) => {
+                    return children.map((child) => <Route path={child.path} exact={child.exact} component={child.component} key={child.name}/>).concat(redirect ? <Redirect to={redirect} key={name} /> : [])
                   })
                 }
               </Switch>
