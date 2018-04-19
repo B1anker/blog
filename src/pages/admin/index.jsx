@@ -39,7 +39,12 @@ export default class Login extends Component {
           collapsed={this.state.collapsed}
         >
           <div className={styles.logo} />
-          <Menu theme='dark' mode='inline' defaultOpenKeys={['/admin/post']}>
+          <Menu theme='dark'
+            mode='inline'
+            defaultOpenKeys={['/admin/post']}
+            onClick={({item, key, keyPath}) => {
+              this.props.history.push(key)
+            }}>
             {
               routes.map((route, index) => {
                 if (route.children) {
@@ -48,7 +53,7 @@ export default class Login extends Component {
                       {
                         route.children.map((child, i)=>
                           <Menu.Item key={child.path}>
-                            <Icon type={ child.icon } />
+                            {/* <Icon type={ child.icon } /> */}
                             <span>{ child.name }</span>
                           </Menu.Item>
                         )

@@ -11,6 +11,11 @@ export default [
       icon: 'edit',
       path: '/admin/post/edit',
       component: AC(() => import('@/components/admin/markdown')),
+    }, {
+      name: '列表',
+      icon: 'list',
+      path: '/admin/post/list',
+      component: AC(() => import('./list')),
     }]
   }
 ]
