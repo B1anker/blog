@@ -9,7 +9,8 @@ export default class Login extends Component {
   constructor () {
     super()
     this.state = {
-      collapsed: false
+      collapsed: false,
+      selectedMenu: ''
     }
     this.contentEl = null
   }
@@ -42,8 +43,13 @@ export default class Login extends Component {
           <Menu theme='dark'
             mode='inline'
             defaultOpenKeys={['/admin/post']}
+            selectedKeys={[this.state.selectedMenu]}
             onClick={({item, key, keyPath}) => {
-              this.props.history.push(key)
+              console.log(key)
+              this.setState({
+                selectedMenu: key.replace(/:.*/, '')
+              })
+              this.props.history.push(key.replace(/:.*/, ''))
             }}>
             {
               routes.map((route, index) => {
@@ -51,11 +57,17 @@ export default class Login extends Component {
                   return (
                     <Menu.SubMenu title={<span><Icon type={route.icon} /><span>{ route.name }</span></span>} key={route.path} >
                       {
-                        route.children.map((child, i)=>
-                          <Menu.Item key={child.path}>
-                            {/* <Icon type={ child.icon } /> */}
-                            <span>{ child.name }</span>
-                          </Menu.Item>
+                        route.children.map((child, i) => {
+                          if (child.noRender) {
+                            return ''
+                          }
+                          return (
+                            <Menu.Item key={child.path}>
+                              {/* <Icon type={ child.icon } /> */}
+                              <span>{ child.name }</span>
+                            </Menu.Item>
+                          )
+                        }
                         )
                       }
                     </Menu.SubMenu>
