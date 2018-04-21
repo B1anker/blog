@@ -14,6 +14,9 @@ export default class Editor extends Component {
     super(props)
     this.editor = null
     this.editorEl = null
+    this.state = {
+      value: ''
+    }
   }
 
   componentDidMount () {
@@ -30,8 +33,14 @@ export default class Editor extends Component {
       extraKeys: {"Enter": "newlineAndIndentContinueMarkdownList"}
     })
     this.editor.on('change', () => {
-      this.props.onChange(this.editor.getValue())
+      if (this.props.value !== this.editor.getValue()) {
+        this.props.onChange(this.editor.getValue())
+      }
     })
+  }
+
+  componentDidUpdate () {
+    this.editor.setValue(this.props.value)
   }
 
   render () {

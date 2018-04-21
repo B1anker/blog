@@ -14,6 +14,19 @@ export default class MarkDown extends Component {
     this.headers = []
   }
 
+  get pid () {
+    return this.props.match.params.pid
+  }
+
+  async componentDidMount () {
+    if (this.pid) {
+      const { data } = await this.$models.post.fetchPost(this.pid)
+      this.setState({
+        value: data[0].content
+      })
+    }
+  }
+
   render () {
     return (
       <MarkDownStyle>

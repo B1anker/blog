@@ -114,7 +114,7 @@ export default class Login extends Component {
               }}>
               <Switch>
                 {
-                  routes.map(({ name, path, exact = true, component, redirect, children }) => {
+                  routes.map(({ name, path, exact = false, component, redirect, children }) => {
                     return children.map((child) => <Route path={child.path} exact={child.exact} component={child.component} key={child.name}/>).concat(redirect ? <Redirect to={redirect} key={name} /> : [])
                   })
                 }

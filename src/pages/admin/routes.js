@@ -10,6 +10,7 @@ export default [
       icon: 'edit',
       path: '/admin/post/edit/',
       noRender: true,
+      exact: true,
       component: AC(() => import('@/components/admin/markdown')),
     }, {
       name: '编辑',
