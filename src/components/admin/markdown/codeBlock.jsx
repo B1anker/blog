@@ -25,7 +25,7 @@ export default class CodeBlock extends Component {
     return (
       <pre>
         <code ref={(el) => this.el = el}
-          className={`language-${this.props.language}`}>
+          className={`language-${this.props.language || 'vim'}`}>
           { this.props.value }
         </code>
       </pre>
