@@ -10,8 +10,8 @@ const convertValue = (value) => {
     }
   }
   try {
-    const removeMore = value.replace(/<!-- more -->/, '')
-    const summary = value.split(/<!-- more -->/)[0] || value
+    const removeMore = value.replace(/<!--\s?more\s?-->/, '')
+    const summary = value.split(/<!--\s?more\s?-->/)[0] || value
     const paramsString = removeMore.match(/---(.|\n)*---/g)
     let result = []
     // 解析头部信息
@@ -93,24 +93,22 @@ export default class Renderer extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      renderValue: ''
+      renderValue: '',
+      value: ''
     }
-  }
-
-  componentDidMount () {
-    this.props.onChange(!this.props.value)
   }
 
   static getDerivedStateFromProps (nextProps, prevState) {
     const { renderValue, headers, parsable } = convertValue(nextProps.value)
-    if (parsable !== nextProps.parsable) {
+    if (prevState.value !== nextProps.value) {
       nextProps.onChange({
         parsable,
         headers
       })
     }
     return {
-      renderValue
+      renderValue,
+      value: nextProps.value
     }
   }
 

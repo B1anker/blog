@@ -11,7 +11,15 @@ const ContentStyle = styled.main`
 
   .posts {
     width: 800px;
-    background-color: white;
+    background-color: transparent;
+
+    .post {
+      margin-top: 60px;
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
   }
 `
 

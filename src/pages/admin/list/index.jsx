@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
-import { Button, Table } from 'antd'
+import { Button, Popconfirm, Table, Tag } from 'antd'
+import { OperateButtons } from './style'
 import moment from 'moment'
 
 export default class List extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      dataSource: []
+      dataSource: [],
+      loading: false
     }
     this.columns = [{
       title: '_id',
@@ -28,14 +30,19 @@ export default class List extends Component {
       title: '标签',
       dataIndex: 'tags',
       key: 'tags',
-      align: 'center'
+      align: 'center',
+      render: (text, record) => {
+        return (
+          <span>{ record.tags.length ? record.tags.map((tag) => (<Tag>{ tag }</Tag>)) : '-' }</span>
+        )
+      }
     }, {
       title: '创建时间',
       align: 'center',
       width: 170,
       render: (text, record) => {
         return (
-          <span>{ moment(record.meta.createdAt).format('YYYY-MM-DD hh:mm:ss') }</span>
+          <span>{ moment(record.meta.createdAt).format('YYYY-MM-DD HH:mm:ss') }</span>
         )
       }
     }, {
@@ -44,23 +51,57 @@ export default class List extends Component {
       width: 170,
       render: (text, record) => {
         return (
-          <span>{ moment(record.meta.updateAt).format('YYYY-MM-DD hh:mm:ss') }</span>
+          <span>{ moment(record.meta.updateAt).format('YYYY-MM-DD HH:mm:ss') }</span>
         )
       }
     }, {
       title: '操作',
       align: 'center',
+      width: 200,
       render: (text, record) => {
         return (
-          <Button type='primary' onClick={() => {
-            this.props.history.push(`/admin/post/edit/${record._id}`)
-          }}>编辑</Button>
+          <OperateButtons>
+            <Button type='primary'
+              onClick={() => {
+                this.props.history.push(`/admin/post/edit/${record._id}`)
+              }}>
+              编辑
+            </Button>
+            <Popconfirm title="确认删除吗？"
+              okText="确定"
+              cancelText="取消"
+              onConfirm={() => {
+                this.handleDelete(record)
+              }}>
+              <Button type='danger'>
+                删除
+              </Button>
+            </Popconfirm>
+          </OperateButtons>
         )
       }
     }]
   }
 
-  async componentDidMount () {
+  componentDidMount () {
+    this.fetchList()
+  }
+
+
+  render () {
+    return (
+      <div>
+        <Table dataSource={this.state.dataSource}
+          columns={this.columns}
+          loading={this.state.loading} />
+      </div>
+    )
+  }
+
+  async fetchList () {
+    this.setState({
+      loading: true
+    })
     const { data } = await this.$models.post.fetchPostList()
     data.forEach((d) => {
       d.key = d._id
@@ -68,14 +109,13 @@ export default class List extends Component {
     this.setState({
       dataSource: data
     })
+    this.setState({
+      loading: false
+    })
   }
 
-
-  render () {
-    return (
-      <div>
-        <Table dataSource={this.state.dataSource} columns={this.columns} />
-      </div>
-    )
+  async handleDelete (record) {
+    await this.$models.post.delPost(record._id)
+    this.fetchList()
   }
 }

@@ -15,15 +15,18 @@ export default class Content extends Component {
                 'title',
                 'tags',
                 'subTitle',
-                'catagory'
+                'category'
               ])
               Object.assign(_post, {
                 id: post._id,
                 render: this.props.type === 'summary' ? post.summary : post.content,
-                createTime: post.meta.createAt,
-                updateTime: post.meta.updateAt
+                createTime: post.meta.createdAt,
+                updateTime: post.meta.updatedAt
               })
-              return <Post post={_post} key={index} type={this.props.type} />
+              return <Post
+                post={_post}
+                key={index}
+                type={this.props.type} />
             })
           }
         </div>

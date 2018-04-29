@@ -19,6 +19,12 @@ export default class Editor extends Component {
     }
   }
 
+  setValue (content) {
+    if (this.state.value === '') {
+      this.editor.setValue(content)
+    }
+  }
+
   componentDidMount () {
     this.editor = CodeMirror(this.editorEl, {
       value: this.props.value,
@@ -32,15 +38,26 @@ export default class Editor extends Component {
       keyMap: 'sublime',
       extraKeys: {"Enter": "newlineAndIndentContinueMarkdownList"}
     })
-    this.editor.on('change', () => {
-      if (this.props.value !== this.editor.getValue()) {
-        this.props.onChange(this.editor.getValue())
-      }
+    this.editor.on('change', (value) => {
+      this.setState({
+        value: this.editor.getValue()
+      })
     })
+    this.setValue(this.props.value)
   }
 
-  componentDidUpdate () {
-    this.editor.setValue(this.props.value)
+  getSnapshotBeforeUpdate (prevProps, prevState) {
+    if (this.state.value !== prevState.value) {
+      return this.state.value
+    }
+    return null
+  }
+
+  componentDidUpdate (prevProps, prevState, snapshot) {
+    if (snapshot) {
+      this.props.onChange(snapshot)
+    }
+    this.setValue(prevProps.value)
   }
 
   render () {

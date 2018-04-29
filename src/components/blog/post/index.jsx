@@ -20,7 +20,7 @@ export default class Post extends Component {
       </div>
     )
     return (
-      <PostStyle>
+      <PostStyle className='post'>
         <div className="post-header">
           <h1 className="post-title">
             <Link className="post-title-link" to={`/post/${this.post.id}`}>

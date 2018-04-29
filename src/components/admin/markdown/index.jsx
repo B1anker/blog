@@ -57,7 +57,7 @@ export default class MarkDown extends Component {
       }
     }).then((res) => {
       message.success('新增文章成功！')
-      console.log(res)
+      this.props.history.push(`/admin/post/list`)
     })
   }
 }

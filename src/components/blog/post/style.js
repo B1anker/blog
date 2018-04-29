@@ -133,6 +133,41 @@ const PostStyle = styled.div`
       line-height: 2;
     }
   }
+  
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    text-align: left;
+    border-radius: 4px 4px 0 0;
+    text-align: center;
+    margin-bottom: 20px;
+
+    tr {
+      th {
+        padding: 16px;
+        word-break: break-all;
+        background: #fafafa;
+        border-bottom: 1px solid #e8e8e8;
+      }
+
+      td {
+        padding: 16px;
+        word-break: break-all;
+        border-bottom: 1px solid #e8e8e8;
+      }
+
+      :hover {
+        td {
+          background: #e6f7ff;
+        }
+      }
+    }
+  }
+
+  img {
+    width: 100%;
+  }
 `
 
 export {

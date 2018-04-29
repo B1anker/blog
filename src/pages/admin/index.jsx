@@ -99,7 +99,7 @@ export default class Login extends Component {
                 <Row type='flex' justify='end' align='middle'>
                   <Dropdown overlay={menu}>
                     <span className={`${styles.action} ${styles.account}`}>
-                      <Avatar className={styles.avatar} src='https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png' />
+                      <Avatar className={styles.avatar} src={require('../../assets/avatar.jpg')} />
                       <span className={styles.name}>b1anker</span>
                     </span>
                   </Dropdown>
