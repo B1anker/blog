@@ -12,14 +12,14 @@ export default class MyFooter extends Component {
     super(props)
     this.blogStartTimestamp = new Date(BLOG_START_DATE).getTime()
     this.state = {
-      gap: +new Date - this.blogStartTimestamp
+      gap: (new Date()).getTime() - this.blogStartTimestamp
     }
   }
 
   componentDidMount () {
     setInterval(() => {
       this.setState({
-        gap: +new Date - this.blogStartTimestamp
+        gap: (new Date()).getTime() - this.blogStartTimestamp
       })
     }, 1000)
   }
