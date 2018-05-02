@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { FooterStyle } from './style'
 
-const BLOG_START_DATE = '2018-04-13 22:57:50'
+const BLOG_START_DATE = '2018/04/13 22:57:50'
 const DAY_GAP = 1000 * 60 * 60 * 24
 const HOUR_GAP = 1000 * 60 * 60
 const MINUTE_GAP = 1000 * 60
