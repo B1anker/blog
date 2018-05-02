@@ -19,6 +19,11 @@ const Menu = styled.ul`
   width: 1110px;
   margin: 0 auto;
   z-index: 3;
+
+  @media only screen and (max-width: 991px) {
+    width: 100%;
+    justify-content: space-around;
+  }
 `
 
 const MenuItem = styled.li`
