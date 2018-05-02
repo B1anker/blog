@@ -30,6 +30,10 @@ const Poster = styled.div`
   @media only screen and (min-width: 1920px) {
     height: 800px;
   }
+
+  @media only screen and (max-width: 991px) {
+    height: 260px;
+  }
 `
 
 export {

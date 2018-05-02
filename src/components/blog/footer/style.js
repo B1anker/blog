@@ -274,6 +274,13 @@ const FooterStyle = styled.footer`
   p {
     margin: 5px 0;
 
+    @media only screen and (max-width: 991px) {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      -o-text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
     a {
       color: #795548;
     }

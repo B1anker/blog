@@ -22,7 +22,7 @@ export default class Home extends Component {
     return (
       <div className='home'>
         <Header />
-        <Content className='content'
+        <Content
           type='summary'
           posts={this.state.posts}/>
         <MyFooter />

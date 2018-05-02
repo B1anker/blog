@@ -26,7 +26,7 @@ export default class MyFooter extends Component {
 
   render () {
     return (
-      <FooterStyle>
+      <FooterStyle className='footer'>
         <div className="footer-image"></div>
         <p>博客已萌萌哒运行{this.convertGap(this.state.gap)}<span className="face">(●'◡'●)ﾉ♥</span></p>
         <p>托管于vps. <a href="https://qiniu.com" target="_blank" ref="nofollow">七牛云</a> 提供 CDN 服务. <a href="https://www.google.com/analytics/" target="_blank" ref="nofollow">Google Analytics</a> 提供网站统计服务.</p>

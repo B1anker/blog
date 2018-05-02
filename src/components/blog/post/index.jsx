@@ -50,7 +50,9 @@ export default class Post extends Component {
               <i className="iconfont icon-eye"></i>
               <span className="prefix">阅读次数</span>
               &nbsp;&nbsp;
-              <span className="text">3879</span>
+              <span className="text">
+                { this.post.count }
+              </span>
             </div>
           </div>
         </div>

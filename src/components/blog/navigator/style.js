@@ -46,6 +46,10 @@ const MenuItem = styled.li`
     i {
       margin-right: 8px;
       color: ${ variable.pink };
+
+      @media only screen and (max-width: 991px) {
+        display: none;
+      }
     }
   }
 `

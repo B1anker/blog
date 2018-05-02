@@ -15,6 +15,10 @@ const ProfileStyle  = styled.div`
   border-radius: 5px;
   z-index: 2;
 
+  @media only screen and (max-width: 991px) {
+    display: none;
+  }
+
   .avatar {
     background-image: url(${require('@/assets/avatar.jpg')});
     margin: 0 auto;

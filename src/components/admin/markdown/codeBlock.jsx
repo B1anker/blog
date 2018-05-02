@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { highlightBlock } from 'highlightjs'
+import { highlightBlock } from './highlight'
 import 'highlightjs/styles/solarized_light.css'
 
 export default class CodeBlock extends Component {

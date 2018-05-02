@@ -7,7 +7,7 @@ import pick from 'lodash/pick'
 export default class Content extends Component {
   render () {
     return (
-      <ContentStyle>
+      <ContentStyle className='main-content'>
         <div className="posts">
           {
             this.props.posts.map((post, index) => {
@@ -15,7 +15,8 @@ export default class Content extends Component {
                 'title',
                 'tags',
                 'subTitle',
-                'category'
+                'category',
+                'count'
               ])
               Object.assign(_post, {
                 id: post._id,

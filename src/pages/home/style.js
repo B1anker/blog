@@ -9,9 +9,18 @@ const ContentStyle = styled.main`
   margin-top: 40px;
   padding-bottom: 380px;
 
+  @media only screen and (max-width: 991px) {
+    width: 100%;
+    margin-top: 0;
+  }
+
   .posts {
     width: 800px;
     background-color: transparent;
+
+    @media only screen and (max-width: 991px) {
+      width: 100%;
+    }
 
     .post {
       margin-top: 60px;

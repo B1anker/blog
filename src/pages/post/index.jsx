@@ -12,8 +12,12 @@ export default class PostPage extends Component {
     }
   }
 
+  get pid () {
+    return this.props.match.params.pid
+  }
+
   async componentDidMount () {
-    const { data } = await this.$models.post.fetchPost(this.props.match.params.pid)
+    const { data } = await this.$models.post.fetchPost(this.pid)
     this.setState({
       posts: data
     })

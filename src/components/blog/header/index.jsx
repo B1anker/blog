@@ -8,7 +8,7 @@ export default class Header extends Component {
       <header>
         <Navigator />
         <Blur />
-        <Poster />
+        <Poster className="poster" />
       </header>
     )
   }

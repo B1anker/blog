@@ -52,6 +52,12 @@ const PostStyle = styled.div`
         color ${ORANGE};
       }
 
+      .prefix {
+        @media only screen and (max-width: 991px) {
+          display: none;
+        }
+      }
+
       .iconfont {
         margin-right: 3px;
       }
@@ -78,6 +84,10 @@ const PostStyle = styled.div`
     text-align: center;
     color: #fff;
     box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+
+    @media only screen and (max-width: 991px) {
+      display: none;
+    }
     
     .post-day {
       font-size: 30px;
@@ -100,6 +110,10 @@ const PostStyle = styled.div`
     border-color: #47456d;
     color: white;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+
+    @media only screen and (max-width: 991px) {
+      display: none;
+    }
 
     a {
       color: white;
