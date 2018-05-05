@@ -1,6 +1,7 @@
 const webpack = require('webpack')
 const HtmlWebPackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const path = require('path')
 const config = require('../config')
 const utils = require('./utils')
@@ -10,7 +11,9 @@ const resolve = dir => {
 }
 
 module.exports = {
-  entry: [resolve('src/entry.jsx')],
+  entry: {
+    app: resolve('src/entry.jsx')
+  },
   devtool: 'source-map',
   mode: process.env.NODE_ENV,
   output: {
@@ -79,7 +82,7 @@ module.exports = {
         loader: 'url-loader',
         options: process.env.NODE_ENV === 'development' ? {
           limit: 10000,
-          name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
+          name: utils.assetsPath('/[name].[hash:7].[ext]')
         } : {
           limit: 10000,
           name: '/[name].[ext]',
@@ -100,6 +103,18 @@ module.exports = {
     new webpack.ContextReplacementPlugin(
       /moment[\/\\]locale/,
       /(zh-cn)\.js/
-    )
+    ),
+    new CopyWebpackPlugin([
+      {
+        from: path.resolve(__dirname, '../src/service-worker.js'),
+        to: config.build.assetsRoot,
+        ignore: ['.*']
+      },
+      {
+        from: path.resolve(__dirname, '../src/sw-toolbox.js'),
+        to: config.build.assetsRoot,
+        ignore: ['.*']
+      }
+    ])
   ]
 }

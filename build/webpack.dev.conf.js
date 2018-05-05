@@ -8,6 +8,7 @@ const utils = require("./utils")
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const fs = require('fs')
 
 const resolve = dir => {
   return path.join(__dirname, "..", dir)
@@ -41,7 +42,11 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       poll: config.dev.poll,
     },
     disableHostCheck: true,
-    https: true
+    // https: true,
+    https: {
+      key: fs.readFileSync('/Users/b1anker/key/b1anker.com/Nginx/2_b1anker.com.key'),
+      cert: fs.readFileSync('/Users/b1anker/key/b1anker.com/Nginx/1_b1anker.com_bundle.crt')
+    }
   },
 
   plugins: [
@@ -61,6 +66,16 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       {
         from: path.resolve(__dirname, '../static'),
         to: config.dev.assetsSubDirectory,
+        ignore: ['.*']
+      },
+      {
+        from: path.resolve(__dirname, '../src/service-worker.js'),
+        to: config.build.assetsRoot,
+        ignore: ['.*']
+      },
+      {
+        from: path.resolve(__dirname, '../src/sw-toolbox.js'),
+        to: config.build.assetsRoot,
         ignore: ['.*']
       }
     ])

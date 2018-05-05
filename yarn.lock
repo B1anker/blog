@@ -1838,7 +1838,7 @@ copy-descriptor@^0.1.0:
 
 copy-webpack-plugin@^4.5.1:
   version "4.5.1"
-  resolved "http://r.cnpmjs.org/copy-webpack-plugin/download/copy-webpack-plugin-4.5.1.tgz#fc4f68f4add837cc5e13d111b20715793225d29c"
+  resolved "http://registry.npm.taobao.org/copy-webpack-plugin/download/copy-webpack-plugin-4.5.1.tgz#fc4f68f4add837cc5e13d111b20715793225d29c"
   dependencies:
     cacache "^10.0.4"
     find-cache-dir "^1.0.0"
