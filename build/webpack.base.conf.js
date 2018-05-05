@@ -85,7 +85,7 @@ module.exports = {
           name: utils.assetsPath('/[name].[hash:7].[ext]')
         } : {
           limit: 10000,
-          name: '/[name].[ext]',
+          name: '[name].[ext]',
           publicPath: 'https://cdn.b1anker.com'
         }
       },
