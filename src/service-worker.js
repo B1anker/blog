@@ -1,4 +1,4 @@
-const cacheVersion = '20180505'
+const cacheVersion = '20180505v2'
 const staticCacheName = 'static' + cacheVersion
 const staticAssetsCacheName = '/' + cacheVersion
 const vendorCacheName = 'verdor' + cacheVersion
@@ -36,18 +36,28 @@ self.toolbox.router.get("/(.*)", self.toolbox.networkOnly, {
     name: vendorCacheName,
     maxEntries: maxEntries
   }
-});
+})
+
+self.toolbox.router.get("/(.*)", self.toolbox.networkOnly, {
+  origin: /(www\.googletagmanager\.com)/,
+  cache: {
+    name: vendorCacheName,
+    maxEntries: maxEntries
+  }
+})
+
 
 self.toolbox.router.get("/*", self.toolbox.networkFirst, {
   cache: {
     name: contentCacheName,
     maxEntries: maxEntries
   }
-});
+})
 
 self.addEventListener("install", function(event) {
   return event.waitUntil(self.skipWaiting());
-});
+})
+
 self.addEventListener("activate", function(event) {
   return event.waitUntil(self.clients.claim());
-});
+})
