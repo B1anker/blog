@@ -86,7 +86,7 @@ module.exports = {
         } : {
           limit: 10000,
           name: '/[name].[ext]',
-          publicPath: 'https://cdn.b1anker.com/'
+          publicPath: 'https://cdn.b1anker.com'
         }
       },
       {
