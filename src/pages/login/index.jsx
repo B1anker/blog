@@ -39,7 +39,7 @@ export default class Login extends Component {
         })
         message.success('登录成功，正在跳转...')
         setTimeout(() => {
-          this.props.history.push('/admin')
+          this.props.history.push('/admin/post/edit')
         }, 1000)
       }).catch((err) => {
         if (err.response.data.name === 'PASSPORT_INCORRECT') {

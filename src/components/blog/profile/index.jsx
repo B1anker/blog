@@ -15,12 +15,17 @@ export default class Profile extends Component {
     name: '网易云',
     icon: 'music',
     url: 'https://music.163.com/#/user/home?id=85989847'
+  }, {
+    name: '谷歌邮箱',
+    icon: 'gmail',
+    url: 'narutowontstop@gmail.com'
   }]
 
   render () {
     return (
       <ProfileStyle> 
-        <div className='avatar' ></div>
+        <div className='avatar'></div>
+        <div className="username">B1anker</div>
         <ul className='social'>
           {
             this.socials.map((social, index) => (
@@ -28,6 +33,10 @@ export default class Profile extends Component {
                 <a href={social.url} target='_blank'>
                   <i className={`icon iconfont icon-${social.icon}`}></i>
                 </a>
+                <div className="tooltip">
+                  <div className="text">{ social.name }</div>
+                  <div className="arrow"></div>
+                </div>
               </li>
             ))
           }

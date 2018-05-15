@@ -26,5 +26,11 @@ export default [
     path: '/admin',
     exact: false,
     component: AC(() => import('./pages/admin'))
+  },
+  {
+    name: '404',
+    icon: '404',
+    path: '*',
+    component: AC(() => import('./pages/404'))
   }
 ]

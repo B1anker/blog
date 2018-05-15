@@ -27,8 +27,14 @@ const ProfileStyle  = styled.div`
     background-size: 100%;
   }
 
+  .username {
+    margin-top: 5px;
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+  }
+
   .social {
-    width: 200px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -37,6 +43,7 @@ const ProfileStyle  = styled.div`
     padding: 0;
 
     .social-item {
+      position: relative;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -53,8 +60,45 @@ const ProfileStyle  = styled.div`
         transition: color ease .3s;
       }
 
+      .tooltip {
+        position: absolute;
+        transition: all ease .5s;
+        opacity: 0;
+        transform: translateY(-100%);
+
+        .text {
+          max-width: 250px;
+          padding: 6px 8px;
+          color: #fff;
+          text-align: left;
+          white-space: nowrap;
+          text-decoration: none;
+          background-color: rgba(0,0,0,.75);
+          border-radius: 4px;
+          box-shadow: 0 2px 8px rgba(0,0,0,.15);
+          min-height: 32px;
+        }
+
+        .arrow {
+          position: absolute;
+          width: 0;
+          height: 0;
+          border-color: transparent;
+          border-style: solid;
+          border-width: 5px 5px 0;
+          border-top-color: rgba(0, 0, 0, .75);
+          left: 50%;
+          margin-left: -5px;
+        }
+      }
+
       &:hover {
         background-color: ${variable.BLUE};
+
+        .tooltip {
+          transform: translateY(-150%);
+          opacity: 1;
+        }
 
         .icon {
           color: #ffffff;
