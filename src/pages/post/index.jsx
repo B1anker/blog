@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { PostPageStyled } from './style'
 import Header from '@/components/blog/header'
 import MyFooter from '@/components/blog/footer'
+import Scroll from '@/components/blog/scroll'
 import Content from '../home/content'
 
 export default class PostPage extends Component {
@@ -29,6 +30,7 @@ export default class PostPage extends Component {
         <Header />
         <Content type='content' posts={this.state.posts}/>
         <MyFooter />
+        <Scroll />
       </div>
     )
   }

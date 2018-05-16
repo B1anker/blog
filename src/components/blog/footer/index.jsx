@@ -14,14 +14,19 @@ export default class MyFooter extends Component {
     this.state = {
       gap: (new Date()).getTime() - this.blogStartTimestamp
     }
+    this.timer = null
   }
 
   componentDidMount () {
-    setInterval(() => {
+    this.timer = setInterval(() => {
       this.setState({
         gap: (new Date()).getTime() - this.blogStartTimestamp
       })
     }, 1000)
+  }
+
+  componentWillUnmount () {
+    this.timer && clearInterval(this.timer)
   }
 
   render () {
