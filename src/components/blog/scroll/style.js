@@ -13,7 +13,7 @@ const ScrollStyle = styled.div`
   opacity: 1;
 
   &.active {
-    top: -20px;
+    top: -18%;
   }
 `
 
