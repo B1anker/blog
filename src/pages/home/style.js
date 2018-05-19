@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 const ContentStyle = styled.main`
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   width: 1200px;
   margin: 0 auto;
@@ -29,6 +30,13 @@ const ContentStyle = styled.main`
         margin-top: 0;
       }
     }
+  }
+  .comment {
+    width: 800px;
+    background: #fff;
+    margin: 0;
+    padding: 40px;
+    border-radius: 5px;
   }
 `
 

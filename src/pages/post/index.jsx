@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { PostPageStyled } from './style'
 import Header from '@/components/blog/header'
 import MyFooter from '@/components/blog/footer'
 import Scroll from '@/components/blog/scroll'
+import Disqus from '@/components/blog/disqus'
 import Content from '../home/content'
 
 export default class PostPage extends Component {
@@ -28,7 +28,9 @@ export default class PostPage extends Component {
     return (
       <div className="post-page">
         <Header />
-        <Content type='content' posts={this.state.posts}/>
+        <Content type='content'
+          posts={ this.state.posts }
+          comment={ <Disqus /> }/>
         <MyFooter />
         <Scroll />
       </div>

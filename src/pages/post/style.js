@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const PostPageStyled = styled.div`
+const PostPageStyle = styled.div`
   display: flex;
   justify-content: space-between;
   width: 1200px;
@@ -10,5 +10,5 @@ const PostPageStyled = styled.div`
 `
 
 export {
-  PostPageStyled
+  PostPageStyle
 }

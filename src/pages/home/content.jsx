@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Profile from '@/components/blog/profile'
 import Post from '@/components/blog/post'
+import Disqus from '@/components/blog/disqus'
 import { ContentStyle } from './style'
 import pick from 'lodash/pick'
 
@@ -34,6 +35,9 @@ export default class Content extends Component {
         <div className="sidebar">
           <Profile />
         </div>
+        {
+          this.props.comment ? (<div className="comment">{ this.props.comment }</div>) : null
+        }
       </ContentStyle>
     )
   }
