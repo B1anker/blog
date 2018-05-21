@@ -11,7 +11,9 @@ export default class Disqus extends Component {
 
   render () {
     return (
-      <div id="disqus_thread"></div>
+      <div id="disqus_thread">
+        翻墙食用评论...
+      </div>
     )
   }
 }
