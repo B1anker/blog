@@ -118,6 +118,7 @@ export default class Face extends Component {
     return new Promise ((resolve, reject) => {
       const img = document.createElement('img')
       img.src = url
+      img.crossOrigin = 'Anonymous'
       img.onload = () => {
         resolve(img)
       }

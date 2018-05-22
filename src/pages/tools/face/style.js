@@ -5,7 +5,7 @@ const FaceStyle = styled.div`
 
   .input-container {
     width: 200px;
-    margin: 100px auto;
+    margin: 50px auto;
 
     img {
       width: 100%;
