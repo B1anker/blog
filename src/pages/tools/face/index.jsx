@@ -66,7 +66,7 @@ export default class Face extends Component {
     this.ctx.clearRect(0, 0, this.width, this.height)
     this.ctx.fillStyle = 'white'
     this.ctx.fillRect(0, 0, this.width, this.height)
-    await loadImage(require('../../../assets/grudges.png'), false)
+    await this.loadImage(require('../../../assets/grudges.png'), false)
     const img = await this.loadImage(require('../../../assets/grudges.png'))
     this.drawImage(img)
   }
