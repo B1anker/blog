@@ -120,7 +120,7 @@ export default class Face extends Component {
       const img = document.createElement('img')
       img.src = url
       if (crossOrigin) {
-        img.crossOrigin = 'Anonymous'
+        img.crossOrigin = 'use-credentials'
       }
       img.onload = () => {
         resolve(img)
