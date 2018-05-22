@@ -43,10 +43,10 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     },
     disableHostCheck: true,
     // https: true,
-    https: {
-      key: fs.readFileSync('/Users/b1anker/key/b1anker.com/Nginx/2_b1anker.com.key'),
-      cert: fs.readFileSync('/Users/b1anker/key/b1anker.com/Nginx/1_b1anker.com_bundle.crt')
-    }
+    // https: {
+    //   key: fs.readFileSync('/Users/b1anker/key/b1anker.com/Nginx/2_b1anker.com.key'),
+    //   cert: fs.readFileSync('/Users/b1anker/key/b1anker.com/Nginx/1_b1anker.com_bundle.crt')
+    // }
   },
 
   plugins: [

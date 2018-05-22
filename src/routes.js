@@ -28,6 +28,13 @@ export default [
     component: AC(() => import('./pages/admin'))
   },
   {
+    name: '工具页',
+    icon: 'tool',
+    path: '/tools',
+    exact: false,
+    component: AC(() => import('./pages/tools'))
+  },
+  {
     name: '404',
     icon: '404',
     path: '*',
