@@ -122,7 +122,7 @@ export default class Face extends Component {
       img.onload = () => {
         resolve(img)
       }
-      img.onerror = (er) => {
+      img.onerror = (err) => {
         reject(err)
       }
     })
