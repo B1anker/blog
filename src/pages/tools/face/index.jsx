@@ -66,6 +66,7 @@ export default class Face extends Component {
     this.ctx.clearRect(0, 0, this.width, this.height)
     this.ctx.fillStyle = 'white'
     this.ctx.fillRect(0, 0, this.width, this.height)
+    await loadImage(require('../../../assets/grudges.png'), false)
     const img = await this.loadImage(require('../../../assets/grudges.png'))
     this.drawImage(img)
   }
@@ -114,11 +115,13 @@ export default class Face extends Component {
     }
   }
 
-  loadImage (url) {
+  loadImage (url, crossOrigin = true) {
     return new Promise ((resolve, reject) => {
       const img = document.createElement('img')
       img.src = url
-      img.crossOrigin = 'Anonymous'
+      if (crossOrigin) {
+        img.crossOrigin = 'Anonymous'
+      }
       img.onload = () => {
         resolve(img)
       }
