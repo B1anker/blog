@@ -12,6 +12,10 @@ const ScrollStyle = styled.div`
   transition: all .5s ease-in-out;
   opacity: 1;
 
+  @media only screen and (max-width: 991px) {
+    display: none;
+  }
+
   &.active {
     top: -18%;
   }
