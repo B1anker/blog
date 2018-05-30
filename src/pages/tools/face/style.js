@@ -11,13 +11,21 @@ const FaceStyle = styled.div`
       width: 100%;
       margin-bottom: 20px;
     }
+
   }
 
   .display-container {
+    position: relative;
     display: flex;
     justify-content: center;
 
-    #canvas {
+    
+    .replace-img {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 999;
     }
   }
 `

@@ -8,7 +8,8 @@ export default class Face extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      text: '2018年5月21日 没人给我点赞，这个仇我先记下来了'
+      text: '2018年5月21日 没人给我点赞，这个仇我先记下来了',
+      canvasToDataURL: ''
     }
     this.img = null
     this.canvas = null
@@ -30,6 +31,9 @@ export default class Face extends Component {
     this.initCanvas()
     this.ctx.save()
     this.fillText(this.state.text)
+    this.setState({
+      canvasToDataURL: this.canvas.toDataURL('image/png')
+    })
   }
 
   render () {
@@ -49,6 +53,7 @@ export default class Face extends Component {
         </div>
         <div className='display-container'>
           <canvas id='canvas' width={200} height={205}></canvas>
+          <img className='replace-img' src={this.state.canvasToDataURL} alt="from canvas"/>
         </div>
       </FaceStyle>
     )
@@ -59,6 +64,9 @@ export default class Face extends Component {
       text: e.target.value
     })
     this.fillText(e.target.value)
+    this.setState({
+      canvasToDataURL: this.canvas.toDataURL('image/png')
+    })
   }
 
   async initCanvas () {
