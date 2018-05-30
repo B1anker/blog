@@ -24,11 +24,11 @@ export default class Face extends Component {
     return this.canvas ? this.canvas.height : 0
   }
 
-  componentDidMount () {
+  async componentDidMount () {
     this.img = document.querySelector('#img')
     this.canvas = document.querySelector('#canvas')
     this.ctx = this.canvas.getContext('2d')
-    this.initCanvas()
+    await this.initCanvas()
     this.ctx.save()
     this.fillText(this.state.text)
     this.setState({
@@ -76,6 +76,7 @@ export default class Face extends Component {
     this.ctx.fillRect(0, 0, this.width, this.height)
     const img = await this.loadImage('https://cdn.b1anker.com/grudges.png')
     this.drawImage(img)
+    return Promise.resolve()
   }
 
   fillText (text) {
