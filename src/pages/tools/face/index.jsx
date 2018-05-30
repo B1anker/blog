@@ -127,7 +127,6 @@ export default class Face extends Component {
         reject(err)
       }
       img.src = url
-      document.body.appendChild(img)
     })
   }
 
