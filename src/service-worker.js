@@ -22,7 +22,14 @@ self.toolbox.router.get("/(.js)", self.toolbox.cacheFirst, {
   }
 });
 
-self.toolbox.router.get("/(.*)", self.toolbox.cacheFirst, {
+self.toolbox.router.get("/(.*)", function (request, values, options) {
+  const newRequest = new Request(request, {
+    headers: {
+      Origin: 'https://b1anker.com'
+    }
+  })
+  return self.toolbox.cacheFirst.apply(this, [newRequest, values, options])
+}, {
   origin: /cdn\.b1anker\.com/,
   cache: {
     name: staticAssetsCacheName,
