@@ -1,4 +1,4 @@
-const cacheVersion = '20180601v1'
+const cacheVersion = '20180601v2'
 const staticCacheName = 'static' + cacheVersion
 const staticAssetsCacheName = '/' + cacheVersion
 const vendorCacheName = 'verdor' + cacheVersion
