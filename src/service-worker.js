@@ -1,4 +1,4 @@
-const cacheVersion = '20180602v4'
+const cacheVersion = '20180602v5'
 const staticCacheName = 'static' + cacheVersion
 const staticAssetsCacheName = '/' + cacheVersion
 const vendorCacheName = 'verdor' + cacheVersion
@@ -23,6 +23,7 @@ self.toolbox.router.get("/(.js)", self.toolbox.cacheFirst, {
 });
 
 self.toolbox.router.get("/(.*)", function (request, values, options) {
+  console.log(request, values, options)
   const newRequest = new Request(request, {
     mode: 'no-cors'
   })
