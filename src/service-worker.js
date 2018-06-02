@@ -1,4 +1,4 @@
-const cacheVersion = '20180601v2'
+const cacheVersion = '20180602v1'
 const staticCacheName = 'static' + cacheVersion
 const staticAssetsCacheName = '/' + cacheVersion
 const vendorCacheName = 'verdor' + cacheVersion
@@ -25,7 +25,8 @@ self.toolbox.router.get("/(.js)", self.toolbox.cacheFirst, {
 self.toolbox.router.get("/(.*)", function (request, values, options) {
   const newRequest = new Request(request, {
     headers: {
-      Origin: 'https://b1anker.com'
+      Origin: 'https://b1anker.com',
+      mode: 'cors'
     }
   })
   return self.toolbox.cacheFirst.apply(this, [newRequest, values, options])
