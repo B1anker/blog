@@ -26,7 +26,7 @@ self.toolbox.router.get("/(.*)", function (request, values, options) {
   const newRequest = new Request(request, {
     headers: {
       Origin: 'https://b1anker.com',
-      mode: 'cors'
+      mode: 'no-cors'
     }
   })
   return self.toolbox.cacheFirst.apply(this, [newRequest, values, options])
@@ -54,6 +54,30 @@ self.toolbox.router.get("/(.*)", self.toolbox.networkOnly, {
   }
 })
 
+self.toolbox.router.get("/next/config.json", self.toolbox.networkOnly, {
+  origin: /disqus\.com/,
+})
+
+self.toolbox.router.get("/api/(.*)", self.toolbox.networkOnly, {
+  origin: /disqus\.com/,
+})
+
+self.toolbox.router.get("/(.*)", self.toolbox.cacheFirst, {
+  origin: /disquscdn\.com/,
+  cache: {
+    name: vendorCacheName,
+    maxEntries: maxEntries
+  }
+})
+
+self.toolbox.router.get("/(.*)", self.toolbox.cacheFirst, {
+  origin: /referrer\.disqus\.com/,
+  cache: {
+    name: vendorCacheName,
+    maxEntries: maxEntries
+  }
+});
+
 
 self.toolbox.router.get("/*", self.toolbox.networkFirst, {
   cache: {
@@ -62,10 +86,10 @@ self.toolbox.router.get("/*", self.toolbox.networkFirst, {
   }
 })
 
-self.addEventListener("install", function(event) {
+self.addEventListener("install", function (event) {
   return event.waitUntil(self.skipWaiting());
 })
 
-self.addEventListener("activate", function(event) {
+self.addEventListener("activate", function (event) {
   return event.waitUntil(self.clients.claim());
 })
