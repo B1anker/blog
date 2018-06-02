@@ -24,9 +24,6 @@ self.toolbox.router.get("/(.js)", self.toolbox.cacheFirst, {
 
 self.toolbox.router.get("/(.*)", function (request, values, options) {
   const newRequest = new Request(request, {
-    headers: {
-      Origin: 'https://b1anker.com'
-    },
     mode: 'cors'
   })
   return self.toolbox.cacheFirst.apply(this, [newRequest, values, options])
