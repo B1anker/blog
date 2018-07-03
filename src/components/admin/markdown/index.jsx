@@ -9,9 +9,14 @@ export default class MarkDown extends Component {
     super(props)
     this.state = {
       value: '',
-      parsable: false
+      parsable: false,
+      submitting: false
     }
     this.headers = []
+  }
+
+  get isEdit () {
+    return !!this.props.match.params.pid
   }
 
   get pid () {
@@ -40,24 +45,48 @@ export default class MarkDown extends Component {
           }}/>
         <SubmitStyle type='primary'
           disabled={!this.state.parsable}
+          loading={this.state.submitting}
           onClick={() => {
             this.handleSubmit()
           }}>
-          提交
+          { this.isEdit ? '修改' : '提交' }
         </SubmitStyle>
       </MarkDownStyle>
     )
   }
 
-  handleSubmit () {
-    this.$models.post.addPost({
-      ...this.headers,
-      ...{
-        content: this.state.value
-      }
-    }).then((res) => {
-      message.success('新增文章成功！')
-      this.props.history.push(`/admin/post/list`)
+  finish (res) {
+    const successText = this.isEdit ? '修改' : '提交' + '文章成功！'
+    message.success('修改文章成功！')
+    this.props.history.push(`/admin/post/list`)
+    this.setState({
+      submitting: false
     })
+  }
+
+  handleSubmit () {
+    this.setState({
+      submitting: true
+    })
+    if (this.isEdit) {
+      this.$models.post.updatePost({
+        pid: this.pid,
+        ...this.headers,
+        ...{
+          content: this.state.value
+        }
+      }).then((res) => {
+        this.finish(res)
+      })
+    } else {
+      this.$models.post.addPost({
+        ...this.headers,
+        ...{
+          content: this.state.value
+        }
+      }).then((res) => {
+        this.finish(res)
+      })
+    }
   }
 }

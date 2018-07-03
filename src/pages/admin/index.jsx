@@ -5,7 +5,7 @@ import styles from './style.less'
 import routes from './routes'
 const { Header, Sider, Content } = Layout
 
-export default class Login extends Component {
+export default class Admin extends Component {
   constructor () {
     super()
     this.state = {
@@ -15,8 +15,15 @@ export default class Login extends Component {
     this.contentEl = null
   }
 
+  get selectedKey () {
+    return this.props.location.pathname.replace(/:.*/, '')
+  }
+
   componentDidMount () {
     this.$models.user.getInfo()
+    this.setState({
+      selectedMenu: this.selectedKey
+    })
     setTimeout(() => {
       this.contentEl.style.height = this.contentEl.parentNode.getBoundingClientRect().height - 2 * 24 + 'px'
     })
@@ -45,7 +52,6 @@ export default class Login extends Component {
             defaultOpenKeys={['/admin/post']}
             selectedKeys={[this.state.selectedMenu]}
             onClick={({item, key, keyPath}) => {
-              console.log(key)
               this.setState({
                 selectedMenu: key.replace(/:.*/, '')
               })
@@ -62,8 +68,8 @@ export default class Login extends Component {
                             return ''
                           }
                           return (
-                            <Menu.Item key={child.path}>
-                              {/* <Icon type={ child.icon } /> */}
+                            <Menu.Item key={child.path.replace(/:.*/, '')}>
+                              { <Icon type={ child.icon } /> }
                               <span>{ child.name }</span>
                             </Menu.Item>
                           )

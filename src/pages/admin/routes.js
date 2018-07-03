@@ -7,7 +7,6 @@ export default [
     path: '/admin/post',
     children: [{
       name: '编辑',
-      icon: 'edit',
       path: '/admin/post/edit/',
       noRender: true,
       exact: true,
@@ -19,7 +18,7 @@ export default [
       component: AC(() => import('@/components/admin/markdown')),
     }, {
       name: '列表',
-      icon: 'list',
+      icon: 'table',
       path: '/admin/post/list',
       component: AC(() => import('./list')),
     }]

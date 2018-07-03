@@ -15,6 +15,10 @@ class Post extends Model {
     return this.fetch.post(`${this.modelName}/add`, data)
   }
 
+  updatePost (data) {
+    return this.fetch.put(`${this.modelName}/update`, data)
+  }
+
   delPost (id) {
     return this.fetch.delete(`${this.modelName}/${id}`)
   }

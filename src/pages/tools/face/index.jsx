@@ -29,7 +29,6 @@ export default class Face extends Component {
     this.canvas = document.querySelector('#canvas')
     this.ctx = this.canvas.getContext('2d')
     await this.initCanvas()
-    this.ctx.save()
     this.fillText(this.state.text)
     this.setState({
       canvasToDataURL: this.canvas.toDataURL('image/png')
@@ -60,17 +59,14 @@ export default class Face extends Component {
   }
 
   onChangeText (e) {
-    this.setState({
-      text: e.target.value
-    })
     this.fillText(e.target.value)
     this.setState({
+      text: e.target.value,
       canvasToDataURL: this.canvas.toDataURL('image/png')
     })
   }
 
   async initCanvas () {
-    this.canvas.setAttribute('height', 200)
     this.ctx.clearRect(0, 0, this.width, this.height)
     this.ctx.fillStyle = 'white'
     this.ctx.fillRect(0, 0, this.width, this.height)
@@ -96,7 +92,7 @@ export default class Face extends Component {
     for (let i = 0; i < text.length; i++) {
       const currTextWidth = this.ctx.measureText(text.substring(lastIndex, i)).width
       const nextTextWidth = this.ctx.measureText(text.substring(lastIndex, i + 1)).width
-      if ( currTextWidth > boundary || (nextTextWidth - boundary) > 4) {
+      if ( currTextWidth > boundary) {
         this.ctx.fillText(text.substring(lastIndex, i), 8, initHeight)
         initHeight += 20
         lastIndex = i
