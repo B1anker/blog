@@ -9,20 +9,17 @@ export default class Scroll extends Component {
       active: false
     }
     this.unmount = false
-  }
-
-  get scrollHandler () {
-    return throttle(this.scroll.bind(this), 300)
+    this.throttled = throttle(this.scroll, 300)
   }
 
   componentDidMount () {
-    window.addEventListener('scroll', this.scrollHandler)
+    document.querySelector('#app').addEventListener('scroll', this.throttled.bind(this))
   }
 
   componentWillUnmount () {
     this.unmount = true
-    this.scrollHandler.cancel()
-    window.removeEventListener('scroll', this.scrollHandler)
+    this.throttled.bind(this).cancel()
+    document.querySelector('#app').removeEventListener('scroll', this.throttled.bind(this))
   }
 
   shouldComponentUpdate (prevProps, prevState) {
@@ -39,11 +36,11 @@ export default class Scroll extends Component {
     )
   }
 
-  scroll (e) {
+  scroll () {
     if (this.unmount) {
       return
     }
-    const top = document.documentElement.scrollTop
+    const top = document.querySelector('#app').scrollTop
     if (top > 100) {
       this.setState({
         active: true

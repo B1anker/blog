@@ -57,7 +57,7 @@ export default class MarkDown extends Component {
 
   finish (res) {
     const successText = this.isEdit ? '修改' : '提交' + '文章成功！'
-    message.success('修改文章成功！')
+    message.success(successText)
     this.props.history.push(`/admin/post/list`)
     this.setState({
       submitting: false

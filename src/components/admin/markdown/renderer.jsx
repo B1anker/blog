@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ReactMarkdown from 'react-markdown'
-import CodeBlock from './codeBlock'
+import CodeBlock from './prism'
 import { RendererStyle } from './style'
 
 const convertValue = (value) => {

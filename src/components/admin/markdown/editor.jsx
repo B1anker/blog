@@ -8,6 +8,7 @@ import 'codemirror/mode/markdown/markdown.js'
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/theme/material.css'
 import { EditorStyle } from './style'
+import debounce from 'lodash/debounce'
 
 export default class Editor extends Component {
   constructor (props) {
@@ -38,12 +39,17 @@ export default class Editor extends Component {
       keyMap: 'sublime',
       extraKeys: {"Enter": "newlineAndIndentContinueMarkdownList"}
     })
+    const debounced = debounce(this.update, 600)
     this.editor.on('change', (value) => {
-      this.setState({
-        value: this.editor.getValue()
-      })
+      debounced.call(this)
     })
     this.setValue(this.props.value)
+  }
+
+  update () {
+    this.setState({
+      value: this.editor.getValue()
+    })
   }
 
   getSnapshotBeforeUpdate (prevProps, prevState) {

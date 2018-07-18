@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { highlightBlock } from './highlight'
-import 'highlightjs/styles/solarized_light.css'
+import '../../../styles/lib/code.less'
+// import 'highlightjs/styles/solarized_light.css'
 
 export default class CodeBlock extends Component {
   constructor (props) {
@@ -26,7 +27,7 @@ export default class CodeBlock extends Component {
       <pre>
         <code ref={(el) => this.el = el}
           className={`language-${this.props.language || 'vim'}`}>
-          { this.props.value }
+          { value }
         </code>
       </pre>
     )
