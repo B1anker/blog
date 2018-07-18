@@ -36,7 +36,7 @@ export default class Content extends Component {
           <Profile />
         </div>
         {
-          this.props.comment ? (<div className="comment">{ this.props.comment }</div>) : null
+          this.props.comment ? (<div className="post-comment">{ this.props.comment }</div>) : null
         }
       </ContentStyle>
     )

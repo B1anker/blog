@@ -31,7 +31,7 @@ const ContentStyle = styled.main`
       }
     }
   }
-  .comment {
+  .post-comment {
     width: 800px;
     background: #fff;
     margin: 0;
