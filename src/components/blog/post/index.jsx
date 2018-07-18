@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { Link } from 'react-router-dom'
 import { PostStyle } from './style'
-import CodeBlock from '@/components/admin/markdown/codeBlock'
+import CodeBlock from '@/components/admin/markdown/prism'
 import moment from 'moment'
 
 export default class Post extends Component {
