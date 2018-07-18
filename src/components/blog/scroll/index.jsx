@@ -53,7 +53,7 @@ export default class Scroll extends Component {
   }
 
   scrollToTop () {
-    const doc = document.documentElement
+    const doc = document.querySelector('#app')
     let top = doc.scrollTop
     const step = Math.ceil(top / 16)
     const animate = () => {
