@@ -18,7 +18,7 @@ export default class Scroll extends Component {
 
   componentWillUnmount () {
     this.unmount = true
-    this.throttled.bind(this).cancel()
+    this.throttled.cancel()
     document.querySelector('#app').removeEventListener('scroll', this.throttled.bind(this))
   }
 
