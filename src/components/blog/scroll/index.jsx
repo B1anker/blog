@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { ScrollStyle } from './style'
+import { connect } from 'react-redux'
+import { changeScrollStatus } from '../../../actions/system'
 import throttle from 'lodash/throttle'
 
-export default class Scroll extends Component {
+class Scroll extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -42,10 +44,12 @@ export default class Scroll extends Component {
     }
     const top = document.querySelector('#app').scrollTop
     if (top > 100) {
+      this.props.dispatch(changeScrollStatus(true))
       this.setState({
         active: true
       })
     } else {
+      this.props.dispatch(changeScrollStatus(false))
       this.setState({
         active: false
       })
@@ -68,3 +72,5 @@ export default class Scroll extends Component {
     window.requestAnimationFrame(animate)
   }
 }
+
+export default connect()(Scroll)

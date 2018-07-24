@@ -11,6 +11,19 @@ const Navigator = styled.nav`
   top: 0;
   z-index: 3;
   box-shadow: 0 1px 4px 2px rgba(0, 0, 0, 0.1);
+  transition: all ease .3s;
+
+  &.active {
+    background: rgba(0, 0, 0, .6);
+
+    a {
+      color: white;
+
+      &:hover {
+        background: hsla(0, 0%, 100%, .9) !important;
+      }
+    }
+  }
 `
 
 const Menu = styled.ul`

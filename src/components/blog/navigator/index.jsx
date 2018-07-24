@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 import { Menu, MenuItem, Navigator } from './style'
 
-export default class Nav extends Component {
+class Nav extends Component {
   constructor (props) {
+    console.log(props)
     super(props)
     this.state = {
       navList: [{
@@ -30,9 +32,13 @@ export default class Nav extends Component {
     }
   }
 
+  get scrolled () {
+    return this.props.system.scrolled
+  }
+
   render () {
     return (
-      <Navigator className='site-nav'>
+      <Navigator className={this.scrolled ? 'site-nav active' : 'site-nav'}>
         <Menu id='menu' className='menu'>
           {
             this.state.navList.map((nav, index) => (
@@ -49,3 +55,11 @@ export default class Nav extends Component {
     )
   }
 }
+
+const mapStateToProps = state => ({
+  system: state.system
+})
+
+export default connect(
+  mapStateToProps
+)(Nav)
