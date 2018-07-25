@@ -5,7 +5,6 @@ import { Menu, MenuItem, Navigator } from './style'
 
 class Nav extends Component {
   constructor (props) {
-    console.log(props)
     super(props)
     this.state = {
       navList: [{

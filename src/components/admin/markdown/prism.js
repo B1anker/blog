@@ -1,33 +1,20 @@
-import prism from 'prismjs'
 import React, { Component } from 'react'
-
-import '../../../styles/lib/code.less'
-// import 'highlightjs/styles/solarized_light.css'
+import SyntaxHighlighter from 'react-syntax-highlighter/prism'
+import style from './prism-style'
 
 export default class CodeBlock extends Component {
   constructor (props) {
     super(props)
   }
 
-  highlight (str, lang) {
-    let result = ''
-    try {
-      result = prism.highlight(str, prism.languages[lang], lang)
-    } catch (err) {
-      console.log(str, lang)
-    }
-    return result
-  }
-
   render () {
     const { value, language } = this.props
     return (
-      <pre className='prism-highlight'>
-        <code ref={(el) => this.el = el}
-          dangerouslySetInnerHTML={ {__html: this.highlight(value, language || 'vim')} }
-          className={`language-${language || 'vim'}`}
-        />
-      </pre>
+      <SyntaxHighlighter className='prism-highlight'
+        language={language}
+        style={style}>
+        { value }
+      </SyntaxHighlighter>
     )
   }
 }

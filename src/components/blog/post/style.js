@@ -97,6 +97,45 @@ const PostStyle = styled.div`
 
   .post-content {
     margin-top 60px;
+
+    li {
+      list-style: disc;
+    }
+
+    .prism-highlight {
+      code {
+        background-color: inherit;
+      }
+    }
+
+    code {
+      background-color: #fff5f5;
+      color: #ff502c;
+      font-size: .87em;
+      padding: .065em .4em;
+    }
+
+    blockquote {
+      color: #666;
+      margin: 0;
+      padding-left: 3em;
+      border-left: 0.5em #eee solid;
+    }
+    
+    tr {
+      border-top: 1px solid #c6cbd1;
+      background: #fff;
+    }
+    
+    th,
+    td {
+      padding: 6px 13px;
+      border: 1px solid #dfe2e5;
+    }
+    
+    table tr:nth-child(2n) {
+      background: #f6f8fa;
+    }
   }
   
   .post-badage {
