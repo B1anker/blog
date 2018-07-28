@@ -5,7 +5,7 @@ const MenuHeight = '48px'
 const NavItemHeight = '48px'
 
 const Navigator = styled.nav`
-  position absolute;
+  position: fixed;
   left: 0;
   right: 0;
   top: 0;
