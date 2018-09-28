@@ -80,6 +80,15 @@ const RendererStyle = styled.div`
     background: #f6f8fa;
   }
 
+  p {
+    code {
+      background-color: #fff5f5;
+      color: #ff502c;
+      font-size: .87em;
+      padding: .065em .4em;
+    }
+  }
+
   img {
     max-width: 100%;
   }

@@ -12,7 +12,7 @@ const convertValue = (value) => {
   try {
     const removeMore = value.replace(/<!--\s?more\s?-->/, '')
     const summary = value.split(/<!--\s?more\s?-->/)[0] || value
-    const paramsString = removeMore.match(/---(.|\n)*---/g)
+    const paramsString = removeMore.match(/---\n(.|\n)*\n---/)
     let result = []
     // 解析头部信息
     if (paramsString && paramsString[0]) {
