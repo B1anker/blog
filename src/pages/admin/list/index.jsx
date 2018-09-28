@@ -11,20 +11,14 @@ export default class List extends Component {
       loading: false
     }
     this.columns = [{
-      title: '_id',
-      dataIndex: '_id',
-      key: '_id',
-      align: 'center',
-      width: 220
-    }, {
       title: '标题',
       dataIndex: 'title',
       key: 'title',
       align: 'center'
     }, {
       title: '分类',
-      dataIndex: 'category',
-      key: 'category',
+      dataIndex: 'categories',
+      key: 'categories',
       align: 'center'
     }, {
       title: '标签',
@@ -62,6 +56,7 @@ export default class List extends Component {
         return (
           <OperateButtons>
             <Button type='primary'
+              size='small'
               onClick={() => {
                 this.props.history.push(`/admin/post/edit/${record._id}`)
               }}>
@@ -73,7 +68,7 @@ export default class List extends Component {
               onConfirm={() => {
                 this.handleDelete(record)
               }}>
-              <Button type='danger'>
+              <Button type='danger' size='small'>
                 删除
               </Button>
             </Popconfirm>

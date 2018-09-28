@@ -74,7 +74,7 @@ const convertValue = (value) => {
     }
     const headers = {}
     result.forEach((r) => {
-      headers[r.name] = r.value
+      headers[r.name] = r.value.trim()
     })
     return {
       renderValue: removeMore.replace(/---\n(.|\n)*\n---/g, ''),

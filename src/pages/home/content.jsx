@@ -14,7 +14,7 @@ export default class Content extends Component {
             'title',
             'tags',
             'subTitle',
-            'category',
+            'categories',
             'count'
           ])
           Object.assign(_post, {

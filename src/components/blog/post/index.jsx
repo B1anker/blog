@@ -42,7 +42,7 @@ export default class Post extends Component {
               <span className="prefix">分类于</span>
               &nbsp;&nbsp;
               <span className="text">
-                { this.post.category }
+                { this.post.categories }
               </span>
             </div>
             <span className='split'>•</span>
@@ -70,7 +70,7 @@ export default class Post extends Component {
           escapeHtml={false}
           renderers={{code: CodeBlock}}/>
         <div className="post-badage">
-          <span>{ this.post.category }</span>
+          <span>{ this.post.categories }</span>
         </div>
         {
           this.props.type === 'summary' ? readMore : null
