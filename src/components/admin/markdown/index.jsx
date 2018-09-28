@@ -1,3 +1,4 @@
+import { Icon, Spin } from 'antd'
 import React, { Component } from 'react'
 import Editor from './editor'
 import Renderer from './renderer'
@@ -10,7 +11,8 @@ export default class MarkDown extends Component {
     this.state = {
       value: '',
       parsable: false,
-      submitting: false
+      submitting: false,
+      loading: !!props.match.params.pid
     }
     this.headers = []
   }
@@ -27,30 +29,39 @@ export default class MarkDown extends Component {
     if (this.pid) {
       const { data } = await this.$models.post.fetchPost(this.pid)
       this.setState({
-        value: data[0].content
+        value: data[0].content,
+        loading: false
       })
     }
   }
 
   render () {
+    const container = (
+      <div className="container">
+        <Editor value={this.state.value}
+            onChange={(value) => this.setState({value})} />
+          <Renderer value={this.state.value}
+            parsable={this.state.parsable}
+            onChange={({parsable, headers}) => {
+              this.headers = headers
+              this.setState({parsable})
+            }}/>
+          <SubmitStyle type='primary'
+            disabled={!this.state.parsable}
+            loading={this.state.submitting}
+            onClick={() => {
+              this.handleSubmit()
+            }}>
+            { this.isEdit ? '修改' : '提交' }
+          </SubmitStyle>
+      </div>)
     return (
       <MarkDownStyle>
-        <Editor value={this.state.value}
-          onChange={(value) => this.setState({value})} />
-        <Renderer value={this.state.value}
-          parsable={this.state.parsable}
-          onChange={({parsable, headers}) => {
-            this.headers = headers
-            this.setState({parsable})
-          }}/>
-        <SubmitStyle type='primary'
-          disabled={!this.state.parsable}
-          loading={this.state.submitting}
-          onClick={() => {
-            this.handleSubmit()
-          }}>
-          { this.isEdit ? '修改' : '提交' }
-        </SubmitStyle>
+        {
+          this.state.loading ? <Spin indicator={<Icon type="loading" style={{ fontSize: 24 }} spin />} >
+            {container}
+          </Spin> : container
+        }
       </MarkDownStyle>
     )
   }

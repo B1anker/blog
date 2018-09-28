@@ -7,7 +7,7 @@ export default [
     path: '/admin/post',
     children: [{
       name: '编辑',
-      path: '/admin/post/edit/',
+      path: '/admin/post/edit',
       noRender: true,
       exact: true,
       component: AC(() => import('@/components/admin/markdown')),

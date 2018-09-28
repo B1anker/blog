@@ -35,7 +35,7 @@ export default class Content extends Component {
       <ContentStyle className='main-content'>
         {
           this.props.loading ? <div className="loading">
-            <Spin indicator={<Icon type="loading" style={{ fontSize: 24 }} spin />} />
+            <Spin wrapperClassName="spin" indicator={<Icon type="loading" style={{ fontSize: 24 }} spin />} />
           </div> : Posts
         }
         <div className="sidebar">

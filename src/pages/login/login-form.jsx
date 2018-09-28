@@ -93,12 +93,11 @@ class LoginForm extends Component {
         })
         try {
           await this.props.callback(values.username, values.password, values.remember)
-        } catch (err) {
-          console.log(err)
-        } finally {
           this.setState({
             pending: false
           })
+        } catch (err) {
+          console.log(err)
         }
       }
     })

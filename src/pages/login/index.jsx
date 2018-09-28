@@ -20,7 +20,7 @@ export default class Login extends Component {
         }
         <div className={style.form}>
           <LoginForm callback={(username, password, remember) => {
-            this.login(username, password, remember)
+            return this.login(username, password, remember)
           }}/>
         </div>
       </div>

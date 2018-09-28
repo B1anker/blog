@@ -2,11 +2,21 @@ import styled from 'styled-components'
 import { Button } from 'antd'
 
 const MarkDownStyle = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  width: 100%;
   height: calc(100% - 40px);
+  .ant-spin-nested-loading, .ant-spin-container {
+    height: 100%;
+  }
+  .ant-spin-spinning {
+    max-height: none !important;
+  }
+
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    width: 100%;
+    height: 100%;
+  }
 `
 
 const SubmitStyle = styled(Button)`

@@ -9,21 +9,17 @@ export default class Admin extends Component {
   constructor () {
     super()
     this.state = {
-      collapsed: false,
-      selectedMenu: ''
+      collapsed: false
     }
     this.contentEl = null
   }
 
   get selectedKey () {
-    return this.props.location.pathname.replace(/:.*/, '')
+    return '/' + this.props.location.pathname.split('/').slice(1, 4).join('/')
   }
 
   componentDidMount () {
     this.$models.user.getInfo()
-    this.setState({
-      selectedMenu: this.selectedKey
-    })
     setTimeout(() => {
       this.contentEl.style.height = this.contentEl.parentNode.getBoundingClientRect().height - 2 * 24 + 'px'
     })
@@ -50,11 +46,8 @@ export default class Admin extends Component {
           <Menu theme='dark'
             mode='inline'
             defaultOpenKeys={['/admin/post']}
-            selectedKeys={[this.state.selectedMenu]}
+            selectedKeys={[this.selectedKey]}
             onClick={({item, key, keyPath}) => {
-              this.setState({
-                selectedMenu: key.replace(/:.*/, '')
-              })
               this.props.history.push(key.replace(/:.*/, ''))
             }}>
             {
@@ -63,12 +56,12 @@ export default class Admin extends Component {
                   return (
                     <Menu.SubMenu title={<span><Icon type={route.icon} /><span>{ route.name }</span></span>} key={route.path} >
                       {
-                        route.children.map((child, i) => {
+                        route.children.map((child) => {
                           if (child.noRender) {
-                            return ''
+                            return null
                           }
                           return (
-                            <Menu.Item key={child.path.replace(/:.*/, '')}>
+                            <Menu.Item key={child.path.replace(/\/:.*/, '')}>
                               { <Icon type={ child.icon } /> }
                               <span>{ child.name }</span>
                             </Menu.Item>
