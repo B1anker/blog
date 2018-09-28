@@ -15,6 +15,12 @@ const ContentStyle = styled.main`
     margin-top: 0;
   }
 
+  .loading {
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+  }
+
   .posts {
     width: 800px;
     background-color: transparent;

@@ -8,14 +8,19 @@ export default class Home extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      posts: []
+      posts: [],
+      loading: false
     }
   }
 
   async componentDidMount () {
+    this.setState({
+      loading: true
+    })
     const { data } = await this.$models.post.fetchPostList()
     this.setState({
-      posts: data
+      posts: data,
+      loading: false
     })
   }
 
@@ -25,6 +30,7 @@ export default class Home extends Component {
         <Header />
         <Content
           type='summary'
+          loading={this.state.loading}
           posts={this.state.posts}/>
         <MyFooter />
         <Scroll />
