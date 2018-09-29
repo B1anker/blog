@@ -45,7 +45,7 @@ export default class List extends Component {
       width: 170,
       render: (text, record) => {
         return (
-          <span>{ moment(record.meta.updateAt).format('YYYY-MM-DD HH:mm:ss') }</span>
+          <span>{ moment(record.meta.updatedAt).format('YYYY-MM-DD HH:mm:ss') }</span>
         )
       }
     }, {

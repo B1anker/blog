@@ -12,6 +12,7 @@
     "antd": "^3.4.0",
     "axios": "^0.18.0",
     "codemirror": "^5.36.0",
+    "dayjs": "^1.7.7",
     "highlightjs": "^9.10.0",
     "moment": "^2.22.0",
     "prismjs": "^1.15.0",
