@@ -5,7 +5,7 @@ const ContentStyle = styled.main`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  width: 1200px;
+  width: 1300px;
   margin: 0 auto;
   margin-top: 40px;
   padding-bottom: 380px;
@@ -22,7 +22,7 @@ const ContentStyle = styled.main`
   }
 
   .posts {
-    width: 800px;
+    width: 900px;
     background-color: transparent;
 
     @media only screen and (max-width: 991px) {
@@ -38,7 +38,7 @@ const ContentStyle = styled.main`
     }
   }
   .post-comment {
-    width: 800px;
+    width: 900px;
     background: #fff;
     margin: 0;
     padding: 40px;
