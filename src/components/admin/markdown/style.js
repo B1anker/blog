@@ -34,6 +34,78 @@ const EditorStyle = styled.div`
     height: 100%;
   }
 `
+const CodeStyle = `
+.prism-highlight {
+  margin-bottom: 36px !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 16px 0;
+}
+
+p {
+  text-indent: 2em;
+}
+
+table {
+  margin-bottom: 1em;
+  margin: 0 auto 1em auto;
+
+  tr {
+    border-top: 1px solid #c6cbd1;
+    background: #fff;
+  }
+
+  th,
+  td {
+    padding: 6px 13px;
+    border: 1px solid #dfe2e5;
+  }
+}
+
+table tr:nth-child(2n) {
+  background: #f6f8fa;
+}
+
+ul {
+  margin-left: 2.5em;
+
+  li {
+    list-style: disc;
+    margin: .5em 0;
+  }
+}
+
+pre {
+  border: 1px solid #ccc;
+}
+
+blockquote {
+  color: #666;
+  margin: 1.5em 0;
+  border-left: 0.5em #eee solid;
+  padding-left: 1em;
+
+  p {
+    text-indent: 0;
+    margin-bottom: 0;
+  }
+}
+
+p, blockquote, li {
+  code {
+    background-color: #fff5f5;
+    color: #ff502c;
+    padding: .3em .4em;
+    margin: 0 .4em;
+    border-radius: 4px;
+  }
+}
+
+img {
+  max-width: 100%;
+}
+`
 
 const RendererStyle = styled.div`
   width: 50%;
@@ -50,51 +122,11 @@ const RendererStyle = styled.div`
     color: #444;
   }
 
-  li {
-    list-style: disc;
-  }
-
-  pre {
-    border: 1px solid #ccc;
-  }
-  
-  blockquote {
-    color: #666;
-    margin: 0;
-    padding-left: 3em;
-    border-left: 0.5em #eee solid;
-  }
-  
-  tr {
-    border-top: 1px solid #c6cbd1;
-    background: #fff;
-  }
-  
-  th,
-  td {
-    padding: 6px 13px;
-    border: 1px solid #dfe2e5;
-  }
-  
-  table tr:nth-child(2n) {
-    background: #f6f8fa;
-  }
-
-  p {
-    code {
-      background-color: #fff5f5;
-      color: #ff502c;
-      font-size: .87em;
-      padding: .065em .4em;
-    }
-  }
-
-  img {
-    max-width: 100%;
-  }
+  ${CodeStyle}
 `
 
 export {
+  CodeStyle,
   EditorStyle,
   MarkDownStyle,
   RendererStyle,
