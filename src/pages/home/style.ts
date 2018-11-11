@@ -16,9 +16,23 @@ const ContentStyle = styled.main`
   }
 
   .loading {
-    margin: 0 auto;
+    margin-bottom: 40px;
+    width: 900px;
+    border-radius: 5px;
+    background: white;
     display: flex;
     align-items: center;
+
+    .ant-spin {
+      margin: 0 auto;
+    }
+  }
+
+  .empty {
+    text-align: center;
+    line-height: 48px;
+    font-weight: bolder;
+    font-size: 24px;
   }
 
   .posts {
@@ -31,6 +45,7 @@ const ContentStyle = styled.main`
 
     .post {
       margin-top: 60px;
+      border-radius: 5px;
 
       &:first-child {
         margin-top: 0;

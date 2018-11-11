@@ -1,11 +1,26 @@
+import ExtendComponent from '@/core/component'
 import { Icon, Spin } from 'antd'
-import React, { Component } from 'react'
+import React from 'react'
+import { RouteComponentProps } from 'react-router-dom'
 import Editor from './editor'
 import Renderer from './renderer'
 import { MarkDownStyle, SubmitStyle } from './style'
 import { message } from 'antd'
 
-export default class MarkDown extends Component {
+export interface Params {
+  pid: number
+}
+
+interface MarkDownState {
+  value: string
+  parsable: boolean
+  submitting: boolean
+  loading: boolean
+}
+
+export default class MarkDown extends ExtendComponent<RouteComponentProps<Params>, MarkDownState> {
+  private headers: any[] = []
+
   constructor (props) {
     super(props)
     this.state = {
@@ -14,7 +29,6 @@ export default class MarkDown extends Component {
       submitting: false,
       loading: !!props.match.params.pid
     }
-    this.headers = []
   }
 
   get isEdit () {

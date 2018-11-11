@@ -1,12 +1,12 @@
 import styled from 'styled-components'
-import { CodeStyle } from '../../../components/admin/markdown/style'
+import { CodeStyle } from '../../admin/markdown/style'
 
 
 const BLUE = '#97dffd'
 const ORANGE = '#ff3f1a'
 const PURPLE = '#8378EA'
 
-const center = (justify) => {
+const center = (justify: string) => {
   return `
     display: flex;
     justify-content: ${justify};

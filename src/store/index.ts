@@ -1,3 +1,7 @@
+declare global {
+  interface Window { __REDUX_DEVTOOLS_EXTENSION__: any }
+}
+
 import { combineReducers, createStore } from 'redux'
 
 import system from './system'

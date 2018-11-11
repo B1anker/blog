@@ -10,18 +10,28 @@ import 'codemirror/theme/material.css'
 import { EditorStyle } from './style'
 import debounce from 'lodash/debounce'
 
-export default class Editor extends Component {
+interface EditorProps {
+  onChange: (snapshot: any) => void
+  value: string
+}
+
+interface EditorState {
+  value: string
+}
+
+export default class Editor extends Component<EditorProps, EditorState> {
+  private editor: CodeMirror.Editor | null = null
+  private editorEl: any
+
   constructor (props) {
     super(props)
-    this.editor = null
-    this.editorEl = null
     this.state = {
       value: ''
     }
   }
 
   setValue (content) {
-    if (this.state.value === '') {
+    if (this.state.value === '' && this.editor) {
       this.editor.setValue(content)
     }
   }
@@ -31,25 +41,29 @@ export default class Editor extends Component {
       value: this.props.value,
       mode: 'markdown',
       lineNumbers: true,
-      autoCloseBrackets: true,
-      matchBrackets: true,
       showCursorWhenSelecting: true,
       lineWrapping: true,  // 长句子折行
-      theme: "material",
+      theme: 'material',
       keyMap: 'sublime',
-      extraKeys: {"Enter": "newlineAndIndentContinueMarkdownList"}
+      extraKeys: {
+        Enter: 'newlineAndIndentContinueMarkdownList'
+      }
     })
-    const debounced = debounce(this.update, 600)
-    this.editor.on('change', (value) => {
-      debounced.call(this)
-    })
-    this.setValue(this.props.value)
+    if (this.editor) {
+      const debounced = debounce(this.update, 600)
+      this.editor.on('change', (value) => {
+        debounced.call(this)
+      })
+      this.setValue(this.props.value)   
+    }
   }
 
   update () {
-    this.setState({
-      value: this.editor.getValue()
-    })
+    if (this.editor) {
+      this.setState({
+        value: this.editor.getValue()
+      })
+    }
   }
 
   getSnapshotBeforeUpdate (prevProps, prevState) {
@@ -68,9 +82,11 @@ export default class Editor extends Component {
 
   render () {
     return (
-      <EditorStyle id="CodeMirror" innerRef={(el) => {
-        this.editorEl = el
-      }} />
+      <EditorStyle id="CodeMirror"
+        innerRef={(el) => {
+          this.editorEl = el
+        }}
+      />
     )
   }
 }

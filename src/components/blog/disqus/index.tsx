@@ -5,7 +5,7 @@ export default class Disqus extends Component {
     const doc = document
     const s = doc.createElement('script')
     s.src = 'https://b1anker.disqus.com/embed.js'
-    s.setAttribute('data-timestamp', +new Date())
+    s.setAttribute('data-timestamp', new Date().getTime().toString())
     ;(doc.head || doc.body).appendChild(s)
   }
 

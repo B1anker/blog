@@ -3,7 +3,23 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Menu, MenuItem, Navigator } from './style'
 
-class Nav extends Component {
+interface NavProps {
+  system: {
+    scrolled: boolean
+  }
+}
+
+interface NavItem {
+  name: string
+  route: string
+  icon: string
+}
+
+interface NavState {
+  navList: NavItem[]
+}
+
+class Nav extends Component<NavProps, NavState> {
   constructor (props) {
     super(props)
     this.state = {
@@ -55,10 +71,10 @@ class Nav extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   system: state.system
 })
 
-export default connect(
+export default connect<NavProps>(
   mapStateToProps
 )(Nav)

@@ -1,10 +1,11 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Header from '@/components/blog/header'
 import MyFooter from '@/components/blog/footer'
 import Scroll from '@/components/blog/scroll'
 import Content from './content'
+import ExtendComponent from '@/core/component';
 
-export default class Home extends Component {
+export default class Home extends ExtendComponent {
   constructor (props) {
     super(props)
     this.state = {
@@ -17,19 +18,26 @@ export default class Home extends Component {
     this.setState({
       loading: true
     })
-    const { data } = await this.$models.post.fetchPostList()
-    this.setState({
-      posts: data,
-      loading: false
-    })
+    try {
+      const { data } = await this.$models.post.fetchPostList()
+      this.setState({
+        posts: data,
+        loading: false
+      })
+    } catch (err) {
+      this.setState({
+        posts: [],
+        loading: false
+      })
+      throw err
+    }
   }
 
   render () {
     return (
       <div className='home'>
         <Header />
-        <Content
-          type='summary'
+        <Content type='summary'
           loading={this.state.loading}
           posts={this.state.posts}/>
         <MyFooter />

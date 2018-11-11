@@ -5,7 +5,12 @@ import { PostStyle } from './style'
 import CodeBlock from '@/components/admin/markdown/prism'
 import moment from 'moment'
 
-export default class Post extends Component {
+export interface PostProps {
+  post: any
+  type: string
+}
+
+export default class Post extends Component<PostProps> {
   get post () {
     return this.props.post
   }
@@ -14,7 +19,9 @@ export default class Post extends Component {
     const date = moment(this.post.createTime)
     const readMore = (
       <div className="read-all">
-        <Link className="btn" to={`/post/${this.post.id}`}>
+        <Link className="btn"
+          to={`/post/${this.post.id}`}
+        >
           阅读全文 &raquo;
         </Link>
       </div>
