@@ -27,8 +27,8 @@ const removeInfoFlag = (string) => {
   * title: xxxx
   */
 const seperateLinesToArrayLikeAndNotArrayLike = (perLineStore) => {
-  const arrayLikeOfLine = []
-  const notArrayLikeOfLine = []
+  const arrayLikeOfLine: string[] = []
+  const notArrayLikeOfLine: string[] = []
   perLineStore.forEach((line) => {
     if (line.split(': ').length < 2 || !line.split(': ')[1]) {
       arrayLikeOfLine.push(line)
@@ -43,25 +43,29 @@ const seperateLinesToArrayLikeAndNotArrayLike = (perLineStore) => {
 }
 
 const handleArrayLike = (arrayLikeOfLine) => {
-  const o = {
+  interface Temp {
+    name: string
+    value: string[]
+  }
+  const temp: Temp = {
     name: '',
     value: []
   }
-  const arrayLike = []
+  const arrayLike: any[] = []
   // 处理数组形式的组
   for (let i = 0, len = arrayLikeOfLine.length; i < len; i++) {
     const currentLine = arrayLikeOfLine[i]
     if (~currentLine.search(':')) {
       if (i > 0) {
-        arrayLike.push(Object.assign({}, o))
-        o.value = []
+        arrayLike.push(Object.assign({}, temp))
+        temp.value = []
       }
-      o.name = currentLine.match(/.*(?=:)/)[0]
+      temp.name = currentLine.match(/.*(?=:)/)[0]
     } else {
-      o.value.push(currentLine.match(/(?!-)\s*(.*)/)[1])
+      temp.value.push(currentLine.match(/(?!-)\s*(.*)/)[1])
     }
   }
-  o.name && arrayLike.push(Object.assign({}, o))
+  temp.name && arrayLike.push(Object.assign({}, temp))
   return arrayLike
 }
 
@@ -124,7 +128,18 @@ const convertValue = (value) => {
   }
 }
 
-export default class Renderer extends Component {
+interface RendererProps {
+  value: string
+  parsable: boolean
+  onChange: ({parsable, headers}) => void
+}
+
+interface RendererState {
+  renderValue: string
+  value: string
+}
+
+export default class Renderer extends Component<RendererProps, RendererState> {
   constructor (props) {
     super(props)
     this.state = {

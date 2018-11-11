@@ -1,6 +1,5 @@
 const webpack = require('webpack')
-const HtmlWebPackPlugin = require('html-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const tsImportPluginFactory = require('ts-import-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const path = require('path')
 const config = require('../config')
@@ -12,9 +11,8 @@ const resolve = dir => {
 
 module.exports = {
   entry: {
-    app: resolve('src/entry.jsx')
+    app: resolve('src/entry.tsx')
   },
-  devtool: 'source-map',
   mode: process.env.NODE_ENV,
   output: {
     path: config.build.assetsRoot,
@@ -25,9 +23,10 @@ module.exports = {
     filename: '[name].[hash].js'
   },
   resolve: {
-    extensions: ['.jsx', '.js', '.less'],
+    extensions: ['.tsx', '.ts', '.jsx', '.js', '.less'],
     alias: {
       '@': resolve('src'),
+      src: resolve('src'),
       assets: resolve('src/assets')
     }
   },
@@ -39,6 +38,23 @@ module.exports = {
         use: {
           loader: 'babel-loader'
         }
+      },
+      {
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        use: [{
+          loader: 'ts-loader',
+          options: {
+            transpileOnly: true,
+            getCustomTransformers: () => ({
+              before: [ tsImportPluginFactory({
+                libraryDirectory: 'lib',
+                libraryName: 'antd',
+                style: 'css',
+              }) ]
+            })
+          }
+        }]
       },
       {
         test: /\.(css|less)$/,
@@ -62,7 +78,21 @@ module.exports = {
         exclude: [resolve('node_modules'), resolve('src/styles/lib')]
       },
       {
-        test: /\.(css|less)$/,
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader'
+        ],
+        include: [
+          'highlightjs',
+          'codemirror',
+          'antd'
+        ]
+          .map(path => resolve(`node_modules/${path}`))
+          .concat(resolve('src/styles/lib'))
+      },
+      {
+        test: /\.less$/,
         use: [
           'style-loader',
           'css-loader',
@@ -73,7 +103,11 @@ module.exports = {
             }
           }
         ],
-        include: ['highlightjs', 'codemirror', 'antd']
+        include: [
+          'highlightjs',
+          'codemirror',
+          'antd'
+        ]
           .map(path => resolve(`node_modules/${path}`))
           .concat(resolve('src/styles/lib'))
       },

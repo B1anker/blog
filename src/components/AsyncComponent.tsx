@@ -1,19 +1,24 @@
 import React, { Component } from 'react'
+import { SpinProps } from 'antd/lib/spin'
 import styled from 'styled-components'
 import { Spin } from 'antd'
 
-const BodySpin = styled(Spin)`
+const BodySpin = styled<SpinProps>(props => <Spin {...props}/>)`
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 `
 
-export default (loadComponent) => {
-  return class AsyncComponent extends Component {
+interface AsyncComponentState {
+  Child: (new(...args: any[]) => React.Component) | null
+}
+
+const GenAsyncComponent = (loadComponent: () => Promise<any>) => {
+  return class AsyncComponent extends Component<{}, AsyncComponentState> {
+    private unmount: boolean = false
     constructor (props) {
       super(props)
-      this.unmount = false
       this.state = {
         Child: null
       }
@@ -24,7 +29,7 @@ export default (loadComponent) => {
     }
 
     async componentDidMount () {
-      const { default: Child } = await loadComponent()
+      const { default: Child} = await loadComponent()
 
       if (this.unmount) {
         return
@@ -46,3 +51,5 @@ export default (loadComponent) => {
     }
   }
 }
+
+export default GenAsyncComponent

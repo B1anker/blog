@@ -1,20 +1,24 @@
 import React, { Component } from 'react'
 import { FooterStyle } from './style'
 
+interface MyFooterState {
+  gap: number
+}
+
 const BLOG_START_DATE = '2018/04/13 22:57:50'
 const DAY_GAP = 1000 * 60 * 60 * 24
 const HOUR_GAP = 1000 * 60 * 60
 const MINUTE_GAP = 1000 * 60
 const SECOND_GAP = 1000
 
-export default class MyFooter extends Component {
+export default class MyFooter extends Component<{}, MyFooterState> {
+  private blogStartTimestamp: number = new Date(BLOG_START_DATE).getTime()
+  private timer: NodeJS.Timer
   constructor (props) {
     super(props)
-    this.blogStartTimestamp = new Date(BLOG_START_DATE).getTime()
     this.state = {
       gap: (new Date()).getTime() - this.blogStartTimestamp
     }
-    this.timer = null
   }
 
   componentDidMount () {

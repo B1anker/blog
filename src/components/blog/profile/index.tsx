@@ -1,9 +1,14 @@
 import React, { Component } from 'react'
 import { ProfileStyle } from './style'
 
+export interface SocialItem {
+  name: string
+  icon: string
+  url: string
+}
 
 export default class Profile extends Component {
-  socials = [{
+  private socials: SocialItem[] = [{
     name: 'Github',
     icon: 'github',
     url: 'https://github.com/b1anker'

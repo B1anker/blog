@@ -5,11 +5,18 @@ import Post from '@/components/blog/post'
 import { ContentStyle } from './style'
 import pick from 'lodash/pick'
 
-export default class Content extends Component {
+interface ContentProps {
+  posts: any[]
+  type: string
+  loading: boolean
+  comment?: React.Component
+}
+
+export default class Content extends Component<ContentProps> {
   render () {
     const Posts = <div className="posts">
       {
-        this.props.posts.map((post, index) => {
+        this.props.posts.length ? this.props.posts.map((post, index) => {
           const _post = pick(post, [
             'title',
             'tags',
@@ -27,7 +34,7 @@ export default class Content extends Component {
             post={_post}
             key={index}
             type={this.props.type} />
-        })
+        }) : <div className="empty">暂无文章╮(╯_╰)╭</div>
       }
     </div>
 
@@ -42,7 +49,11 @@ export default class Content extends Component {
           <Profile />
         </div>
         {
-          this.props.comment ? (<div className="post-comment">{ this.props.comment }</div>) : null
+          this.props.comment ? (
+            <div className="post-comment">
+              { this.props.comment }
+            </div>
+          ) : null
         }
       </ContentStyle>
     )

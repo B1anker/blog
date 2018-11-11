@@ -25,7 +25,7 @@ self.toolbox.router.get("/(.js)", self.toolbox.cacheFirst, {
 self.toolbox.router.get("/(.*)", function (request, values, options) {
   let newRequest = null
   if (request.mode === 'cors') {
-    const newRequest = new Request(request, {
+    newRequest = new Request(request, {
       credentials: 'include'
     })
   }
