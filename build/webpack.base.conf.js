@@ -143,11 +143,6 @@ module.exports = {
         from: path.resolve(__dirname, '../src/service-worker.js'),
         to: config.build.assetsRoot,
         ignore: ['.*']
-      },
-      {
-        from: path.resolve(__dirname, '../src/sw-toolbox.js'),
-        to: config.build.assetsRoot,
-        ignore: ['.*']
       }
     ])
   ]

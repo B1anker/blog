@@ -1,95 +1,58 @@
-const cacheVersion = '20180602v6'
-const staticCacheName = 'static' + cacheVersion
-const staticAssetsCacheName = '/' + cacheVersion
-const vendorCacheName = 'verdor' + cacheVersion
-const contentCacheName = 'content' + cacheVersion
-const maxEntries = 100
-self.importScripts('/sw-toolbox.js')
-self.toolbox.options.debug = false
-self.toolbox.options.networkTimeoutSeconds = 3
+importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.6.1/workbox-sw.js')
 
-self.toolbox.router.get("/static/(.*)", self.toolbox.cacheFirst, {
-  cache: {
-    name: staticCacheName,
-    maxEntries: maxEntries
-  }
-});
+if (workbox) {
+  const url = new URL(location.href);
+  const debug = url.searchParams.has('debug');
+  const cacheName = '2018-11-11v1'
+  workbox.setConfig({
+    debug
+  })
+  workbox.precaching.precacheAndRoute(self.__precacheManifest || [])
+  console.log(`Yay! Workbox is loaded 🎉`)
+  workbox.skipWaiting()
+  workbox.clientsClaim()
 
-self.toolbox.router.get("/(.js)", self.toolbox.cacheFirst, {
-  cache: {
-    name: staticAssetsCacheName,
-    maxEntries: maxEntries
-  }
-});
-
-self.toolbox.router.get("/(.*)", function (request, values, options) {
-  let newRequest = null
-  if (request.mode === 'cors') {
-    newRequest = new Request(request, {
-      credentials: 'include'
+  workbox.routing.registerRoute(
+    new RegExp('.*\.html'),
+    workbox.strategies.networkFirst({
+      cacheName
     })
-  }
-  return self.toolbox.cacheFirst.apply(this, [newRequest || request, values, options])
-}, {
-  origin: /cdn\.b1anker\.com/,
-  cache: {
-    name: staticAssetsCacheName,
-    maxEntries: maxEntries
-  }
-})
+  )
 
-self.toolbox.router.get("/(.*)", self.toolbox.networkOnly, {
-  origin: /(www\.google-analytics\.com|ssl\.google-analytics\.com)/,
-  cache: {
-    name: vendorCacheName,
-    maxEntries: maxEntries
-  }
-})
-
-self.toolbox.router.get("/(.*)", self.toolbox.networkOnly, {
-  origin: /(www\.googletagmanager\.com)/,
-  cache: {
-    name: vendorCacheName,
-    maxEntries: maxEntries
-  }
-})
-
-self.toolbox.router.get("/next/config.json", self.toolbox.networkOnly, {
-  origin: /disqus\.com/,
-})
-
-self.toolbox.router.get("/api/(.*)", self.toolbox.networkOnly, {
-  origin: /disqus\.com/,
-})
-
-self.toolbox.router.get("/(.*)", self.toolbox.cacheFirst, {
-  origin: /disquscdn\.com/,
-  cache: {
-    name: vendorCacheName,
-    maxEntries: maxEntries
-  }
-})
-
-self.toolbox.router.get("/(.*)", self.toolbox.cacheFirst, {
-  origin: /referrer\.disqus\.com/,
-  cache: {
-    name: vendorCacheName,
-    maxEntries: maxEntries
-  }
-});
-
-
-self.toolbox.router.get("/*", self.toolbox.networkFirst, {
-  cache: {
-    name: contentCacheName,
-    maxEntries: maxEntries
-  }
-})
-
-self.addEventListener("install", function (event) {
-  return event.waitUntil(self.skipWaiting());
-})
-
-self.addEventListener("activate", function (event) {
-  return event.waitUntil(self.clients.claim());
-})
+  workbox.routing.registerRoute(
+    new RegExp('\/$'),
+    workbox.strategies.networkFirst({
+      cacheName
+    })
+  )
+  
+  workbox.routing.registerRoute(
+    new RegExp('\/static\/.*'),
+    workbox.strategies.cacheFirst({
+      cacheName
+    })
+  )
+  
+  workbox.routing.registerRoute(
+    new RegExp('/api/.*'),
+    workbox.strategies.networkFirst({
+      cacheName
+    })
+  )
+  
+  workbox.routing.registerRoute(
+    /cdn\.b1anker\.com\\.*/,
+    workbox.strategies.cacheFirst({
+      cacheName
+    })
+  )
+  
+  workbox.routing.registerRoute(
+    /(www\.google-analytics\.com|ssl\.google-analytics\.com)/,
+    workbox.strategies.networkFirst({
+      cacheName
+    })
+  )
+} else {
+  console.log(`Boo! Workbox didn't load 😬`)
+}
