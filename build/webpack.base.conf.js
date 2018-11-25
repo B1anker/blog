@@ -33,20 +33,6 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader'
-        }
-      },
-      // {
-      //   test: /\.tsx?$/,
-      //   enforce: 'pre',
-      //   use: {
-      //     loader: 'tslint-loader'
-      //   }
-      // },
-      {
         test: /\.tsx?$/,
         exclude: /node_modules/,
         use: [{

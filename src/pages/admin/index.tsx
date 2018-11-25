@@ -1,13 +1,17 @@
+import ExtendComponent from '@/core/component'
 import { Avatar, Col, Dropdown, Icon, Layout, Menu, Row } from 'antd'
-import React, { Component } from 'react'
+import React from 'react'
 import { Route, Redirect, Switch } from 'react-router-dom'
 import styles from './style.less'
 import routes from './routes'
 const { Header, Sider, Content } = Layout
 
-export default class Admin extends Component {
-  constructor () {
-    super()
+
+
+export default class Admin extends ExtendComponent {
+  private contentEl: HTMLDivElement | null
+  constructor (props) {
+    super(props)
     this.state = {
       collapsed: false
     }
@@ -21,13 +25,17 @@ export default class Admin extends Component {
   componentDidMount () {
     this.$models.user.getInfo()
     setTimeout(() => {
-      this.contentEl.style.height = this.contentEl.parentNode.getBoundingClientRect().height - 2 * 24 + 'px'
+      if (this.contentEl && this.contentEl.parentElement) {
+        this.contentEl.style.height = this.contentEl.parentElement.getBoundingClientRect().height - 2 * 24 + 'px'
+      }
     })
   }
 
   render () {
     const menu = (
-      <Menu className={styles.menu} selectedKeys={[]} onClick={this.props.onMenuClick}>
+      <Menu className={styles.menu}
+        selectedKeys={[]}
+        onClick={this.props.onMenuClick}>
         <Menu.Item disabled={true}><Icon type='user' />个人中心</Menu.Item>
         <Menu.Item disabled={true}><Icon type='setting' />设置</Menu.Item>
         <Menu.Item key='triggerError'><Icon type='close-circle' />触发报错</Menu.Item>
@@ -113,8 +121,9 @@ export default class Admin extends Component {
               }}>
               <Switch>
                 {
-                  routes.map(({ name, path, exact = false, component, redirect, children }) => {
-                    return children.map((child) => <Route path={child.path} exact={child.exact} component={child.component} key={child.name}/>).concat(redirect ? <Redirect to={redirect} key={name} /> : [])
+                  routes.map((route) => {
+                    const { name, path, children } = route
+                    return children.map((child) => <Route path={child.path} exact={child.exact} component={child.component} key={child.name}/>)
                   })
                 }
               </Switch>

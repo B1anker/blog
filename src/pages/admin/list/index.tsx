@@ -1,9 +1,31 @@
-import React, { Component } from 'react'
+import ExtendComponent from '@/core/component'
+import React from 'react'
 import { Button, Popconfirm, Table, Tag } from 'antd'
+import { ColumnProps } from 'antd/lib/table'
 import { OperateButtons } from './style'
 import moment from 'moment'
 
-export default class List extends Component {
+interface ListItem {
+  _id: number
+  tags: string[]
+  meta: {
+    createdAt: string
+    updatedAt: string
+  }
+}
+
+interface Column extends ListItem {
+  createdAt: number
+  updatedAt: number
+}
+
+interface ListState {
+  dataSource: any[]
+  loading: boolean
+}
+
+export default class List extends ExtendComponent<{}, ListState> {
+  private columns: Array<ColumnProps<Column>>
   constructor (props) {
     super(props)
     this.state = {
@@ -83,7 +105,7 @@ export default class List extends Component {
   }
 
 
-  render () {
+  public render () {
     return (
       <div>
         <Table dataSource={this.state.dataSource}

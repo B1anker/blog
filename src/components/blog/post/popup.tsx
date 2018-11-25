@@ -47,7 +47,7 @@ export default class Popup extends Component<{}, PopupState> {
   public render () {
     const { active, maskProperty, popupImage } = this.state
     if (active && popupImage && maskProperty) {
-      return <PopupStyle className="popup" innerRef={this.ref as any}>
+      return <PopupStyle className="popup" ref={this.ref}>
         { this.props.children }
         <div className="popup-mask"
           key="mask"
@@ -74,7 +74,8 @@ export default class Popup extends Component<{}, PopupState> {
       </PopupStyle>
     }
     return (
-      <PopupStyle className="popup" innerRef={this.ref as any}>
+      <PopupStyle className="popup"
+        ref={this.ref}>
         { this.props.children }
       </PopupStyle>
     )

@@ -3,7 +3,7 @@ import { SpinProps } from 'antd/lib/spin'
 import styled from 'styled-components'
 import { Spin } from 'antd'
 
-const BodySpin = styled<SpinProps>((props) => <Spin {...props}/>)`
+const BodySpin = styled((props: SpinProps) => <Spin {...props}/>)`
   position: fixed;
   top: 50%;
   left: 50%;

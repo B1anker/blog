@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { Button } from 'antd'
+import { RouteComponentProps } from 'react-router-dom'
 import { NotFoundStyle } from './style'
 
-export default class NotFound extends Component {
-  render () {
+export default class NotFound extends Component<RouteComponentProps> {
+  public render () {
     return (
       <NotFoundStyle>
         <div className='image'></div>
