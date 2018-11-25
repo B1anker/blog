@@ -4,7 +4,15 @@ import React, { Component } from 'react'
 const FormItem = Form.Item
 import style from './style.less'
 
-class LoginForm extends Component {
+export interface LoginFormProps extends FormComponentProps {
+  callback: (username: string, password: string, remember?: boolean) => void
+}
+
+interface LoginFormState {
+  pending: boolean
+}
+
+class LoginForm extends Component<LoginFormProps, LoginFormState> {
   constructor (props) {
     super(props)
     this.state = {

@@ -8,9 +8,10 @@ const utils = require("./utils")
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 const fs = require('fs')
 
-const resolve = dir => {
+const resolve = (dir) => {
   return path.join(__dirname, "..", dir)
 }
 
@@ -18,7 +19,7 @@ const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
 
 const devWebpackConfig = merge(baseWebpackConfig, {
-  devtool: config.dev.tool,
+  devtool: config.dev.devtool,
   devServer: {
     clientLogLevel: 'warning',
     historyApiFallback: {
@@ -52,6 +53,10 @@ const devWebpackConfig = merge(baseWebpackConfig, {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': require('../config/dev.env')
+    }),
+    new ForkTsCheckerWebpackPlugin({
+      tsconfig: resolve('tsconfig.json'),
+      workers: 2
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(), // HMR shows correct file names in console on update.

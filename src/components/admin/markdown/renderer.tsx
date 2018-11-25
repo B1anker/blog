@@ -161,8 +161,8 @@ export default class Renderer extends Component<RendererProps, RendererState> {
       value: nextProps.value
     }
   }
-  
-  render () {
+
+  public render () {
     return (
       <RendererStyle>
         <ReactMarkdown source={ this.state.renderValue }

@@ -152,6 +152,48 @@ const PostStyle = styled.div`
   }
 `
 
+const PopupStyle = styled.div`
+.fade-enter {
+  opacity: 0.01;
+  img {
+    transform: scaleY(0);
+  }
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: all 300ms ease-in;
+  img {
+    transform: scaleY(1);
+    transition: all 300ms ease-in;
+  }
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0.01;
+  transition: all 300ms ease-in;
+}
+
+.popup-mask {
+  position: fixed;
+  z-index: 9998;
+  background-color: rgba(0, 0, 0, .6);
+  transition: all ease-in .1s;
+}
+
+.popup-image {
+  transition: all ease-in .2s;
+  position: fixed;
+  z-index: 9999;
+  max-height: 90%;
+}
+`
+
 export {
-  PostStyle
+  PostStyle,
+  PopupStyle
 }

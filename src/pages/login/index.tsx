@@ -1,9 +1,14 @@
 import { Alert, message } from 'antd'
-import React, { Component } from 'react'
+import ExtendComponent from '@/core/component'
+import React from 'react'
 import LoginForm from './login-form'
 import style from './style.less'
 
-export default class Login extends Component {
+interface LoginState {
+  loginState: string
+}
+
+export default class Login extends ExtendComponent<any, LoginState> {
   constructor (props) {
     super(props)
     this.state = {
@@ -27,7 +32,7 @@ export default class Login extends Component {
     )
   }
 
-  login (username, password, remember) {
+  login (username: string, password: string, remember?: boolean) {
     return new Promise ((resolve, reject) => {
       this.$models.user.login({
         username,

@@ -1,14 +1,14 @@
 import ExtendComponent from '@/core/component'
-import { Icon, Spin } from 'antd'
+import { Button, Icon, Spin } from 'antd'
 import React from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 import Editor from './editor'
 import Renderer from './renderer'
-import { MarkDownStyle, SubmitStyle } from './style'
+import { MarkDownStyle } from './style'
 import { message } from 'antd'
 
 export interface Params {
-  pid: number
+  pid: string | undefined
 }
 
 interface MarkDownState {
@@ -60,14 +60,15 @@ export default class MarkDown extends ExtendComponent<RouteComponentProps<Params
               this.headers = headers
               this.setState({parsable})
             }}/>
-          <SubmitStyle type='primary'
+          <Button className="button"
+            type='primary'
             disabled={!this.state.parsable}
             loading={this.state.submitting}
             onClick={() => {
               this.handleSubmit()
             }}>
             { this.isEdit ? '修改' : '提交' }
-          </SubmitStyle>
+          </Button>
       </div>)
     return (
       <MarkDownStyle>

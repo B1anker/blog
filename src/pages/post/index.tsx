@@ -8,7 +8,7 @@ import Content from '../home/content'
 import ExtendComponent from '@/core/component';
 
 interface RouteParmas {
-  pid: number
+  pid: string | undefined
 }
 
 export interface Post {

@@ -39,6 +39,13 @@ module.exports = {
           loader: 'babel-loader'
         }
       },
+      // {
+      //   test: /\.tsx?$/,
+      //   enforce: 'pre',
+      //   use: {
+      //     loader: 'tslint-loader'
+      //   }
+      // },
       {
         test: /\.tsx?$/,
         exclude: /node_modules/,
@@ -108,7 +115,7 @@ module.exports = {
           'codemirror',
           'antd'
         ]
-          .map(path => resolve(`node_modules/${path}`))
+          .map((path) => resolve(`node_modules/${path}`))
           .concat(resolve('src/styles/lib'))
       },
       {
