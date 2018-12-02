@@ -44,7 +44,7 @@ export default class Admin extends ExtendComponent {
       </Menu>
     )
     return (
-      <Layout>
+      <Layout className={styles.layout}>
         <Sider
           trigger={null}
           collapsible={true}
