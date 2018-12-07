@@ -6,7 +6,8 @@
   "license": "MIT",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --config build/webpack.prod.conf.js",
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.conf.js"
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.conf.js",
+    "up": "scp -r dist b1anker:/repo/blog"
   },
   "dependencies": {
     "antd": "^3.10.8",

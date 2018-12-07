@@ -290,6 +290,15 @@ const FooterStyle = styled.footer`
     display: inline-block;
     animation: ${faceAnimation} 5s linear infinite;
   }
+
+  .record {
+    cursor: pointer;
+
+    :hover {
+      color: white;
+      text-decoration: underline;
+    }
+  }
 `
 
 export {
