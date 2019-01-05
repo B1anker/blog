@@ -35,6 +35,10 @@ const ProfileStyle  = styled.div`
     color: #333;
   }
 
+  p {
+    text-align: center;
+  }
+
   .social {
     display: flex;
     justify-content: space-between;

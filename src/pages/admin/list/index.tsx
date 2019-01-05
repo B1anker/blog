@@ -7,6 +7,8 @@ import moment from 'moment'
 
 interface ListItem {
   _id: number
+  title: string
+  categories: string
   tags: string[]
   meta: {
     createdAt: string

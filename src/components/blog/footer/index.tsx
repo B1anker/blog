@@ -45,7 +45,7 @@ export default class MyFooter extends Component<{}, MyFooterState> {
             newWindow.location.href = 'http://www.miitbeian.gov.cn'
           }
         }}>粤ICP备16024121号-1.</span></p>
-        <p>Made with by B1anker.</p>
+        <p>Made with <i className="iconfont icon-heart" /> by B1anker.</p>
       </FooterStyle>
     )
   }

@@ -47,6 +47,8 @@ export default class Popup extends Component<{}, PopupState> {
   public render () {
     const { active, maskProperty, popupImage } = this.state
     if (active && popupImage && maskProperty) {
+      const offsetLeft: number = popupImage.left - this.clickedImageProperty.left;
+      const offsetTop: number = popupImage.top - this.clickedImageProperty.top;
       return <PopupStyle className="popup" ref={this.ref}>
         { this.props.children }
         <div className="popup-mask"
@@ -58,16 +60,18 @@ export default class Popup extends Component<{}, PopupState> {
             left: maskProperty.left + 'px',
             opacity: maskProperty.opacity
           }}
-          onClick={(e) => this.close(e)}>
+          onClick={(e: React.MouseEvent<HTMLDivElement>) => this.close(e)}>
         </div>
         <img className="popup-image"
           key="img"
           style={{
             width: popupImage.width + 'px',
             height: popupImage.height + 'px',
-            top: popupImage.top + 'px',
-            left: popupImage.left + 'px'
+            transform: `translate(${offsetLeft}px, ${offsetTop}px)`,
+            top: this.clickedImageProperty.top + 'px',
+            left: this.clickedImageProperty.left + 'px'
           }}
+          onClick={(e: React.MouseEvent<HTMLImageElement>) => this.close(e)}
           src={this.state.imgUrl}
           alt=""
         />
@@ -81,27 +85,25 @@ export default class Popup extends Component<{}, PopupState> {
     )
   }
 
-  private close (e: any) {
-    if (e.target.tagName !== 'IMG') {
-      this.setState({
-        popupImage: omit(this.clickedImageProperty, [
+  private close (e: React.MouseEvent<HTMLDivElement>) {
+    this.setState({
+      popupImage: omit(this.clickedImageProperty, [
+        'naturalHeight',
+        'naturalWidth'
+      ]),
+      maskProperty: {
+        ...omit(this.clickedImageProperty, [
           'naturalHeight',
           'naturalWidth'
         ]),
-        maskProperty: {
-          ...omit(this.clickedImageProperty, [
-            'naturalHeight',
-            'naturalWidth'
-          ]),
-          opacity: 0
-        }
+        opacity: 0
+      }
+    })
+    setTimeout(() => {
+      this.setState({
+        active: false
       })
-      setTimeout(() => {
-        this.setState({
-          active: false
-        })
-      }, 200)
-    }
+    }, 200)
   }
 
   private getInitialData () {
@@ -115,7 +117,7 @@ export default class Popup extends Component<{}, PopupState> {
     if (this.ref.current) {
       this.ref.current.addEventListener('click', (e: any) => {
         const target = e.target
-        if (target.tagName === 'IMG') {
+        if (target && target.tagName === 'IMG' && !target.className.includes('popup-image')) {
           this.setClickedImageProperty(target)
           this.movePopupToOrigin(target.src)
           this.openPopup()

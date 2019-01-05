@@ -56,7 +56,8 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     }),
     new ForkTsCheckerWebpackPlugin({
       tsconfig: resolve('tsconfig.json'),
-      workers: 2
+      workers: 2,
+      reportFiles: ['src/**/*.{ts,tsx}']
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(), // HMR shows correct file names in console on update.

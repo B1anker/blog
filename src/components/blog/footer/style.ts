@@ -299,6 +299,10 @@ const FooterStyle = styled.footer`
       text-decoration: underline;
     }
   }
+
+  .icon-heart {
+    color: #d43f57;
+  }
 `
 
 export {

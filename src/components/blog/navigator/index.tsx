@@ -24,11 +24,11 @@ class Nav extends Component<NavProps, NavState> {
     super(props)
     this.state = {
       navList: [{
-        name: 'home',
+        name: '首页',
         route: '/',
         icon: 'home'
       }, {
-        name: 'archives',
+        name: '归档',
         route: '/archives',
         icon: 'archive'
       }, {
@@ -40,7 +40,7 @@ class Nav extends Component<NavProps, NavState> {
         route: '/comment',
         icon: 'pencil'
       }, {
-        name: 'about',
+        name: '关于',
         route: '/about',
         icon: 'rocket'
       }]

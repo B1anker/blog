@@ -50,7 +50,7 @@ const PostStyle = styled.div`
       }
       
       .visited {
-        color ${ORANGE};
+        color: ${ORANGE};
       }
 
       .prefix {
@@ -97,7 +97,7 @@ const PostStyle = styled.div`
   }
 
   .post-content {
-    margin-top 60px;
+    margin-top: 60px;
 
     ${CodeStyle}
   }
@@ -181,8 +181,9 @@ const PopupStyle = styled.div`
 .popup-mask {
   position: fixed;
   z-index: 9998;
-  background-color: rgba(0, 0, 0, .6);
-  transition: all ease-in .1s;
+  background-color: #efefef;
+  transition: all ease-in .2s;
+  cursor: zoom-out;
 }
 
 .popup-image {
@@ -190,6 +191,7 @@ const PopupStyle = styled.div`
   position: fixed;
   z-index: 9999;
   max-height: 90%;
+  cursor: zoom-out;
 }
 `
 
