@@ -18,7 +18,7 @@ interface PostState {
 
 export default class Post extends Component<PostProps, PostState> {
   private contentRef: React.RefObject<HTMLDivElement> = React.createRef()
-  get post () {
+  private get post () {
     return this.props.post
   }
 

@@ -11,7 +11,10 @@ const resolve = dir => {
 
 module.exports = {
   entry: {
-    app: resolve('src/entry.tsx')
+    app: [
+      'react-hot-loader/patch',
+      resolve('src/entry.tsx')
+    ]
   },
   mode: process.env.NODE_ENV,
   output: {

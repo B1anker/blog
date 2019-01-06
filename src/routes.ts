@@ -5,15 +5,8 @@ export default [
     name: '首页',
     icon: 'home',
     path: '/',
-    exact: true,
+    exact: false,
     component: AC(() => import('./pages/home'))
-  },
-  {
-    name: '文章页',
-    icon: 'home',
-    path: '/post/:pid',
-    exact: true,
-    component: AC(() => import('./pages/post'))
   },
   {
     name: '登录页',

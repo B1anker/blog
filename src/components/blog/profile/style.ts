@@ -7,6 +7,7 @@ const SOCIAL_ITEM_SIZE = '40px'
 const ProfileStyle  = styled.div`
   width: 315px;
   padding: 20px;
+  max-height: 400px;
   box-sizing: border-box;
   color: #555;
   background: #fff;

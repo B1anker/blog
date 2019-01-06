@@ -1,14 +1,13 @@
 import installModels from '@/models'
 import React from 'react'
-import ReactDOM from 'react-dom'
-import { BrowserRouter as Router } from 'react-router-dom'
+import { render } from 'react-dom'
 import App from './app'
+import { AppContainer } from 'react-hot-loader'
 
 installModels()
 
-ReactDOM.render(
-  <Router>
-    <App />
-  </Router>,
+render(<AppContainer>
+  <App />
+</AppContainer>,
   document.querySelector('#app')
 )

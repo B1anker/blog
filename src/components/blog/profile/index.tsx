@@ -23,7 +23,7 @@ export default class Profile extends Component {
   }, {
     name: '谷歌邮箱',
     icon: 'gmail',
-    url: 'narutowontstop@gmail.com'
+    url: 'mailto:narutowontstop@gmail.com'
   }]
 
   render () {
