@@ -8,6 +8,7 @@ const baseWebpackConfig = require('./webpack.base.conf')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 const env = require('../config/prod.env')
 
@@ -41,6 +42,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     new webpack.DefinePlugin({
       'process.env': env
     }),
+    new CleanWebpackPlugin(['app']),
     // extract css into its own file
     // new MiniCssExtractPlugin({
     //   filename: utils.assetsPath('css/[name].[contenthash].css'),

@@ -18,7 +18,7 @@ const border = (border) => {
   return `border-radius: ${border};`
 }
 
-const PostStyle = styled.div`
+const PostStyle = styled.article`
   width: 100%;
   background-color: white;
   position: relative;
