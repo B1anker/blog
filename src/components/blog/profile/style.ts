@@ -7,6 +7,7 @@ const SOCIAL_ITEM_SIZE = '40px'
 const ProfileStyle  = styled.div`
   width: 315px;
   padding: 20px;
+  max-height: 400px;
   box-sizing: border-box;
   color: #555;
   background: #fff;
@@ -33,6 +34,10 @@ const ProfileStyle  = styled.div`
     text-align: center;
     font-size: 24px;
     color: #333;
+  }
+
+  p {
+    text-align: center;
   }
 
   .social {

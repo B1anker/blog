@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { Button } from 'antd'
 
 const MarkDownStyle = styled.div`
   height: calc(100% - 40px);
@@ -17,10 +16,10 @@ const MarkDownStyle = styled.div`
     width: 100%;
     height: 100%;
   }
-`
 
-const SubmitStyle = styled(Button)`
-  margin-top: 10px;
+  .button {
+    margin-top: 10px;
+  }
 `
 
 const EditorStyle = styled.div`
@@ -103,6 +102,9 @@ p, blockquote, li {
 }
 
 img {
+  display: block;
+  cursor: zoom-in;
+  margin: 0 auto;
   max-width: 100%;
 }
 `
@@ -129,6 +131,5 @@ export {
   CodeStyle,
   EditorStyle,
   MarkDownStyle,
-  RendererStyle,
-  SubmitStyle
+  RendererStyle
 }

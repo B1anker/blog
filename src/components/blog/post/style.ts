@@ -18,7 +18,7 @@ const border = (border) => {
   return `border-radius: ${border};`
 }
 
-const PostStyle = styled.div`
+const PostStyle = styled.article`
   width: 100%;
   background-color: white;
   position: relative;
@@ -50,7 +50,7 @@ const PostStyle = styled.div`
       }
       
       .visited {
-        color ${ORANGE};
+        color: ${ORANGE};
       }
 
       .prefix {
@@ -97,7 +97,7 @@ const PostStyle = styled.div`
   }
 
   .post-content {
-    margin-top 60px;
+    margin-top: 60px;
 
     ${CodeStyle}
   }
@@ -152,6 +152,50 @@ const PostStyle = styled.div`
   }
 `
 
+const PopupStyle = styled.div`
+.fade-enter {
+  opacity: 0.01;
+  img {
+    transform: scaleY(0);
+  }
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: all 300ms ease-in;
+  img {
+    transform: scaleY(1);
+    transition: all 300ms ease-in;
+  }
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0.01;
+  transition: all 300ms ease-in;
+}
+
+.popup-mask {
+  position: fixed;
+  z-index: 9998;
+  background-color: #efefef;
+  transition: all ease-in .2s;
+  cursor: zoom-out;
+}
+
+.popup-image {
+  transition: all ease-in .2s;
+  position: fixed;
+  z-index: 9999;
+  max-height: 90%;
+  cursor: zoom-out;
+}
+`
+
 export {
-  PostStyle
+  PostStyle,
+  PopupStyle
 }

@@ -4,18 +4,45 @@ import { Link } from 'react-router-dom'
 import { PostStyle } from './style'
 import CodeBlock from '@/components/admin/markdown/prism'
 import moment from 'moment'
+import Popup from './popup'
 
 export interface PostProps {
   post: any
   type: string
 }
 
-export default class Post extends Component<PostProps> {
-  get post () {
+interface PostState {
+  popupImage: boolean
+  imgUrl: string
+}
+
+export default class Post extends Component<PostProps, PostState> {
+  private contentRef: React.RefObject<HTMLDivElement> = React.createRef()
+  private get post () {
     return this.props.post
   }
 
-  render () {
+  constructor (props) {
+    super(props)
+    this.state = {
+      popupImage: false,
+      imgUrl: ''
+    }
+    this.contentRef = React.createRef()
+  }
+
+  public componentDidMount () {
+    if (this.contentRef && this.contentRef.current) {
+      Array.from(this.contentRef.current.querySelectorAll('img'))
+        .forEach((el) => {
+          if (el.parentElement) {
+            el.parentElement.style.textIndent = '0'
+          }
+        })
+    }
+  }
+
+  public render () {
     const date = moment(this.post.createTime)
     const readMore = (
       <div className="read-all">
@@ -71,11 +98,15 @@ export default class Post extends Component<PostProps> {
             { date.format('D') }
           </div>
         </div>
-        <ReactMarkdown source={ this.convertRenderValue(this.post.render) }
-          className="post-content"
-          skipHtml={false}
-          escapeHtml={false}
-          renderers={{code: CodeBlock}}/>
+        <Popup>
+          <div className="post-content"
+            ref={this.contentRef}>
+            <ReactMarkdown source={ this.convertRenderValue(this.post.render) }
+              skipHtml={false}
+              escapeHtml={false}
+              renderers={{code: CodeBlock}}/>
+          </div>
+        </Popup>
         <div className="post-badage">
           <span>{ this.post.categories }</span>
         </div>
@@ -86,7 +117,7 @@ export default class Post extends Component<PostProps> {
     )
   }
 
-  convertRenderValue (value) {
+  private convertRenderValue (value) {
     const removeMore = value.replace(/<!-- more -->/, '')
     return removeMore.replace(/---\n(.|\n)*\n---/g, '')
   }

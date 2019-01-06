@@ -11,7 +11,10 @@ const resolve = dir => {
 
 module.exports = {
   entry: {
-    app: resolve('src/entry.tsx')
+    app: [
+      'react-hot-loader/patch',
+      resolve('src/entry.tsx')
+    ]
   },
   mode: process.env.NODE_ENV,
   output: {
@@ -32,13 +35,6 @@ module.exports = {
   },
   module: {
     rules: [
-      {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader'
-        }
-      },
       {
         test: /\.tsx?$/,
         exclude: /node_modules/,
@@ -108,7 +104,7 @@ module.exports = {
           'codemirror',
           'antd'
         ]
-          .map(path => resolve(`node_modules/${path}`))
+          .map((path) => resolve(`node_modules/${path}`))
           .concat(resolve('src/styles/lib'))
       },
       {

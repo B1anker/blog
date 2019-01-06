@@ -23,7 +23,7 @@ export default class Profile extends Component {
   }, {
     name: '谷歌邮箱',
     icon: 'gmail',
-    url: 'narutowontstop@gmail.com'
+    url: 'mailto:narutowontstop@gmail.com'
   }]
 
   render () {
@@ -31,6 +31,7 @@ export default class Profile extends Component {
       <ProfileStyle> 
         <div className='avatar'></div>
         <div className="username">B1anker</div>
+        <p>与食俱进，贱多识广</p>
         <ul className='social'>
           {
             this.socials.map((social, index) => (

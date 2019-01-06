@@ -1,18 +1,17 @@
 {
   "presets": [
-    ["env", {
+    ["@babel/preset-env", {
       "modules": false,
-      "targets": {
-        "browsers": ["> 1%", "last 2 versions", "not ie <= 8"]
-      }
+      "useBuiltIns": "usage"
     }],
-    "stage-2",
-    "react"
+    "@babel/preset-react"
   ],
   "plugins": [["import", {
       "libraryName": "antd",
       "style": true
     }],
-    "transform-runtime"
+    "@babel/transform-runtime",
+    "@babel/plugin-syntax-dynamic-import",
+    "react-hot-loader/babel"
   ]
 }

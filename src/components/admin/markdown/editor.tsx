@@ -21,7 +21,7 @@ interface EditorState {
 
 export default class Editor extends Component<EditorProps, EditorState> {
   private editor: CodeMirror.Editor | null = null
-  private editorEl: any
+  private editorEl: React.RefObject<HTMLDivElement> = React.createRef()
 
   constructor (props) {
     super(props)
@@ -37,24 +37,26 @@ export default class Editor extends Component<EditorProps, EditorState> {
   }
 
   componentDidMount () {
-    this.editor = CodeMirror(this.editorEl, {
-      value: this.props.value,
-      mode: 'markdown',
-      lineNumbers: true,
-      showCursorWhenSelecting: true,
-      lineWrapping: true,  // 长句子折行
-      theme: 'material',
-      keyMap: 'sublime',
-      extraKeys: {
-        Enter: 'newlineAndIndentContinueMarkdownList'
-      }
-    })
-    if (this.editor) {
-      const debounced = debounce(this.update, 600)
-      this.editor.on('change', (value) => {
-        debounced.call(this)
+    if (this.editorEl.current) {
+      this.editor = CodeMirror(this.editorEl.current, {
+        value: this.props.value,
+        mode: 'markdown',
+        lineNumbers: true,
+        showCursorWhenSelecting: true,
+        lineWrapping: true,  // 长句子折行
+        theme: 'material',
+        keyMap: 'sublime',
+        extraKeys: {
+          Enter: 'newlineAndIndentContinueMarkdownList'
+        }
       })
-      this.setValue(this.props.value)   
+      if (this.editor) {
+        const debounced = debounce(this.update, 600)
+        this.editor.on('change', (value) => {
+          debounced.call(this)
+        })
+        this.setValue(this.props.value)   
+      }
     }
   }
 
@@ -83,9 +85,7 @@ export default class Editor extends Component<EditorProps, EditorState> {
   render () {
     return (
       <EditorStyle id="CodeMirror"
-        innerRef={(el) => {
-          this.editorEl = el
-        }}
+        ref={this.editorEl}
       />
     )
   }

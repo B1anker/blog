@@ -290,6 +290,19 @@ const FooterStyle = styled.footer`
     display: inline-block;
     animation: ${faceAnimation} 5s linear infinite;
   }
+
+  .record {
+    cursor: pointer;
+
+    :hover {
+      color: white;
+      text-decoration: underline;
+    }
+  }
+
+  .icon-heart {
+    color: #d43f57;
+  }
 `
 
 export {
