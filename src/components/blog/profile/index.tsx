@@ -1,12 +1,12 @@
-import React, { Component } from 'react'
-import { ProfileStyle } from './style'
+import React, { Component } from 'react';
+
+import { ProfileStyle } from './style';
 
 export interface SocialItem {
   name: string
   icon: string
   url: string
 }
-
 export default class Profile extends Component {
   private socials: SocialItem[] = [{
     name: 'Github',

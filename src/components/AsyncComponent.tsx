@@ -1,14 +1,11 @@
-import React, { Component } from 'react'
-import styled from 'styled-components'
 import { Icon, Spin } from 'antd'
-import { connect } from 'react-redux'
+import React, { Component } from 'react'
 import { CSSTransition } from 'react-transition-group'
+import styled from 'styled-components'
 
 const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />
 
-const BodySpin = styled((props) => <Spin {...props}
-  indicator={antIcon}
-  />)`
+const BodySpin = styled((props) => <Spin {...props} indicator={antIcon} />)`
   position: fixed;
   top: 50%;
   left: 50%;
@@ -46,28 +43,31 @@ interface AsyncComponentProps {
 }
 
 interface AsyncComponentState {
-  Child: (new(...args: any[]) => React.Component) | null
+  Child: (new (...args: any[]) => React.Component) | null
 }
 
 const GenAsyncComponent = (loadComponent: () => Promise<any>) => {
-  return class AsyncComponent extends Component<AsyncComponentProps, AsyncComponentState> {
+  return class AsyncComponent extends Component<
+    AsyncComponentProps,
+    AsyncComponentState
+  > {
     private unmount: boolean = false
-    constructor (props) {
+    constructor(props) {
       super(props)
       this.state = {
         Child: null
       }
     }
 
-    componentWillUnmount () {
+    componentWillUnmount() {
       this.setState({
         Child: null
       })
       this.unmount = true
     }
 
-    async componentDidMount () {
-      const { default: Child} = await loadComponent()
+    async componentDidMount() {
+      const { default: Child } = await loadComponent()
       if (this.unmount) {
         return
       }
@@ -76,34 +76,37 @@ const GenAsyncComponent = (loadComponent: () => Promise<any>) => {
       })
     }
 
-    public render () {
+    public render() {
       const { Child } = this.state
       let renderComponent
       if (Child) {
-        renderComponent = (
-          <Child {...this.props} />
-        )
+        renderComponent = <Child {...this.props} />
       } else {
         renderComponent = (
-          <div style={{
-            width: '100%',
-            minHeight: '100%',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center'
-          }}>
-            <BodySpin size="large"/>
+          <div
+            style={{
+              width: '100%',
+              minHeight: '100%',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}
+          >
+            <BodySpin size="large" />
           </div>
         )
       }
-      return <AsyncComponentStyle>
-        <CSSTransition
-          timeout={200}
-          in={!!this.state.Child}
-          classNames="fade">
-          { renderComponent }
-        </CSSTransition>
-      </AsyncComponentStyle>
+      return (
+        <AsyncComponentStyle>
+          <CSSTransition
+            timeout={200}
+            in={!!this.state.Child}
+            classNames="fade"
+          >
+            {renderComponent}
+          </CSSTransition>
+        </AsyncComponentStyle>
+      )
     }
   }
 }

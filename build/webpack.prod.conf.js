@@ -42,7 +42,9 @@ const webpackConfig = merge(baseWebpackConfig, {
     new webpack.DefinePlugin({
       'process.env': env
     }),
-    new CleanWebpackPlugin(['app']),
+    new CleanWebpackPlugin(['dist'], {
+      root: path.resolve(__dirname, '..')
+    }),
     // extract css into its own file
     // new MiniCssExtractPlugin({
     //   filename: utils.assetsPath('css/[name].[contenthash].css'),

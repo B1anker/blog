@@ -1,8 +1,9 @@
-import config from '@/core/config'
 import { message, notification } from 'antd'
-import React from 'react'
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
+import React from 'react'
 import ReactJson from 'react-json-view'
+
+import config from '@/core/config'
 
 const openErrorNotification = (msg) => {
   notification.error({
@@ -36,7 +37,7 @@ export default (cfg: AxiosRequestConfig = { baseURL: config.baseUrl }) => {
         openErrorNotification(data.msg)
       }
     }
-    return response.data
+    return response
   }, (error) => {
     let err
     if (error.response) {

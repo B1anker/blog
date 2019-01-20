@@ -1,11 +1,11 @@
-import AC from './components/AsyncComponent'
+import AC from './components/AsyncComponent';
 
 export default [
   {
     name: '首页',
     icon: 'home',
     path: '/',
-    exact: false,
+    exact: true,
     component: AC(() => import('./pages/home'))
   },
   {

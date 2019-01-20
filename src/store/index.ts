@@ -1,11 +1,28 @@
 declare global {
-  interface Window { __REDUX_DEVTOOLS_EXTENSION__: any }
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION__: any
+  }
 }
 
-import { combineReducers, createStore } from 'redux'
+import { createStore } from 'redux'
 
-import system from './system'
+import reducers from '../reducers'
 
-export default createStore(combineReducers({
-  system
-}), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+function configureStore() {
+  const store = createStore(
+    reducers,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  )
+
+  if (module.hot) {
+    // Enable Webpack hot module replacement for reducers
+    module.hot.accept('../reducers', () => {
+      const nextRootReducer = require('../reducers')
+      store.replaceReducer(nextRootReducer)
+    })
+  }
+
+  return store
+}
+
+export default configureStore()

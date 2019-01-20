@@ -1,18 +1,20 @@
-import { Button, Checkbox, Form, Icon, Input } from 'antd'
-import { FormComponentProps } from 'antd/lib/form'
-import React, { Component } from 'react'
-const FormItem = Form.Item
-import style from './style.less'
+import { Button, Checkbox, Form, Icon, Input } from 'antd';
+import { FormComponentProps } from 'antd/lib/form';
+import React from 'react';
+import ExtendComponent from '@/core/component'
 
+import style from './style.less';
+
+const FormItem = Form.Item
 export interface LoginFormProps extends FormComponentProps {
-  callback: (username: string, password: string, remember?: boolean) => void
+  login: (account: string, password: string, remember?: boolean) => void
 }
 
 interface LoginFormState {
   pending: boolean
 }
 
-class LoginForm extends Component<LoginFormProps, LoginFormState> {
+export class LoginForm extends ExtendComponent<LoginFormProps, LoginFormState> {
   constructor (props) {
     super(props)
     this.state = {
@@ -28,11 +30,11 @@ class LoginForm extends Component<LoginFormProps, LoginFormState> {
       }}>
         <FormItem hasFeedback={true}>
           {
-            getFieldDecorator('username', {
+            getFieldDecorator('account', {
               rules: [{
                 required: true, message: '请输入用户名!'
               }, {
-                validator: this.checkUsername
+                validator: this.checkaccount
               }],
               validateTrigger: ['onBlur', 'onChange']
             })(
@@ -41,7 +43,7 @@ class LoginForm extends Component<LoginFormProps, LoginFormState> {
                     style={{ color: 'rgba(0,0,0,.25)' }} />
                 }
                 size='large'
-                placeholder='Username' />
+                placeholder='account' />
             )
           }
         </FormItem>
@@ -79,7 +81,7 @@ class LoginForm extends Component<LoginFormProps, LoginFormState> {
     )
   }
 
-  checkUsername (rule, value, callback) {
+  checkaccount (rule, value, callback) {
     if (!value) {
       callback()
     } else if (!~value.search(/^[a-zA-Z0-9_-]{4,16}$/)) {
@@ -100,10 +102,12 @@ class LoginForm extends Component<LoginFormProps, LoginFormState> {
           pending: true
         })
         try {
-          await this.props.callback(values.username, values.password, values.remember)
-          this.setState({
-            pending: false
-          })
+          await this.props.login(values.account, values.password, values.remember)
+          if (!this.unmount) {
+            this.setState({
+              pending: false
+            })
+          }
         } catch (err) {
           console.log(err)
         }
@@ -112,4 +116,4 @@ class LoginForm extends Component<LoginFormProps, LoginFormState> {
   }
 }
 
-export default Form.create()(LoginForm)
+export default Form.create()<LoginFormProps>(LoginForm)

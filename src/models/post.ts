@@ -1,26 +1,26 @@
-import Model from '@/core/model'
+import Model from '@/core/model';
 
 class Post extends Model {
   modelName = '/post'
 
   fetchPostList () {
-    return this.fetch.get(`${this.modelName}/list`)
+    return this.http.get(`${this.modelName}/list`)
   }
 
   fetchPost (pid) {
-    return this.fetch.get(`${this.modelName}/${pid}`)
+    return this.http.get(`${this.modelName}/${pid}`)
   }
 
   addPost (data) {
-    return this.fetch.post(`${this.modelName}/add`, data)
+    return this.http.post(`${this.modelName}/add`, data)
   }
 
   updatePost (data) {
-    return this.fetch.put(`${this.modelName}/update`, data)
+    return this.http.put(`${this.modelName}/update`, data)
   }
 
   delPost (id) {
-    return this.fetch.delete(`${this.modelName}/${id}`)
+    return this.http.delete(`${this.modelName}/${id}`)
   }
 }
 

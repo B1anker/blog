@@ -1,9 +1,10 @@
-import React, { Component } from 'react'
-import { ScrollStyle } from './style'
-import { connect, DispatchProp } from 'react-redux'
-import { changeScrollStatus } from '../../../actions/system'
-import throttle from 'lodash/throttle'
-import { Cancelable } from 'lodash'
+import { Cancelable } from 'lodash';
+import throttle from 'lodash/throttle';
+import React, { Component } from 'react';
+import { connect, DispatchProp } from 'react-redux';
+
+import { changeScrollStatus } from '../../../actions/system';
+import { ScrollStyle } from './style';
 
 interface ScrollState {
   active: boolean

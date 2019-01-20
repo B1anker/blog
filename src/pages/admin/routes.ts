@@ -5,6 +5,7 @@ export default [
     name: '文章管理',
     icon: 'file-markdown',
     path: '/admin/post',
+    redirect: '/admin/post/edit',
     children: [{
       name: '编辑',
       path: '/admin/post/edit',

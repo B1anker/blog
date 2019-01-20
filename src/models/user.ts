@@ -1,14 +1,11 @@
-import Model from '@/core/model'
+import Model from '@/core/model';
 
 class User extends Model {
-  modelName = '/admin'
 
-  getInfo () {
-    return this.fetch.get(`${this.modelName}/info`)
-  }
+  private modelName = '/user'
 
-  login (data) {
-    return this.fetch.post(`${this.modelName}/login`, data)
+  public getInfo (id: number) {
+    return this.http.get(`${this.modelName}/${id}`)
   }
 }
 

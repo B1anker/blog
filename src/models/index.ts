@@ -1,10 +1,13 @@
-import { Component } from 'react'
-import user from './user'
-import post from './post'
+import { Component } from 'react';
+
+import auth from './auth';
+import post from './post';
+import user from './user';
 
 export const $models = {
   post,
-  user
+  user,
+  auth
 }
 
 
