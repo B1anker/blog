@@ -4,7 +4,7 @@ import { RouteComponentProps } from 'react-router-dom'
 import Articles from '../articles'
 
 interface RouteParmas {
-  pid: string | undefined
+  pid?: string
 }
 
 export interface Post {

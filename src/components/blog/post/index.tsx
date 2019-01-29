@@ -43,7 +43,7 @@ export default class Post extends Component<PostProps, PostState> {
   }
 
   public render () {
-    const date = moment(this.post.createTime)
+    const date = moment.unix(this.post.createTime)
     const readMore = (
       <div className="read-all">
         <Link className="btn"
@@ -85,7 +85,7 @@ export default class Post extends Component<PostProps, PostState> {
               <span className="prefix">阅读次数</span>
               &nbsp;&nbsp;
               <span className="text">
-                { this.post.count }
+                { this.post.views }
               </span>
             </div>
           </div>

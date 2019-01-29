@@ -1,6 +1,7 @@
 import Markdown from '@/components/admin/markdown'
 import Toolbar, { MenuItem } from '@/components/Toolbar'
 import ExtendComponent from '@/core/component'
+import { CategoryModel } from '@/models/category'
 import { PostModel } from '@/models/post'
 import { Button, Icon, message, Tag } from 'antd'
 import defaulsDeep from 'lodash/defaultsDeep'
@@ -22,6 +23,7 @@ interface PostEditState {
   disabled: boolean
   tags: string[]
   postLoading: boolean
+  categoryList: CategoryModel[]
 }
 
 const defaultMenu: MenuItem[] = [
@@ -36,12 +38,7 @@ const defaultMenu: MenuItem[] = [
     key: 'categories',
     name: '分类',
     mode: 'multiple',
-    optionList: [
-      {
-        value: 1,
-        label: '测试'
-      }
-    ]
+    optionList: []
   },
   {
     type: 'input',
@@ -88,7 +85,8 @@ export default class PostEdit extends ExtendComponent<
       disabled: true,
       markdownValue: '',
       tags: [],
-      postLoading: true
+      postLoading: true,
+      categoryList: []
     }
   }
 
@@ -101,6 +99,7 @@ export default class PostEdit extends ExtendComponent<
   }
 
   public async componentDidMount () {
+    this.getCategoryList()
     if (this.pid) {
       const { data } = await this.$models.post.fetchPost(this.pid)
       const { post } = data
@@ -197,6 +196,18 @@ export default class PostEdit extends ExtendComponent<
         ...this.state.toolbar,
         [key]: value
       }
+    })
+  }
+
+  private async getCategoryList () {
+    const { data } = await this.$models.category.getList()
+    const menu = defaulsDeep([], this.state.menu)
+    menu[1].optionList = data.list.map(({ id, name }) => ({
+      value: id,
+      label: name
+    }))
+    this.setState({
+      menu
     })
   }
 

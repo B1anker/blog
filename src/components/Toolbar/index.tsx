@@ -30,6 +30,8 @@ export interface ToolbarProps {
   menu: MenuItem[]
   onChange: (key: string, value: any) => void
   toolbar: {[T in any]: any}
+  append?: React.ReactNode
+  prepend?: React.ReactNode
 }
 
 export default class Toolbar extends ExtendComponent<ToolbarProps, {}> {
@@ -41,22 +43,30 @@ export default class Toolbar extends ExtendComponent<ToolbarProps, {}> {
     return (
       <ToolbarStyle>
         <div className="tool-bar">
-          {
-            this.props.menu.map((menuItem) => {
-              const { name, key } = menuItem
-              return (
-                <div className="tool-bar-item"
-                  key={ key }>
-                  <div className="tool-bar-label">
-                    <label htmlFor="">{ name }</label>
+          <div className="main">
+            {
+              this.props.menu.map((menuItem) => {
+                const { name, key } = menuItem
+                return (
+                  <div className="tool-bar-item"
+                    key={ key }>
+                    <div className="tool-bar-label">
+                      <label htmlFor="">{ name }</label>
+                    </div>
+                    <div className="tool-bar-body">
+                      { this.generateToolbarBody(menuItem) }
+                    </div>
                   </div>
-                  <div className="tool-bar-body">
-                    { this.generateToolbarBody(menuItem) }
-                  </div>
-                </div>
-              )
-            })
-          }
+                )
+              })
+            }
+            <div className="prepend">
+              { this.props.prepend }
+            </div>
+          </div>
+          <div className="append">
+            { this.props.append }
+          </div>
         </div>
       </ToolbarStyle>
     )

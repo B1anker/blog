@@ -51,7 +51,7 @@ export default (cfg: AxiosRequestConfig = { baseURL: config.baseUrl }) => {
       if (status >= 500) {
         openErrorNotification({
           status,
-          msg: error.response.data
+          msg: error.response.data.message || error.response.data
         })
       }
       err = new Error(error.response.data.msg)

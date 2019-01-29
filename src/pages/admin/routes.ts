@@ -25,6 +25,12 @@ export default [
         icon: 'table',
         path: '/admin/post/list',
         component: AC(() => import('./list'))
+      },
+      {
+        name: '分类',
+        icon: 'bars',
+        path: '/admin/post/category',
+        component: AC(() => import('./category'))
       }
     ]
   }

@@ -48,10 +48,10 @@ export default class Articles extends ExtendComponent<ArticlesProps, ArticlesSta
             'count'
           ])
           Object.assign(innerPost, {
-            id: post._id,
+            id: post.id,
             render: this.type === 'summary' ? post.summary : post.content,
-            createTime: post.meta.createdAt,
-            updateTime: post.meta.updatedAt
+            createTime: post.created,
+            updateTime: post.updated
           })
           return <Post
             post={innerPost}
@@ -87,14 +87,9 @@ export default class Articles extends ExtendComponent<ArticlesProps, ArticlesSta
       loading: true
     })
     try {
-      let data
-      if (typeof this.props.pid === 'string') {
-        data = (await this.$models.post.fetchPost(this.props.pid)).data
-      } else {
-        data = (await this.$models.post.fetchPostList()).data
-      }
+      const { data } = await this.$models.post.fetchPostList()
       this.setState({
-        posts: data,
+        posts: data.list,
         loading: false
       })
     } catch (err) {

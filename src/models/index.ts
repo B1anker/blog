@@ -1,13 +1,15 @@
 import { Component } from 'react'
 
 import auth from './auth'
+import category from './category'
 import post from './post'
 import user from './user'
 
 export const $models = {
   post,
   user,
-  auth
+  auth,
+  category
 }
 
 export default () => {

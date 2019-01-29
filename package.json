@@ -11,7 +11,7 @@
     "lint": "tslint --fix -p tsconfig.json -c tslint.json"
   },
   "dependencies": {
-    "antd": "^3.10.8",
+    "antd": "^3.13.0",
     "axios": "^0.18.0",
     "codemirror": "^5.36.0",
     "dayjs": "^1.7.7",
