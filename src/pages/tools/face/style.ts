@@ -19,7 +19,7 @@ const FaceStyle = styled.div`
     display: flex;
     justify-content: center;
 
-    
+
     .replace-img {
       position: absolute;
       top: 0;

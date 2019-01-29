@@ -1,118 +1,48 @@
 import ExtendComponent from '@/core/component'
-import { Button, Icon, Spin } from 'antd'
+import { Icon, Spin } from 'antd'
 import React from 'react'
-import { RouteComponentProps } from 'react-router-dom'
 import Editor from './editor'
 import Renderer from './renderer'
 import { MarkDownStyle } from './style'
-import { message } from 'antd'
 
-export interface Params {
-  pid: string | undefined
-}
-
-interface MarkDownState {
+export interface MarkDownProps {
+  pid: string
+  height?: number
   value: string
-  parsable: boolean
-  submitting: boolean
+  onChange: (value: string) => void
   loading: boolean
 }
 
-export default class MarkDown extends ExtendComponent<RouteComponentProps<Params>, MarkDownState> {
-  private headers: any[] = []
+interface MarkDownState {
+  disabled: boolean
+  submitting: boolean
+}
 
-  constructor (props) {
+export default class MarkDown extends ExtendComponent<MarkDownProps, MarkDownState> {
+  public constructor (props: MarkDownProps) {
     super(props)
     this.state = {
-      value: '',
-      parsable: false,
-      submitting: false,
-      loading: !!props.match.params.pid
+      disabled: true,
+      submitting: false
     }
   }
 
-  get isEdit () {
-    return !!this.props.match.params.pid
-  }
-
-  get pid () {
-    return this.props.match.params.pid
-  }
-
-  async componentDidMount () {
-    if (this.pid) {
-      const { data } = await this.$models.post.fetchPost(this.pid)
-      this.setState({
-        value: data[0].content,
-        loading: false
-      })
-    }
-  }
-
-  render () {
+  public render () {
     const container = (
       <div className="container">
-        <Editor value={this.state.value}
-            onChange={(value) => this.setState({value})} />
-          <Renderer value={this.state.value}
-            parsable={this.state.parsable}
-            onChange={({parsable, headers}) => {
-              this.headers = headers
-              this.setState({parsable})
-            }}/>
-          <Button className="button"
-            type='primary'
-            disabled={!this.state.parsable}
-            loading={this.state.submitting}
-            onClick={() => {
-              this.handleSubmit()
-            }}>
-            { this.isEdit ? '修改' : '提交' }
-          </Button>
+        <Editor value={this.props.value}
+          onChange={(value) => this.props.onChange(value)}
+        />
+        <Renderer value={this.props.value} />
       </div>)
     return (
-      <MarkDownStyle>
+      <MarkDownStyle height={this.props.height}>
         {
-          this.state.loading ? <Spin indicator={<Icon type="loading" style={{ fontSize: 24 }} spin />} >
+          this.props.loading ? <Spin indicator={<Icon type="loading" style={{ fontSize: 24 }} spin={true} />} >
             {container}
           </Spin> : container
         }
       </MarkDownStyle>
     )
-  }
-
-  finish (res) {
-    const successText = this.isEdit ? '修改' : '提交' + '文章成功！'
-    message.success(successText)
-    this.props.history.push(`/admin/post/list`)
-    this.setState({
-      submitting: false
-    })
-  }
-
-  handleSubmit () {
-    this.setState({
-      submitting: true
-    })
-    if (this.isEdit) {
-      this.$models.post.updatePost({
-        pid: this.pid,
-        ...this.headers,
-        ...{
-          content: this.state.value
-        }
-      }).then((res) => {
-        this.finish(res)
-      })
-    } else {
-      this.$models.post.addPost({
-        ...this.headers,
-        ...{
-          content: this.state.value
-        }
-      }).then((res) => {
-        this.finish(res)
-      })
-    }
   }
 }

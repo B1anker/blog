@@ -1,5 +1,5 @@
-import styled from 'styled-components'
 import variable from '@/styles/styled/variable'
+import styled from 'styled-components'
 
 const AVATAR_SIZE = '200px'
 const SOCIAL_ITEM_SIZE = '40px'

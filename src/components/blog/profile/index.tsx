@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
-import { ProfileStyle } from './style';
+import { ProfileStyle } from './style'
 
 export interface SocialItem {
   name: string
@@ -26,22 +26,22 @@ export default class Profile extends Component {
     url: 'mailto:narutowontstop@gmail.com'
   }]
 
-  render () {
+  public render () {
     return (
-      <ProfileStyle> 
-        <div className='avatar'></div>
+      <ProfileStyle>
+        <div className="avatar" />
         <div className="username">B1anker</div>
         <p>与食俱进，贱多识广</p>
-        <ul className='social'>
+        <ul className="social">
           {
             this.socials.map((social, index) => (
-              <li className='social-item' key={index}>
-                <a href={social.url} target='_blank'>
-                  <i className={`icon iconfont icon-${social.icon}`}></i>
+              <li className="social-item" key={index}>
+                <a href={social.url} target="_blank">
+                  <i className={`icon iconfont icon-${social.icon}`} />
                 </a>
                 <div className="tooltip">
                   <div className="text">{ social.name }</div>
-                  <div className="arrow"></div>
+                  <div className="arrow" />
                 </div>
               </li>
             ))

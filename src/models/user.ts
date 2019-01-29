@@ -1,7 +1,6 @@
-import Model from '@/core/model';
+import Model from '@/core/model'
 
 class User extends Model {
-
   private modelName = '/user'
 
   public getInfo (id: number) {

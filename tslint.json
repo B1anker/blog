@@ -1,15 +1,18 @@
 {
   "defaultSeverity": "error",
-  "extends": ["tslint:latest", "tslint-react"],
-  "jsRules": {},
+  "extends": ["tslint:recommended", "tslint-react"],
+  "jsRules": {
+    "no-unused-expression": true
+  },
   "rules": {
     "space-before-function-paren": true,
     "no-console": false,
     "quotemark": [true, "single", "jsx-double"],
+    "no-var-requires": false,
     "semicolon": [true, "never"],
     "interface-name": [true, "never-prefix"],
     "object-literal-sort-keys": false,
-    "trailing-comma": [false, {"multiline": "always", "singleline": "never"}],
+    "trailing-comma": false,
     "max-line-length": false,
     "jsx-no-multiline-js": false,
     "jsx-alignment": false,

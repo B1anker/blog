@@ -1,10 +1,10 @@
+import CodeBlock from '@/components/admin/markdown/prism'
+import moment from 'moment'
 import React, { Component } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { Link } from 'react-router-dom'
-import { PostStyle } from './style'
-import CodeBlock from '@/components/admin/markdown/prism'
-import moment from 'moment'
 import Popup from './popup'
+import { PostStyle } from './style'
 
 export interface PostProps {
   post: any
@@ -54,7 +54,7 @@ export default class Post extends Component<PostProps, PostState> {
       </div>
     )
     return (
-      <PostStyle className='post'>
+      <PostStyle className="post">
         <div className="post-header">
           <h1 className="post-title">
             <Link className="post-title-link" to={`/post/${this.post.id}`}>
@@ -63,25 +63,25 @@ export default class Post extends Component<PostProps, PostState> {
           </h1>
           <div className="post-meta">
             <div className="published">
-              <i className="iconfont icon-calendar"></i>
+              <i className="iconfont icon-calendar" />
               <span className="prefix">发表于</span>
               &nbsp;&nbsp;
               <span className="text">
                 { date.format('YYYY-MM-DD') }
               </span>
             </div>
-            <span className='split'>•</span>
+            <span className="split">•</span>
             <div className="category">
-              <i className="iconfont icon-folder"></i>
+              <i className="iconfont icon-folder" />
               <span className="prefix">分类于</span>
               &nbsp;&nbsp;
               <span className="text">
                 { this.post.categories }
               </span>
             </div>
-            <span className='split'>•</span>
+            <span className="split">•</span>
             <div className="visited">
-              <i className="iconfont icon-eye"></i>
+              <i className="iconfont icon-eye" />
               <span className="prefix">阅读次数</span>
               &nbsp;&nbsp;
               <span className="text">

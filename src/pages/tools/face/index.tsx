@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
 import { Input } from 'antd'
+import React, { Component } from 'react'
 import { FaceStyle } from './style'
 
 const { TextArea } = Input
@@ -29,7 +29,7 @@ export default class Face extends Component<{}, FaceState> {
     return this.canvas ? this.canvas.height : 0
   }
 
-  async componentDidMount () {
+  public async componentDidMount () {
     this.img = document.querySelector('#img')
     this.canvas = document.querySelector('#canvas')
     if (this.canvas) {
@@ -42,29 +42,28 @@ export default class Face extends Component<{}, FaceState> {
     }
   }
 
-  render () {
+  public render () {
     return (
       <FaceStyle>
-        <div className='input-container'>
+        <div className="input-container">
           <img id="img"
             src={ require('@/assets/grudges.png') }
-            alt='记仇'/>
+            alt="记仇"/>
           <TextArea value={this.state.text}
             onChange={(e) => {
               this.onChangeText(e)
             }}
-            placeholder='请输入你的记仇咯~'>
-          </TextArea>
+            placeholder="请输入你的记仇咯~" />
         </div>
-        <div className='display-container'>
-          <canvas id='canvas' width={200} height={205}></canvas>
-          <img className='replace-img' src={this.state.canvasToDataURL} alt="from canvas"/>
+        <div className="display-container">
+          <canvas id="canvas" width={200} height={205} />
+          <img className="replace-img" src={this.state.canvasToDataURL} alt="from canvas"/>
         </div>
       </FaceStyle>
     )
   }
 
-  onChangeText (e) {
+  public onChangeText (e) {
     this.fillText(e.target.value)
     if (this.canvas) {
       this.setState({
@@ -74,7 +73,7 @@ export default class Face extends Component<{}, FaceState> {
     }
   }
 
-  async initCanvas () {
+  public async initCanvas () {
     if (this.ctx) {
       this.ctx.clearRect(0, 0, this.width, this.height)
       this.ctx.fillStyle = 'white'
@@ -85,7 +84,7 @@ export default class Face extends Component<{}, FaceState> {
     }
   }
 
-  fillText (text) {
+  public fillText (text) {
     if (!text) {
       this.initCanvas()
       return
@@ -109,7 +108,7 @@ export default class Face extends Component<{}, FaceState> {
           j++
           this.resize(j)
         }
-        if (i === text.length - 1) { //绘制剩余部分
+        if (i === text.length - 1) { // 绘制剩余部分
           this.ctx.fillText(text.substring(lastIndex, i + 1), 8, initHeight)
         }
       }
@@ -117,7 +116,7 @@ export default class Face extends Component<{}, FaceState> {
     }
   }
 
-  resize (deep) {
+  public resize (deep) {
     if (deep > 1) {
       if (this.ctx && this.canvas) {
         const store = this.ctx.getImageData(0, 0, this.width, this.height)
@@ -132,7 +131,7 @@ export default class Face extends Component<{}, FaceState> {
     }
   }
 
-  loadImage (url, crossOrigin = true) {
+  public loadImage (url, crossOrigin = true) {
     return new Promise ((resolve, reject) => {
       const img = document.createElement('img')
       if (crossOrigin) {
@@ -148,7 +147,7 @@ export default class Face extends Component<{}, FaceState> {
     })
   }
 
-  drawImage (img) {
+  public drawImage (img) {
     if (this.ctx) {
       const sWidth = img.width
       const sHeight = img.height

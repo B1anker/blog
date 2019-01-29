@@ -1,10 +1,10 @@
 import ExtendComponent from '@/core/component'
 import { Avatar, Col, Dropdown, Icon, Layout, Menu, Row } from 'antd'
 import React from 'react'
-import { Route, Switch, Redirect } from 'react-router-dom'
 import { RouteComponentProps } from 'react-router'
-import styles from './style.less'
+import { Redirect, Route, Switch } from 'react-router-dom'
 import routes from './routes'
+import styles from './style.less'
 const { Header, Sider, Content } = Layout
 
 interface Params {
@@ -19,7 +19,7 @@ interface AdminState {
 
 export default class Admin extends ExtendComponent<AdminProps, AdminState> {
   private contentEl: HTMLDivElement | null
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       collapsed: false
@@ -27,7 +27,7 @@ export default class Admin extends ExtendComponent<AdminProps, AdminState> {
     this.contentEl = null
   }
 
-  get selectedKey() {
+  get selectedKey () {
     return (
       '/' +
       this.props.location.pathname
@@ -37,7 +37,7 @@ export default class Admin extends ExtendComponent<AdminProps, AdminState> {
     )
   }
 
-  componentDidMount() {
+  public componentDidMount () {
     setTimeout(() => {
       if (this.contentEl && this.contentEl.parentElement) {
         this.contentEl.style.height =
@@ -48,7 +48,7 @@ export default class Admin extends ExtendComponent<AdminProps, AdminState> {
     })
   }
 
-  render() {
+  public render () {
     const menu = (
       <Menu
         className={styles.menu}
@@ -161,7 +161,7 @@ export default class Admin extends ExtendComponent<AdminProps, AdminState> {
             }}
           >
             <div
-              className="content"
+              className={'content ' + styles.content}
               ref={(el) => {
                 this.contentEl = el
               }}
@@ -190,7 +190,7 @@ export default class Admin extends ExtendComponent<AdminProps, AdminState> {
     )
   }
 
-  toggle() {
+  public toggle () {
     this.setState({
       collapsed: !this.state.collapsed
     })

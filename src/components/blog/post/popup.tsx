@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
 import omit from 'lodash/omit'
+import React, { Component } from 'react'
 import { PopupStyle } from './style'
 
 interface PopupItemProperty {
@@ -43,39 +43,41 @@ export default class Popup extends Component<{}, PopupState> {
     this.getInitialData()
     this.attachEvent()
   }
-  
+
   public render () {
     const { active, maskProperty, popupImage } = this.state
     if (active && popupImage && maskProperty) {
-      const offsetLeft: number = popupImage.left - this.clickedImageProperty.left;
-      const offsetTop: number = popupImage.top - this.clickedImageProperty.top;
-      return <PopupStyle className="popup" ref={this.ref}>
-        { this.props.children }
-        <div className="popup-mask"
-          key="mask"
-          style={{
-            width: maskProperty.width + 'px',
-            height: maskProperty.height + 'px',
-            top: maskProperty.top + 'px',
-            left: maskProperty.left + 'px',
-            opacity: maskProperty.opacity
-          }}
-          onClick={(e: React.MouseEvent<HTMLDivElement>) => this.close(e)}>
-        </div>
-        <img className="popup-image"
-          key="img"
-          style={{
-            width: popupImage.width + 'px',
-            height: popupImage.height + 'px',
-            transform: `translate(${offsetLeft}px, ${offsetTop}px)`,
-            top: this.clickedImageProperty.top + 'px',
-            left: this.clickedImageProperty.left + 'px'
-          }}
-          onClick={(e: React.MouseEvent<HTMLImageElement>) => this.close(e)}
-          src={this.state.imgUrl}
-          alt=""
-        />
-      </PopupStyle>
+      const offsetLeft: number = popupImage.left - this.clickedImageProperty.left
+      const offsetTop: number = popupImage.top - this.clickedImageProperty.top
+      return (
+        <PopupStyle className="popup" ref={this.ref}>
+          { this.props.children }
+          <div className="popup-mask"
+            key="mask"
+            style={{
+              width: maskProperty.width + 'px',
+              height: maskProperty.height + 'px',
+              top: maskProperty.top + 'px',
+              left: maskProperty.left + 'px',
+              opacity: maskProperty.opacity
+            }}
+            onClick={(e: React.MouseEvent<HTMLDivElement>) => this.close(e)}
+          />
+          <img className="popup-image"
+            key="img"
+            style={{
+              width: popupImage.width + 'px',
+              height: popupImage.height + 'px',
+              transform: `translate(${offsetLeft}px, ${offsetTop}px)`,
+              top: this.clickedImageProperty.top + 'px',
+              left: this.clickedImageProperty.left + 'px'
+            }}
+            onClick={(e: React.MouseEvent<HTMLImageElement>) => this.close(e)}
+            src={this.state.imgUrl}
+            alt=""
+          />
+        </PopupStyle>
+      )
     }
     return (
       <PopupStyle className="popup"
@@ -151,8 +153,8 @@ export default class Popup extends Component<{}, PopupState> {
       let popupImageLeft: number
       let popupImageWidth: number
       let popupImageHeight: number
-      let maxHeight = this.pageHeight * .9
-      let maxWidth = this.pageWidth * .9
+      const maxHeight = this.pageHeight * .9
+      const maxWidth = this.pageWidth * .9
       if (naturalHeight > this.pageHeight) {
         popupImageHeight = maxHeight
         if (naturalWidth > this.pageWidth) {

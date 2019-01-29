@@ -1,6 +1,6 @@
+import ExtendComponent from '@/core/component'
 import React from 'react'
 import { RouteComponentProps } from 'react-router-dom'
-import ExtendComponent from '@/core/component'
 import Articles from '../articles'
 
 interface RouteParmas {
@@ -33,7 +33,7 @@ export default class PostPage extends ExtendComponent<RouteComponentProps<RouteP
     return this.props.match.params.pid
   }
 
-  render () {
+  public render () {
     return (
       <div className="post-page">
         <Articles pathname={this.props.location.pathname}

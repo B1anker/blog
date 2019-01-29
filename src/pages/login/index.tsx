@@ -1,8 +1,8 @@
+import { setUserInfo } from '@/actions/user'
+import store from '@/store'
 import { Alert, message } from 'antd'
 import JSEncrypt from 'jsencrypt'
 import React from 'react'
-import { setUserInfo } from '@/actions/user'
-import store from '@/store'
 
 import ExtendComponent from '@/core/component'
 
@@ -16,7 +16,7 @@ interface LoginState {
 export default class Login extends ExtendComponent<any, LoginState> {
   private encryptor: JSEncrypt
 
-  public constructor(props) {
+  public constructor (props) {
     super(props)
     this.state = {
       loginState: 'E0000'
@@ -24,12 +24,12 @@ export default class Login extends ExtendComponent<any, LoginState> {
     this.encryptor = new JSEncrypt()
   }
 
-  public async componentDidMount() {
+  public async componentDidMount () {
     const { data } = await this.$models.auth.getPublicKey()
     this.encryptor.setPublicKey(data.data)
   }
 
-  public render() {
+  public render () {
     return (
       <div className={style.login}>
         {this.state.loginState === 'E0001' ? (
@@ -48,7 +48,7 @@ export default class Login extends ExtendComponent<any, LoginState> {
     )
   }
 
-  private async login(account: string, password: string, remember?: boolean) {
+  private async login (account: string, password: string, remember?: boolean) {
     const localAccount: string | null = localStorage.getItem('account')
     const localPassword: string | null = localStorage.getItem('password')
     let submitAccout: string
@@ -66,7 +66,7 @@ export default class Login extends ExtendComponent<any, LoginState> {
         password: submitPassword
       })
       message.success('登录成功')
-      store.dispatch(setUserInfo(data.data));
+      store.dispatch(setUserInfo(data.data))
       this.props.history.push('/admin/post')
     } catch (err) {
       message.error('登录失败')

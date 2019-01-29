@@ -1,9 +1,9 @@
-import { Button, Checkbox, Form, Icon, Input } from 'antd';
-import { FormComponentProps } from 'antd/lib/form';
-import React from 'react';
 import ExtendComponent from '@/core/component'
+import { Button, Checkbox, Form, Icon, Input } from 'antd'
+import { FormComponentProps } from 'antd/lib/form'
+import React from 'react'
 
-import style from './style.less';
+import style from './style.less'
 
 const FormItem = Form.Item
 export interface LoginFormProps extends FormComponentProps {
@@ -22,7 +22,7 @@ export class LoginForm extends ExtendComponent<LoginFormProps, LoginFormState> {
     }
   }
 
-  render () {
+  public render () {
     const { getFieldDecorator } = this.props.form
     return (
       <Form onSubmit={(e) => {
@@ -39,11 +39,11 @@ export class LoginForm extends ExtendComponent<LoginFormProps, LoginFormState> {
               validateTrigger: ['onBlur', 'onChange']
             })(
               <Input prefix={
-                  <Icon type='user'
+                  <Icon type="user"
                     style={{ color: 'rgba(0,0,0,.25)' }} />
                 }
-                size='large'
-                placeholder='account' />
+                size="large"
+                placeholder="account" />
             )
           }
         </FormItem>
@@ -54,11 +54,11 @@ export class LoginForm extends ExtendComponent<LoginFormProps, LoginFormState> {
               validateTrigger: ['onBlur', 'onChange']
             })(
               <Input prefix={
-                <Icon type='lock'
+                <Icon type="lock"
                   style={{ color: 'rgba(0,0,0,.25)' }} />}
-                type='password'
-                size='large'
-                placeholder='Password' />
+                type="password"
+                size="large"
+                placeholder="Password" />
             )
           }
         </FormItem>
@@ -70,8 +70,8 @@ export class LoginForm extends ExtendComponent<LoginFormProps, LoginFormState> {
             })(
               <Checkbox>Remember me</Checkbox>
             )}
-            <Button type='primary'
-              htmlType='submit'
+            <Button type="primary"
+              htmlType="submit"
               className={style.submit}
               loading={this.state.pending}>
               Log in
@@ -81,7 +81,7 @@ export class LoginForm extends ExtendComponent<LoginFormProps, LoginFormState> {
     )
   }
 
-  checkaccount (rule, value, callback) {
+  public checkaccount (rule, value, callback) {
     if (!value) {
       callback()
     } else if (!~value.search(/^[a-zA-Z0-9_-]{4,16}$/)) {
@@ -91,7 +91,7 @@ export class LoginForm extends ExtendComponent<LoginFormProps, LoginFormState> {
     }
   }
 
-  handleSubmit (e) {
+  public handleSubmit (e) {
     e.preventDefault()
     this.props.form.validateFields(async (err, values) => {
       if (!err) {

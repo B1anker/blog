@@ -1,10 +1,10 @@
-import { Icon, Spin } from 'antd'
-import React from 'react'
-import ExtendComponent from '@/core/component'
-import Post from '@/components/blog/post'
 import Disqus from '@/components/blog/disqus'
-import ArticleStyle from './style'
+import Post from '@/components/blog/post'
+import ExtendComponent from '@/core/component'
+import { Icon, Spin } from 'antd'
 import pick from 'lodash/pick'
+import React from 'react'
+import ArticleStyle from './style'
 
 interface ArticlesProps {
   pathname: string
@@ -40,21 +40,21 @@ export default class Articles extends ExtendComponent<ArticlesProps, ArticlesSta
     const Posts = <div className="posts">
       {
         this.state.posts.length ? this.state.posts.map((post, index) => {
-          const _post = pick(post, [
+          const innerPost = pick(post, [
             'title',
             'tags',
             'subTitle',
             'categories',
             'count'
           ])
-          Object.assign(_post, {
+          Object.assign(innerPost, {
             id: post._id,
             render: this.type === 'summary' ? post.summary : post.content,
             createTime: post.meta.createdAt,
             updateTime: post.meta.updatedAt
           })
           return <Post
-            post={_post}
+            post={innerPost}
             key={index}
             type={this.type} />
         }) : <div className="empty">暂无文章╮(╯_╰)╭</div>
@@ -62,12 +62,12 @@ export default class Articles extends ExtendComponent<ArticlesProps, ArticlesSta
     </div>
 
     return (
-      <ArticleStyle className='articles'>
+      <ArticleStyle className="articles">
         {
           this.state.loading ? <div className="loading">
             <Spin wrapperClassName="spin"
               tip="加载文章中..."
-              indicator={<Icon type="loading" style={{ fontSize: 24 }} spin />}
+              indicator={<Icon type="loading" style={{ fontSize: 24 }} spin={true} />}
             />
           </div> : Posts
         }

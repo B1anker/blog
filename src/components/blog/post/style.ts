@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import { CodeStyle } from '../../admin/markdown/style'
 
-
 const BLUE = '#97dffd'
 const ORANGE = '#ff3f1a'
 const PURPLE = '#8378EA'
@@ -34,7 +33,7 @@ const PostStyle = styled.article`
       font-size: 25px;
       font-weight: 700;
     }
-      
+
     .post-meta {
       ${center('center')};
 
@@ -48,7 +47,7 @@ const PostStyle = styled.article`
           color: ${BLUE};
         }
       }
-      
+
       .visited {
         color: ${ORANGE};
       }
@@ -89,7 +88,7 @@ const PostStyle = styled.article`
     @media only screen and (max-width: 991px) {
       display: none;
     }
-    
+
     .post-day {
       font-size: 30px;
       font-weight: 700;
@@ -101,7 +100,7 @@ const PostStyle = styled.article`
 
     ${CodeStyle}
   }
-  
+
   .post-badage {
     ${border('0 4px 4px 0')};
     position: absolute;
@@ -121,7 +120,7 @@ const PostStyle = styled.article`
     a {
       color: white;
     }
-    
+
     &:after {
       content: '';
       position: absolute;

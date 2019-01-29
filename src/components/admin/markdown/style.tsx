@@ -1,26 +1,22 @@
 import styled from 'styled-components'
 
-const MarkDownStyle = styled.div`
-  height: calc(100% - 40px);
-  .ant-spin-nested-loading, .ant-spin-container {
-    height: 100%;
-  }
-  .ant-spin-spinning {
-    max-height: none !important;
-  }
+const MarkDownStyle = styled.div<{height?: number}>((props: any) => `
+.ant-spin-nested-loading, .ant-spin-container {
+  height: 100%;
+}
+.ant-spin-spinning {
+  max-height: none !important;
+}
 
-  .container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    width: 100%;
-    height: 100%;
-  }
-
-  .button {
-    margin-top: 10px;
-  }
-`
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  width: 100%;
+  height: ${props.height || 600}px;
+  transition: height ease .3s;
+}
+`)
 
 const EditorStyle = styled.div`
   width: 50%;
@@ -28,6 +24,7 @@ const EditorStyle = styled.div`
   border: 1px solid #d3d3d3;
   box-shadow: 0 0 3px rgba(0, 0, 0, .4);
   border-radius: 5px 0 0 5px;
+  overflow: hidden;
 
   .CodeMirror {
     height: 100%;

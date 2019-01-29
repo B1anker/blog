@@ -3,7 +3,7 @@ import Navigator from '../navigator'
 import { Blur, Poster } from './style'
 
 export default class Header extends Component {
-  render () {
+  public render () {
     return (
       <header>
         <Navigator />

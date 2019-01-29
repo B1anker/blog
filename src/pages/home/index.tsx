@@ -1,24 +1,24 @@
-import React from 'react'
-import Header from '@/components/blog/header'
 import MyFooter from '@/components/blog/footer'
-import Scroll from '@/components/blog/scroll'
-import Articles from './articles'
-import ExtendComponent from '@/core/component'
+import Header from '@/components/blog/header'
 import Profile from '@/components/blog/profile'
+import Scroll from '@/components/blog/scroll'
+import ExtendComponent from '@/core/component'
+import React from 'react'
 import {
   Route,
-  Switch,
-  RouteComponentProps
+  RouteComponentProps,
+  Switch
 } from 'react-router-dom'
-import { MainContentStyle } from './style'
+import Articles from './articles'
 import routes from './routes'
+import { MainContentStyle } from './style'
 
 export default class Home extends ExtendComponent<RouteComponentProps> {
   public render () {
     return (
-      <div className='home'>
+      <div className="home">
         <Header />
-        <MainContentStyle className='main-content'>
+        <MainContentStyle className="main-content">
           <div className="left-content">
             <Switch>
               {
@@ -30,7 +30,7 @@ export default class Home extends ExtendComponent<RouteComponentProps> {
                 })
               }
             </Switch>
-            { this.props.location.pathname !=='/' ? null : <Articles pathname={this.props.location.pathname} /> }
+            { this.props.location.pathname !== '/' ? null : <Articles pathname={this.props.location.pathname} /> }
           </div>
           <Profile />
         </MainContentStyle>

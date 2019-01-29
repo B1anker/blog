@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { Menu, MenuItem, Navigator } from './style'
 
 interface NavProps {
@@ -51,10 +51,10 @@ class Nav extends Component<NavProps, NavState> {
     return this.props.system.scrolled
   }
 
-  render () {
+  public render () {
     return (
       <Navigator className={this.scrolled ? 'site-nav active' : 'site-nav'}>
-        <Menu id='menu' className='menu'>
+        <Menu id="menu" className="menu">
           {
             this.state.navList.map((nav, index) => (
               <MenuItem className={ `menu-item menu-item-${nav.name}` } key={ index }>

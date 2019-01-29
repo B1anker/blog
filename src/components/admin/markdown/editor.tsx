@@ -1,42 +1,35 @@
-import React, { Component } from 'react'
 import CodeMirror from 'codemirror'
-import 'codemirror/keymap/sublime.js'
+import 'codemirror/addon/edit/closebrackets.js'
 import 'codemirror/addon/edit/continuelist.js'
 import 'codemirror/addon/edit/matchbrackets.js'
-import 'codemirror/addon/edit/closebrackets.js'
-import 'codemirror/mode/markdown/markdown.js'
+import 'codemirror/keymap/sublime.js'
 import 'codemirror/lib/codemirror.css'
+import 'codemirror/mode/markdown/markdown.js'
 import 'codemirror/theme/material.css'
-import { EditorStyle } from './style'
 import debounce from 'lodash/debounce'
+import React, { Component } from 'react'
+import { EditorStyle } from './style'
 
 interface EditorProps {
   onChange: (snapshot: any) => void
   value: string
 }
 
-interface EditorState {
-  value: string
-}
-
-export default class Editor extends Component<EditorProps, EditorState> {
+export default class Editor extends Component<EditorProps, {}> {
   private editor: CodeMirror.Editor | null = null
   private editorEl: React.RefObject<HTMLDivElement> = React.createRef()
 
   constructor (props) {
     super(props)
-    this.state = {
-      value: ''
-    }
   }
 
-  setValue (content) {
-    if (this.state.value === '' && this.editor) {
+  public setValue (content) {
+    if (this.props.value === '' && this.editor) {
       this.editor.setValue(content)
     }
   }
 
-  componentDidMount () {
+  public componentDidMount () {
     if (this.editorEl.current) {
       this.editor = CodeMirror(this.editorEl.current, {
         value: this.props.value,
@@ -51,42 +44,26 @@ export default class Editor extends Component<EditorProps, EditorState> {
         }
       })
       if (this.editor) {
-        const debounced = debounce(this.update, 600)
+        const debounced = debounce(this.update, 300)
         this.editor.on('change', (value) => {
           debounced.call(this)
         })
-        this.setValue(this.props.value)   
+        this.setValue(this.props.value)
       }
     }
   }
 
-  update () {
-    if (this.editor) {
-      this.setState({
-        value: this.editor.getValue()
-      })
-    }
-  }
-
-  getSnapshotBeforeUpdate (prevProps, prevState) {
-    if (this.state.value !== prevState.value) {
-      return this.state.value
-    }
-    return null
-  }
-
-  componentDidUpdate (prevProps, prevState, snapshot) {
-    if (snapshot) {
-      this.props.onChange(snapshot)
-    }
-    this.setValue(prevProps.value)
-  }
-
-  render () {
+  public render () {
     return (
       <EditorStyle id="CodeMirror"
         ref={this.editorEl}
       />
     )
+  }
+
+  private update () {
+    if (this.editor) {
+      this.props.onChange(this.editor.getValue())
+    }
   }
 }

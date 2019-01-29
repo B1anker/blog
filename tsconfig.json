@@ -3,7 +3,7 @@
     "outDir": "build/dist",
     "module": "esnext",
     "target": "es2015",
-    "lib": ["es6", "dom", "es2015", "es2017"],
+    "lib": ["dom", "es2015", "esnext"],
     "paths": {
       "@/*": ["./src/*"],
       "src": ["./src"]

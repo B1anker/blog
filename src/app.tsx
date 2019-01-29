@@ -1,13 +1,13 @@
-import './styles/lib/index.less';
+import './styles/lib/index.less'
 
-import React from 'react';
-import { setConfig } from 'react-hot-loader';
-import { hot } from 'react-hot-loader/root';
-import { Provider } from 'react-redux';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import React from 'react'
+import { setConfig } from 'react-hot-loader'
+import { hot } from 'react-hot-loader/root'
+import { Provider } from 'react-redux'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
-import routes from './routes';
-import store from './store';
+import routes from './routes'
+import store from './store'
 
 const App =  () => (
   <Provider store={store}>

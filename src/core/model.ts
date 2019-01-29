@@ -1,6 +1,6 @@
-import { AxiosInstance, AxiosRequestConfig } from 'axios';
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 
-import httpClient from './http';
+import httpClient from './http'
 
 export default class Model {
   public http: AxiosInstance

@@ -1,4 +1,4 @@
-import Model from '@/core/model';
+import Model from '@/core/model'
 
 interface LoginModel {
   account: string
@@ -11,14 +11,14 @@ interface User {
 }
 
 export class UserModel extends Model {
-  modelName = '/auth'
+  private modelName = '/auth'
 
   public getPublicKey () {
-    return this.http.post<{data: string}>(`${this.modelName}/public`)
+    return this.http.post<{ data: string }>(`${this.modelName}/public`)
   }
 
   public login (data: LoginModel) {
-    return this.http.post<{data: User}>(`${this.modelName}/login`, data)
+    return this.http.post<{ data: User }>(`${this.modelName}/login`, data)
   }
 }
 

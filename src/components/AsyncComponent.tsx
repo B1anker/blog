@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { CSSTransition } from 'react-transition-group'
 import styled from 'styled-components'
 
-const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />
+const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin={true} />
 
 const BodySpin = styled((props) => <Spin {...props} indicator={antIcon} />)`
   position: fixed;
@@ -52,21 +52,21 @@ const GenAsyncComponent = (loadComponent: () => Promise<any>) => {
     AsyncComponentState
   > {
     private unmount: boolean = false
-    constructor(props) {
+    constructor (props) {
       super(props)
       this.state = {
         Child: null
       }
     }
 
-    componentWillUnmount() {
+    public componentWillUnmount () {
       this.setState({
         Child: null
       })
       this.unmount = true
     }
 
-    async componentDidMount() {
+    public async componentDidMount () {
       const { default: Child } = await loadComponent()
       if (this.unmount) {
         return
@@ -76,7 +76,7 @@ const GenAsyncComponent = (loadComponent: () => Promise<any>) => {
       })
     }
 
-    public render() {
+    public render () {
       const { Child } = this.state
       let renderComponent
       if (Child) {

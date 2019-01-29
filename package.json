@@ -7,7 +7,8 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --config build/webpack.prod.conf.js",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.conf.js",
-    "up": "scp -r dist b1anker:/repo/blog"
+    "up": "scp -r dist b1anker:/repo/blog",
+    "lint": "tslint --fix -p tsconfig.json -c tslint.json"
   },
   "dependencies": {
     "antd": "^3.10.8",
@@ -33,7 +34,7 @@
   "devDependencies": {
     "@types/codemirror": "^0.0.67",
     "@types/lodash": "^4.14.118",
-    "@types/react": "^16.7.18",
+    "@types/react": "^16.7.21",
     "@types/react-dom": "^16.0.11",
     "@types/react-redux": "^6.0.12",
     "@types/react-router-dom": "^4.3.1",
@@ -58,6 +59,7 @@
     "optimize-css-assets-webpack-plugin": "^4.0.0",
     "portfinder": "^1.0.13",
     "postcss-loader": "^3.0.0",
+    "prettier-tslint": "^0.4.2",
     "react-hot-loader": "^4.6.3",
     "style-loader": "^0.23.1",
     "styled-components": "^4.1.1",

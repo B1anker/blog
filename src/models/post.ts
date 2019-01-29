@@ -1,25 +1,34 @@
-import Model from '@/core/model';
+import Model from '@/core/model'
+
+export interface PostModel {
+  title: string
+  content: string
+  id?: string
+  tags: string[]
+  categories: number[]
+  summary: string
+}
 
 class Post extends Model {
-  modelName = '/post'
+  private modelName = '/post'
 
-  fetchPostList () {
-    return this.http.get(`${this.modelName}/list`)
+  public fetchPostList<T> () {
+    return this.http.get<{ msg: string; list: T[] }>(`${this.modelName}`)
   }
 
-  fetchPost (pid) {
+  public fetchPost (pid) {
     return this.http.get(`${this.modelName}/${pid}`)
   }
 
-  addPost (data) {
-    return this.http.post(`${this.modelName}/add`, data)
+  public addPost (data) {
+    return this.http.post(`${this.modelName}`, data)
   }
 
-  updatePost (data) {
-    return this.http.put(`${this.modelName}/update`, data)
+  public updatePost (data) {
+    return this.http.put(`${this.modelName}`, data)
   }
 
-  delPost (id) {
+  public delPost (id) {
     return this.http.delete(`${this.modelName}/${id}`)
   }
 }

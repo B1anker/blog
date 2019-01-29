@@ -1,10 +1,10 @@
-import { Cancelable } from 'lodash';
-import throttle from 'lodash/throttle';
-import React, { Component } from 'react';
-import { connect, DispatchProp } from 'react-redux';
+import { Cancelable } from 'lodash'
+import throttle from 'lodash/throttle'
+import React, { Component } from 'react'
+import { connect, DispatchProp } from 'react-redux'
 
-import { changeScrollStatus } from '../../../actions/system';
-import { ScrollStyle } from './style';
+import { changeScrollStatus } from '../../../actions/system'
+import { ScrollStyle } from './style'
 
 interface ScrollState {
   active: boolean
@@ -53,6 +53,27 @@ class Scroll extends Component<DispatchProp, ScrollState> {
     )
   }
 
+  public scrollToTop () {
+    if (this.app) {
+      let top = this.app.scrollTop
+      const step = Math.ceil(top / 16)
+      const animate = () => {
+        if (top <= 0) {
+          if (this.app) {
+            this.app.scrollTop = 0
+          }
+        } else {
+          if (this.app) {
+            top -= step
+            this.app.scrollTop = top
+            window.requestAnimationFrame(animate)
+          }
+        }
+      }
+      window.requestAnimationFrame(animate)
+    }
+  }
+
   private scroll () {
     if (this.unmount) {
       return
@@ -71,27 +92,6 @@ class Scroll extends Component<DispatchProp, ScrollState> {
           active: false
         })
       }
-    }
-  }
-
-  scrollToTop () {
-    if (this.app) {
-      let top = this.app.scrollTop
-      const step = Math.ceil(top / 16)
-      const animate = () => {
-        if (top <= 0) {
-          if (this.app) {
-            this.app.scrollTop = 0
-          }
-        } else {
-          if (this.app) {
-            top -= step
-            this.app.scrollTop = top
-            window.requestAnimationFrame(animate)
-          }
-        }
-      }
-      window.requestAnimationFrame(animate)
     }
   }
 }
