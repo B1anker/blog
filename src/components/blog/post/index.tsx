@@ -76,7 +76,7 @@ export default class Post extends Component<PostProps, PostState> {
               <span className="prefix">分类于</span>
               &nbsp;&nbsp;
               <span className="text">
-                { this.post.categories }
+                { this.post.categories.map(({ name }) => name).join(',')  }
               </span>
             </div>
             <span className="split">•</span>
@@ -108,7 +108,7 @@ export default class Post extends Component<PostProps, PostState> {
           </div>
         </Popup>
         <div className="post-badage">
-          <span>{ this.post.categories }</span>
+          <span>{ this.post.categories.map(({ name }) => name).join(',') }</span>
         </div>
         {
           this.props.type === 'summary' ? readMore : null

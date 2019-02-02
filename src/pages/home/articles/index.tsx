@@ -6,6 +6,8 @@ import pick from 'lodash/pick'
 import React from 'react'
 import ArticleStyle from './style'
 
+import { PostModel } from '@/models/post'
+
 interface ArticlesProps {
   pathname: string
   pid?: string
@@ -87,9 +89,16 @@ export default class Articles extends ExtendComponent<ArticlesProps, ArticlesSta
       loading: true
     })
     try {
-      const { data } = await this.$models.post.fetchPostList()
+      let posts: PostModel[] = []
+      if (this.type === 'summary') {
+        const { data } = await this.$models.post.fetchPostList()
+        posts = data.list
+      } else {
+        const { data } = await this.$models.post.fetchPost(this.props.pid)
+        posts = [data.post]
+      }
       this.setState({
-        posts: data.list,
+        posts,
         loading: false
       })
     } catch (err) {

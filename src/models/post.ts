@@ -7,13 +7,14 @@ export interface PostModel {
   tags: string[]
   categories: number[]
   summary: string
+  key?: string
 }
 
 class Post extends Model {
   private modelName = '/post'
 
-  public fetchPostList<T> () {
-    return this.http.get<{ msg: string; list: T[] }>(`${this.modelName}`)
+  public fetchPostList () {
+    return this.http.get<{ msg: string; list: PostModel[] }>(`${this.modelName}`)
   }
 
   public fetchPost (pid) {

@@ -1,4 +1,5 @@
 import ExtendComponent from '@/core/component'
+import { PostModel } from '@/models/post'
 import { Button, message, Popconfirm, Table, Tag } from 'antd'
 import { ColumnProps } from 'antd/lib/table'
 import moment from 'moment'
@@ -6,21 +7,13 @@ import React from 'react'
 import { tagsColorList } from '../postEdit'
 import { OperateButtons } from './style'
 
-interface ListItem {
-  id: string
-  key: string
-  title: string
-  categories: string
-  tags: string[]
-}
-
-interface Column extends ListItem {
+interface Column extends PostModel {
   created: number
   updated: number
 }
 
 interface ListState {
-  dataSource: ListItem[]
+  dataSource: PostModel[]
   loading: boolean
 }
 
@@ -45,14 +38,17 @@ export default class List extends ExtendComponent<{}, ListState> {
         key: 'categories',
         align: 'center',
         render: (text, record) => {
+          if (!text || !text.length) {
+            return '-'
+          }
           return (
             <span>
-              {text.length
-                ? text.map((category, index) => <Tag key={index}
-                    color={tagsColorList[index]}>
-                    {category}
-                  </Tag>)
-                : '-'}
+              {
+                text.map((category, index) => <Tag key={index}
+                  color={tagsColorList[index]}>
+                  {category.name}
+                </Tag>)
+              }
             </span>
           )
         }
@@ -154,7 +150,7 @@ export default class List extends ExtendComponent<{}, ListState> {
     this.setState({
       loading: true
     })
-    const { data } = await this.$models.post.fetchPostList<ListItem>()
+    const { data } = await this.$models.post.fetchPostList()
     data.list.forEach((l) => {
       l.key = l.id
     })
@@ -166,7 +162,7 @@ export default class List extends ExtendComponent<{}, ListState> {
     })
   }
 
-  public async handleDelete (record: ListItem) {
+  public async handleDelete (record: PostModel) {
     try {
       await this.$models.post.delPost(record.id)
       message.success('删除成功')
