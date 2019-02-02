@@ -43,7 +43,7 @@ export class LoginForm extends ExtendComponent<LoginFormProps, LoginFormState> {
                     style={{ color: 'rgba(0,0,0,.25)' }} />
                 }
                 size="large"
-                placeholder="account" />
+                placeholder="请输入账号" />
             )
           }
         </FormItem>
@@ -58,7 +58,7 @@ export class LoginForm extends ExtendComponent<LoginFormProps, LoginFormState> {
                   style={{ color: 'rgba(0,0,0,.25)' }} />}
                 type="password"
                 size="large"
-                placeholder="Password" />
+                placeholder="请输入密码" />
             )
           }
         </FormItem>
@@ -68,7 +68,7 @@ export class LoginForm extends ExtendComponent<LoginFormProps, LoginFormState> {
               valuePropName: 'checked',
               initialValue: true,
             })(
-              <Checkbox>Remember me</Checkbox>
+              <Checkbox>记住登录</Checkbox>
             )}
             <Button type="primary"
               htmlType="submit"

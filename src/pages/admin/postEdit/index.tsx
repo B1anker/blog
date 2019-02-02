@@ -47,7 +47,7 @@ const defaultMenu: MenuItem[] = [
   }
 ]
 
-const tagsColorList = [
+export const tagsColorList = [
   'geekblue',
   'red',
   'purple',

@@ -1,7 +1,6 @@
 import './styles/lib/index.less'
 
 import React from 'react'
-import { setConfig } from 'react-hot-loader'
 import { hot } from 'react-hot-loader/root'
 import { Provider } from 'react-redux'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
@@ -25,9 +24,5 @@ const App =  () => (
     </BrowserRouter>
   </Provider>
 )
-
-setConfig({
-  pureSFC: true
-})
 
 export default hot(App)

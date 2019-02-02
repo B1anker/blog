@@ -5,12 +5,13 @@ export default [
     name: '首页',
     icon: 'home',
     path: '/',
-    exact: false,
+    exact: true,
     component: AC(() => import('@/pages/home'))
   },
   {
     name: '登录页',
     path: '/login',
+    exact: false,
     component: AC(() => import('@/pages/login'))
   },
   {
@@ -26,6 +27,13 @@ export default [
     path: '/tools',
     exact: false,
     component: AC(() => import('@/pages/tools'))
+  },
+  {
+    name: '首页',
+    icon: 'home',
+    path: '/',
+    exact: false,
+    component: AC(() => import('@/pages/home'))
   },
   {
     name: '404',

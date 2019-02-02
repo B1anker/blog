@@ -3,6 +3,7 @@ import { Button, message, Popconfirm, Table, Tag } from 'antd'
 import { ColumnProps } from 'antd/lib/table'
 import moment from 'moment'
 import React from 'react'
+import { tagsColorList } from '../postEdit'
 import { OperateButtons } from './style'
 
 interface ListItem {
@@ -42,7 +43,19 @@ export default class List extends ExtendComponent<{}, ListState> {
         title: '分类',
         dataIndex: 'categories',
         key: 'categories',
-        align: 'center'
+        align: 'center',
+        render: (text, record) => {
+          return (
+            <span>
+              {text.length
+                ? text.map((category, index) => <Tag key={index}
+                    color={tagsColorList[index]}>
+                    {category}
+                  </Tag>)
+                : '-'}
+            </span>
+          )
+        }
       },
       {
         title: '标签',
@@ -53,7 +66,10 @@ export default class List extends ExtendComponent<{}, ListState> {
           return (
             <span>
               {record.tags.length
-                ? record.tags.map((tag, index) => <Tag key={index}>{tag}</Tag>)
+                ? record.tags.map((tag, index) => <Tag key={index}
+                    color={tagsColorList[index]}>
+                    {tag}
+                  </Tag>)
                 : '-'}
             </span>
           )

@@ -5,7 +5,7 @@ export default [
     name: '文章页',
     icon: 'home',
     path: '/post/:pid',
-    exact: true,
+    exact: false,
     component: AC(() => import('@/pages/home/article'))
   },
   {
