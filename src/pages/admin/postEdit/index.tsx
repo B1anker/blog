@@ -106,7 +106,7 @@ export default class PostEdit extends ExtendComponent<
       this.setState({
         toolbar: {
           title: post.title,
-          categories: post.categories
+          categories: post.categories.map(({ id }) => id)
         },
         tags: post.tags,
         markdownValue: post.content,

@@ -85,7 +85,7 @@ export default class Post extends Component<PostProps, PostState> {
               <span className="prefix">阅读次数</span>
               &nbsp;&nbsp;
               <span className="text">
-                { this.post.views }
+                { this.post.views || 0 }
               </span>
             </div>
           </div>
