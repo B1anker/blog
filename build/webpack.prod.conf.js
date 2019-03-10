@@ -14,7 +14,7 @@ const env = require('../config/prod.env')
 
 const webpackConfig = merge(baseWebpackConfig, {
   devtool: config.build.productionSourceMap ? config.build.devtool : false,
-  mode: 'development',
+  mode: 'production',
   output: {
     path: config.build.assetsRoot,
     filename: utils.assetsPath('[name].[chunkhash].js'),
