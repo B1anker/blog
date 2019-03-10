@@ -39,8 +39,7 @@ function uploadFile(uploadToken, key, localFile) {
 
 const addPrefixToFileName = (prefix, file) => `${prefix}/${file}`
 const dirs = [
-  resolve('dist/static/js'),
-  resolve('dist/static/imgs')
+  resolve('dist/static')
 ]
 const files = []
 dirs.forEach((dir) => {

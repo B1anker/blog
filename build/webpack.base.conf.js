@@ -112,7 +112,7 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: utils.assetsPath('imgs/[name].[hash:7].[ext]'),
+          name: utils.assetsPath('[name].[hash:7].[ext]'),
           // publicPath: process.env.NODE_ENV === 'production'
           //   ? config.build.assetsPublicPath
           //   : config.dev.assetsPublicPath
@@ -123,7 +123,7 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: utils.assetsPath('fonts/[name].[hash:7].[ext]'),
+          name: utils.assetsPath('[name].[hash:7].[ext]'),
           publicPath: process.env.NODE_ENV === 'production'
             ? config.build.assetsPublicPath
             : config.dev.assetsPublicPath
