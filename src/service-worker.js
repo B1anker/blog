@@ -27,7 +27,7 @@ if (workbox) {
   workbox.skipWaiting && workbox.skipWaiting()
   workbox.clientsClaim && workbox.clientsClaim()
   workbox.routing.registerRoute(
-    new RegExp(`https?://b1anker.com:8080/($|about)`),
+    new RegExp(`https?://b1anker.com/($|about)`),
     new workbox.strategies.NetworkFirst({
       cacheName: 'html/' + cacheVersion
     })
