@@ -110,13 +110,12 @@ module.exports = {
       {
         test: /\.(png|jpe?g|gif|svg|ico)(\?.*)?$/,
         loader: 'url-loader',
-        options: process.env.NODE_ENV === 'development' ? {
+        options: {
           limit: 10000,
-          name: utils.assetsPath('/[name].[hash:7].[ext]')
-        } : {
-          limit: 10000,
-          name: '[name].[ext]',
-          publicPath: 'https://cdn.b1anker.com'
+          name: utils.assetsPath('imgs/[name].[hash:7].[ext]'),
+          publicPath: process.env.NODE_ENV === 'production'
+            ? config.build.assetsPublicPath
+            : config.dev.assetsPublicPath
         }
       },
       {
