@@ -113,9 +113,9 @@ module.exports = {
         options: {
           limit: 10000,
           name: utils.assetsPath('imgs/[name].[hash:7].[ext]'),
-          publicPath: process.env.NODE_ENV === 'production'
-            ? config.build.assetsPublicPath
-            : config.dev.assetsPublicPath
+          // publicPath: process.env.NODE_ENV === 'production'
+          //   ? config.build.assetsPublicPath
+          //   : config.dev.assetsPublicPath
         }
       },
       {
@@ -123,7 +123,10 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
+          name: utils.assetsPath('fonts/[name].[hash:7].[ext]'),
+          publicPath: process.env.NODE_ENV === 'production'
+            ? config.build.assetsPublicPath
+            : config.dev.assetsPublicPath
         }
       }
     ]
@@ -136,8 +139,11 @@ module.exports = {
     new CopyWebpackPlugin([
       {
         from: path.resolve(__dirname, '../src/service-worker.js'),
-        to: config.build.assetsRoot,
-        ignore: ['.*']
+        to: config.build.root
+      },
+      {
+        from: path.resolve(__dirname, '../src/favicon.ico'),
+        to: config.build.root
       }
     ])
   ]

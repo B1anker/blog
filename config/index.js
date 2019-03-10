@@ -51,10 +51,11 @@ module.exports = {
   build: {
     // Template for index.html
     index: path.resolve(__dirname, '../dist/index.html'),
+    root: path.resolve(__dirname, '../dist'),
 
     // Paths
-    assetsRoot: path.resolve(__dirname, '../dist'),
-    assetsSubDirectory: 'static',
+    assetsRoot: path.resolve(__dirname, '../dist/static'),
+    assetsSubDirectory: '',
     assetsPublicPath: 'https://cdn.b1anker.com',
 
     /**
