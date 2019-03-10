@@ -1,3 +1,4 @@
+
 const qiniu = require("qiniu")
 const qiniuKey = require('../config/key')
 const fs = require('fs')
@@ -31,16 +32,17 @@ function uploadFile(uploadToken, key, localFile) {
     if (respInfo.statusCode == 200) {
       console.log(respBody);
     } else {
-      console.log(respInfo.statusCode);
-      console.log(respBody);
+      console.log(respInfo.statusCode, respBody);
     }
   });
 }
+
 
 const addPrefixToFileName = (prefix, file) => `${prefix}/${file}`
 const dirs = [
   resolve('dist/static')
 ]
+
 const files = []
 dirs.forEach((dir) => {
   fs.readdirSync(dir).forEach((file) => {

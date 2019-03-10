@@ -4,7 +4,7 @@ importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.6.1/workbox
 if (workbox) {
   const url = new URL(location.href);
   const debug = url.searchParams.has('debug');
-  const cacheName = '2018-11-11v1'
+  const cacheName = '2019-03-10v1'
   workbox.setConfig({
     debug
   })
@@ -43,7 +43,7 @@ if (workbox) {
   
   workbox.routing.registerRoute(
     /cdn\.b1anker\.com\\.*/,
-    workbox.strategies.cacheFirst({
+    workbox.strategies.staleWhileRevalidate({
       cacheName
     })
   )

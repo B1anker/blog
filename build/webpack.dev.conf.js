@@ -14,7 +14,7 @@ const fs = require('fs')
 const resolve = (dir) => {
   return path.join(__dirname, "..", dir)
 }
-console.log(path.posix.join(config.dev.assetsPublicPath, 'index.html'))
+
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
 

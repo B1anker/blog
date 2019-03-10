@@ -5,7 +5,7 @@ const path = require('path')
 const config = require('../config')
 const utils = require('./utils')
 
-const resolve = dir => {
+const resolve = (dir) => {
   return path.join(__dirname, '..', dir)
 }
 
@@ -138,12 +138,12 @@ module.exports = {
     ),
     new CopyWebpackPlugin([
       {
-        from: path.resolve(__dirname, '../src/service-worker.js'),
-        to: config.build.root
+        from: resolve('src/service-worker.js'),
+        to: process.env.NODE_ENV === 'production' ? config.build.root : './'
       },
       {
-        from: path.resolve(__dirname, '../src/favicon.ico'),
-        to: config.build.root
+        from: resolve('src/favicon.ico'),
+        to:  process.env.NODE_ENV === 'production' ? config.build.root : './'
       }
     ])
   ]
