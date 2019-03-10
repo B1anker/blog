@@ -22,7 +22,7 @@
     <div id="app"></div>
     <script>
       if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/service-worker.js')
+        navigator.serviceWorker.register('/service-worker.js?env=<%= process.env.NODE_ENV %>')
           .then(function(registration) {
             // Successful registration
             console.log('Hooray. Registration successful, scope is:', registration.scope);
