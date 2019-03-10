@@ -56,7 +56,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist/static'),
     assetsSubDirectory: '',
-    assetsPublicPath: 'https://cdn.b1anker.com',
+    assetsPublicPath: 'https://cdn.b1anker.com/',
 
     /**
      * Source Maps
