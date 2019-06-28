@@ -67,7 +67,7 @@ export default class MyFooter extends Component<{}, MyFooterState> {
             onClick={() => {
               const newWindow = window.open()
               if (newWindow) {
-                newWindow.location.href = 'www.beian.miit.gov.cn'
+                newWindow.location.href = 'http://www.beian.miit.gov.cn'
               }
             }}
           >
