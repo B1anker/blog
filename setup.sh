@@ -12,3 +12,7 @@ npm i
 echo "启动项目"
 
 npm run build
+
+echo "上传文件"
+
+npm run up
