@@ -56,7 +56,7 @@ export default class MyFooter extends Component<{}, MyFooterState> {
           提供网站统计服务.
         </p>
         <p>
-          © 2018 Hi, B1anker. Theme By{' '}
+          © {new Date().getFullYear()} Hi, B1anker. Theme By{' '}
           <a
             href="https://github.com/DIYgod/hexo-theme-sagiri"
             target="_blank"
@@ -67,7 +67,7 @@ export default class MyFooter extends Component<{}, MyFooterState> {
             onClick={() => {
               const newWindow = window.open()
               if (newWindow) {
-                newWindow.location.href = 'http://www.miitbeian.gov.cn'
+                newWindow.location.href = 'www.beian.miit.gov.cn'
               }
             }}
           >

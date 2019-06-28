@@ -246,7 +246,7 @@ export default class PostEdit extends ExtendComponent<
         title: this.state.toolbar.title,
         categories: this.state.toolbar.categories,
         content: this.state.markdownValue,
-        summary: this.state.markdownValue.split('<!-- summary -->')[0] || '',
+        summary: this.state.markdownValue.split('<!-- more -->')[0] || '',
         tags: this.state.tags
       }
       if (this.mode === 'add') {
