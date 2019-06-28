@@ -29,6 +29,10 @@ export default class Editor extends Component<EditorProps, {}> {
     }
   }
 
+  public componentDidUpdate () {
+    console.log('update')
+  }
+
   public componentDidMount () {
     if (this.editorEl.current) {
       this.editor = CodeMirror(this.editorEl.current, {
