@@ -16,3 +16,5 @@ npm run build
 echo "上传文件"
 
 npm run up
+
+echo "上传结束"
