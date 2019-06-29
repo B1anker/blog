@@ -17,13 +17,14 @@ export interface Params {
 interface PostEditState {
   menu: MenuItem[]
   markdownValue: string
-  markdownHeight?: number
+  markdownHeight: number
   toolbar: { [T in any]: any }
   submitting: boolean
   disabled: boolean
   tags: string[]
   postLoading: boolean
   categoryList: CategoryModel[]
+  fullscreen: boolean
 }
 
 const defaultMenu: MenuItem[] = [
@@ -67,6 +68,8 @@ export default class PostEdit extends ExtendComponent<
 > {
   private postEditorRef: React.RefObject<HTMLDivElement> = React.createRef()
   private originMarkdownHeigt: number = 600
+  private screenHeight: number = 0
+  private prevHeight: number = 0
 
   public constructor (props) {
     super(props)
@@ -80,13 +83,15 @@ export default class PostEdit extends ExtendComponent<
     )
     this.state = {
       menu,
+      markdownHeight: 0,
       toolbar: this.setInitialToolbarOfState(menu),
       submitting: false,
       disabled: true,
       markdownValue: '',
       tags: [],
       postLoading: true,
-      categoryList: []
+      categoryList: [],
+      fullscreen: false
     }
   }
 
@@ -99,6 +104,7 @@ export default class PostEdit extends ExtendComponent<
   }
 
   public async componentDidMount () {
+    this.screenHeight = window.screen.availHeight
     this.getCategoryList()
     if (this.pid) {
       const { data } = await this.$models.post.fetchPost(this.pid)
@@ -160,7 +166,10 @@ export default class PostEdit extends ExtendComponent<
             ))}
           </div>
         ) : null}
-        <div className="markdown-wrap">
+        <div
+          className={`markdown-wrap ${this.state.fullscreen &&
+            'fullscreen-controller'}`}
+        >
           <Markdown
             pid={this.pid}
             height={this.state.markdownHeight}
@@ -177,8 +186,32 @@ export default class PostEdit extends ExtendComponent<
           >
             {this.mode === 'edit' ? '修改' : '提交'}
           </Button>
+          <Icon
+            className="fullscreen-controller"
+            type={this.state.fullscreen ? 'fullscreen-exit' : 'fullscreen'}
+            onClick={() => this.handleFullscreen()}
+          />
         </div>
       </PostEditStyle>
+    )
+  }
+
+  private handleFullscreen () {
+    this.setState(
+      {
+        fullscreen: !this.state.fullscreen
+      },
+      () => {
+        if (this.state.fullscreen) {
+          this.setState({
+            markdownHeight: this.screenHeight - 170
+          })
+        } else {
+          this.setState({
+            markdownHeight: this.prevHeight
+          })
+        }
+      }
     )
   }
 
@@ -222,18 +255,13 @@ export default class PostEdit extends ExtendComponent<
       let { height } = this.postEditorRef.current.getBoundingClientRect()
       height = ~~(height - 24 * 2 - 32 - 16)
       this.originMarkdownHeigt = height
-      this.setState(
-        {
-          markdownHeight: height
-        },
-        () => {
-          if (this.state.tags.length) {
-            this.setState({
-              markdownHeight: this.originMarkdownHeigt - 16 - 22
-            })
-          }
-        }
-      )
+      this.prevHeight = this.originMarkdownHeigt
+      if (this.state.tags.length) {
+        this.prevHeight = this.originMarkdownHeigt - 16 - 22
+      }
+      this.setState({
+        markdownHeight: this.prevHeight
+      })
     }
   }
 

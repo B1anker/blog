@@ -14,7 +14,7 @@ const MarkDownStyle = styled.div<{height?: number}>((props: any) => `
   justify-content: flex-end;
   width: 100%;
   height: ${props.height || 600}px;
-  transition: height ease .3s;
+  transition: height ease .2s;
 }
 `)
 

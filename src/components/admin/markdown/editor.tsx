@@ -15,28 +15,33 @@ interface EditorProps {
   value: string
 }
 
-export default class Editor extends Component<EditorProps, {}> {
+interface EditorState {
+  value: string
+}
+
+export default class Editor extends Component<EditorProps, EditorState> {
   private editor: CodeMirror.Editor | null = null
   private editorEl: React.RefObject<HTMLDivElement> = React.createRef()
+  private updateDebounced: () => void
 
   constructor (props) {
     super(props)
-  }
-
-  public setValue (content) {
-    if (this.props.value === '' && this.editor) {
-      this.editor.setValue(content)
+    this.state = {
+      value: props.value
     }
   }
 
-  public componentDidUpdate () {
-    console.log('update')
+  public shouldComponentUpdate (nextProps, nextState) {
+    if (nextProps.value !== this.props.value) {
+      return true
+    }
+    return false
   }
 
   public componentDidMount () {
     if (this.editorEl.current) {
       this.editor = CodeMirror(this.editorEl.current, {
-        value: this.props.value,
+        value: this.state.value,
         mode: 'markdown',
         lineNumbers: true,
         showCursorWhenSelecting: true,
@@ -47,14 +52,13 @@ export default class Editor extends Component<EditorProps, {}> {
           Enter: 'newlineAndIndentContinueMarkdownList'
         }
       })
-      if (this.editor) {
-        const debounced = debounce(this.update, 300)
-        this.editor.on('change', (value) => {
-          debounced.call(this)
-        })
-        this.setValue(this.props.value)
-      }
+      this.updateDebounced = debounce(this.update, 300).bind(this)
+      this.editor.on('change', this.updateDebounced)
     }
+  }
+
+  public componentWillUnmount () {
+    this.editor!.off('change', this.updateDebounced)
   }
 
   public render () {
@@ -66,8 +70,6 @@ export default class Editor extends Component<EditorProps, {}> {
   }
 
   private update () {
-    if (this.editor) {
-      this.props.onChange(this.editor.getValue())
-    }
+    this.props.onChange(this.editor!.getValue())
   }
 }
