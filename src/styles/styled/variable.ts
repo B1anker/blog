@@ -1,9 +1,4 @@
-const BLUE = '#97dffd'
-const ORANGE = '#ff3f1a'
-const PURPLE = '#8378EA'
-
-export default {
-  BLUE,
-  ORANGE,
-  PURPLE
-}
+export const BLUE = '#97dffd'
+export const ORANGE = '#ff3f1a'
+export const PURPLE = '#8378EA'
+export const PINK = '#FB7293'

@@ -116,4 +116,4 @@ export class LoginForm extends ExtendComponent<LoginFormProps, LoginFormState> {
   }
 }
 
-export default Form.create()<LoginFormProps>(LoginForm)
+export default Form.create<LoginFormProps>()(LoginForm)

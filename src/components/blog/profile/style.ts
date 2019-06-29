@@ -1,4 +1,4 @@
-import variable from '@/styles/styled/variable'
+import { BLUE } from '@/styles/styled/variable'
 import styled from 'styled-components'
 
 const AVATAR_SIZE = '200px'
@@ -99,7 +99,7 @@ const ProfileStyle  = styled.div`
       }
 
       &:hover {
-        background-color: ${variable.BLUE};
+        background-color: ${BLUE};
 
         .tooltip {
           transform: translateY(-150%);

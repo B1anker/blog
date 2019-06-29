@@ -1,5 +1,6 @@
 import { Component } from 'react'
 
+import archives from './archives'
 import auth from './auth'
 import category from './category'
 import post from './post'
@@ -9,7 +10,8 @@ export const $models = {
   post,
   user,
   auth,
-  category
+  category,
+  archives
 }
 
 export default () => {

@@ -14,5 +14,12 @@ export default [
     path: '/about',
     exact: false,
     component: AC(() => import('@/pages/home/about'))
+  },
+  {
+    name: '归档',
+    icon: 'archives',
+    path: '/archives',
+    exact: false,
+    component: AC(() => import('@/pages/home/archives'))
   }
 ]

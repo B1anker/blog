@@ -1,5 +1,5 @@
+import { PINK } from '@/styles/styled/variable'
 import styled from 'styled-components'
-import variable from '../../style/variable'
 
 const MenuHeight = '48px'
 const NavItemHeight = '48px'
@@ -64,7 +64,7 @@ const MenuItem = styled.li`
 
     i {
       margin-right: 8px;
-      color: ${ variable.pink };
+      color: ${ PINK };
 
       @media only screen and (max-width: 991px) {
         display: none;

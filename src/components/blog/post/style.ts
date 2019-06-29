@@ -1,3 +1,4 @@
+import { stage } from '@/styles/styled/content'
 import styled from 'styled-components'
 import { CodeStyle } from '../../admin/markdown/style'
 
@@ -18,13 +19,7 @@ const border = (border) => {
 }
 
 const PostStyle = styled.article`
-  width: 100%;
-  background-color: white;
-  position: relative;
-  padding: 40px;
-  background: #fff;
-  margin-bottom: 40px;
-  border-radius: 5px;
+  ${stage}
 
   .post-header {
     .post-title, .post-title-link {

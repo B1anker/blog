@@ -11,7 +11,7 @@ export default class About extends Component {
         <Timeline>
           <Timeline.Item>
             <h3 className="expirence">
-              <img className="logo" src="https://a.msstatic.com/huya/main/img/logo.png" alt=""/>虎牙信息科技 (2017年10月 - 至今)
+              <img className="logo" src="https://a.msstatic.com/huya/main/img/logo.png" alt=""/>虎牙信息科技 (2017年10月 - 2019年5月)
             </h3>
             <h3>前端开发工程师 基础保障部</h3>
             <Timeline>
