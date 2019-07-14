@@ -16,6 +16,7 @@ const resolve = (dir) => {
 }
 
 const HOST = process.env.HOST
+
 const PORT = process.env.PORT && Number(process.env.PORT)
 
 const devWebpackConfig = merge(baseWebpackConfig, {
@@ -46,8 +47,8 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     disableHostCheck: true,
     // https: true,
     https: {
-      key: fs.readFileSync('/Users/b1anker/key/b1anker.com/Nginx/2_b1anker.com.key'),
-      cert: fs.readFileSync('/Users/b1anker/key/b1anker.com/Nginx/1_b1anker.com_bundle.crt')
+      key: fs.readFileSync('/Users/b1anker/key/b1anker.com/Nginx/ssl.key'),
+      cert: fs.readFileSync('/Users/b1anker/key/b1anker.com/Nginx/ssl.pem')
     }
   },
 

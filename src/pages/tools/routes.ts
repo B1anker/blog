@@ -1,4 +1,4 @@
-import AC from '@/components/AsyncComponent'
+import { lazy } from 'react'
 
 export default [
   {
@@ -6,6 +6,6 @@ export default [
     icon: 'face',
     path: '/tools/face',
     exact: true,
-    component: AC(() => import('./face'))
+    component: lazy(() => import(/* webpackChunkName: "face" */ './face'))
   }
 ]

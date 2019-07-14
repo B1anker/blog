@@ -8,7 +8,8 @@ const baseWebpackConfig = require('./webpack.base.conf')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
 
 const env = require('../config/prod.env')
 
@@ -17,73 +18,62 @@ const webpackConfig = merge(baseWebpackConfig, {
   mode: 'production',
   output: {
     path: config.build.assetsRoot,
-    filename: utils.assetsPath('[name].[chunkhash].js'),
-    chunkFilename: utils.assetsPath('[id].[chunkhash].js')
+    filename: utils.assetsPath('[name].[contenthash:8].js'),
+    chunkFilename: utils.assetsPath('[name].[contenthash:8].js')
   },
   optimization: {
     splitChunks: {
+      chunks: "all",
+      minSize: 0,
       cacheGroups: {
         vendors: {
           test: /[\\/]node_modules[\\/]/,
           chunks: 'initial',
           name: 'vendors',
+          priority: 1,
+          minChunks: 1
         },
-        'async-vendors': {
+        polyfill: {
+          test: /[\\/]node_modules[\\/]core-js/,
+          chunks: 'initial',
+          name: 'polyfill',
+          priority: 2,
+          minChunks: 1
+        },
+        "async-vendors": {
           test: /[\\/]node_modules[\\/]/,
           minChunks: 2,
-          chunks: 'async',
-          name: 'async-vendors'
+          priority: 4,
+          chunks: "async",
+          name: "async"
         }
       }
     },
-    runtimeChunk: { name: 'runtime' }
+    runtimeChunk: { name: (entryPoint) => `${entryPoint.name}.runtime` }
   },
   plugins: [
-    // http://vuejs.github.io/vue-loader/en/workflow/production.html
     new webpack.DefinePlugin({
       'process.env': env
     }),
-    new CleanWebpackPlugin(['dist'], {
-      root: path.resolve(__dirname, '..')
-    }),
-    // extract css into its own file
-    // new MiniCssExtractPlugin({
-    //   filename: utils.assetsPath('css/[name].[contenthash].css'),
-    //   // Setting the following option to `false` will not extract CSS from codesplit chunks.
-    //   // Their CSS will instead be inserted dynamically with style-loader when the codesplit chunk has been loaded by webpack.
-    //   // It's currently set to `true` because we are seeing that sourcemaps are included in the codesplit bundle as well when it's `false`, 
-    //   // increasing file size: https://github.com/vuejs-templates/webpack/issues/1110
-    //   allChunks: true,
-    // }),
-    // Compress extracted CSS. We are using this plugin so that possible
-    // duplicated CSS from different components can be deduped.
+    new CleanWebpackPlugin(),
     new OptimizeCSSPlugin({
       cssProcessorOptions: config.build.productionSourceMap
         ? { safe: true, map: { inline: false } }
         : { safe: true }
     }),
-    // generate dist index.html with correct asset hash for caching.
-    // you can customize output by editing /index.html
-    // see https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
       filename: config.build.index,
-      template: 'index.html',
+      template: utils.resolve('index.html'),
       inject: true,
       minify: {
         removeComments: true,
         collapseWhitespace: true,
         removeAttributeQuotes: true
-        // more options:
-        // https://github.com/kangax/html-minifier#options-quick-reference
       },
-      // necessary to consistently work with multiple chunks via CommonsChunkPlugin
       chunksSortMode: 'dependency'
     }),
-    // keep module.id stable when vendor modules does not change
     new webpack.HashedModuleIdsPlugin(),
-    // enable scope hoisting
-    // new webpack.optimize.ModuleConcatenationPlugin(),
-    // copy custom static assets
+    new LodashModuleReplacementPlugin(),
     new CopyWebpackPlugin([
       {
         from: path.resolve(__dirname, '../static'),

@@ -28,11 +28,19 @@ export const ArchivesStyle = styled.div`
         color: ${PINK};
         margin-right: 12px;
         font-size: 16px;
+        white-space: nowrap;
       }
 
       .title {
         font-size: 20px;
         cursor: pointer;
+
+        @media only screen and (max-width: 991px) {
+          max-width: 220px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
       }
     }
   }

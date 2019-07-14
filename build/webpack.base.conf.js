@@ -23,14 +23,16 @@ module.exports = {
       process.env.NODE_ENV === 'production'
         ? config.build.assetsPublicPath
         : config.dev.assetsPublicPath,
-    filename: '[name].[hash].js'
+    filename: '[name].[hash:8].js',
+    chunkFilename: '[name].[chunkhash:8].js'
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.jsx', '.js', '.less'],
     alias: {
       '@': resolve('src'),
       src: resolve('src'),
-      assets: resolve('src/assets')
+      assets: resolve('src/assets'),
+      '@ant-design/icons/lib/dist$': resolve('src/utils/antdIcon.ts')
     }
   },
   module: {

@@ -106,6 +106,7 @@ export default class PostEdit extends ExtendComponent<
   public async componentDidMount () {
     this.screenHeight = window.screen.availHeight
     this.getCategoryList()
+    this.setMarkdownHeight()
     if (this.pid) {
       const { data } = await this.$models.post.fetchPost(this.pid)
       const { post } = data
@@ -123,7 +124,6 @@ export default class PostEdit extends ExtendComponent<
         postLoading: false
       })
     }
-    this.setMarkdownHeight()
   }
 
   public componentDidUpdate (prevProps, prevState: PostEditState) {
@@ -144,7 +144,8 @@ export default class PostEdit extends ExtendComponent<
   public render () {
     const { tags } = this.state
     return (
-      <PostEditStyle className="post-editor" ref={this.postEditorRef}>
+      <PostEditStyle className="post-editor"
+        ref={this.postEditorRef}>
         <Toolbar
           menu={this.state.menu}
           onChange={(key: string, value) =>
@@ -159,7 +160,7 @@ export default class PostEdit extends ExtendComponent<
                 closable={true}
                 key={index}
                 color={tagsColorList[index]}
-                afterClose={() => this.handleCloseTag(index)}
+                onClose={() => this.handleCloseTag(index)}
               >
                 {tag}
               </Tag>
@@ -204,7 +205,7 @@ export default class PostEdit extends ExtendComponent<
       () => {
         if (this.state.fullscreen) {
           this.setState({
-            markdownHeight: this.screenHeight - 170
+            markdownHeight: this.screenHeight
           })
         } else {
           this.setState({

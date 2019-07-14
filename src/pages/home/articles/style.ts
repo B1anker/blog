@@ -41,7 +41,7 @@ const ArticleStyle = styled.div`
   }
 
   .post-comment {
-    width: 900px;
+    width: 100%;
     background: #fff;
     margin: 0;
     padding: 40px;

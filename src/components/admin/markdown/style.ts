@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const MarkDownStyle = styled.div<{height?: number}>((props: any) => `
+const MarkDownStyle = styled.div<{height?: number}>((props) => `
 .ant-spin-nested-loading, .ant-spin-container {
   height: 100%;
 }
@@ -13,23 +13,26 @@ const MarkDownStyle = styled.div<{height?: number}>((props: any) => `
   flex-wrap: wrap;
   justify-content: flex-end;
   width: 100%;
-  height: ${props.height || 600}px;
+  height: ${props.height ? props.height + 'px' : '100%'};
   transition: height ease .2s;
 }
 `)
 
-const EditorStyle = styled.div`
-  width: 50%;
-  height: 100%;
-  border: 1px solid #d3d3d3;
-  box-shadow: 0 0 3px rgba(0, 0, 0, .4);
-  border-radius: 5px 0 0 5px;
-  overflow: hidden;
+const EditorStyle = styled.div<{height?: number}>((props) => {
+  return `
+    width: 50%;
+    height: ${props.height ? props.height + 'px' : '100%'};
+    border: 1px solid #d3d3d3;
+    box-shadow: 0 0 3px rgba(0, 0, 0, .4);
+    border-radius: 5px 0 0 5px;
+    overflow: hidden;
 
-  .CodeMirror {
-    height: 100%;
-  }
-`
+    .CodeMirror {
+      height: 100%;
+    }
+  `
+})
+
 const CodeStyle = `
 .prism-highlight {
   margin-bottom: 36px !important;
@@ -39,8 +42,33 @@ h1, h2, h3, h4, h5, h6 {
   margin: 16px 0;
 }
 
+h1 {
+  font-size: 30px;
+}
+
+h2 {
+  font-size: 27px;
+}
+
+h3 {
+  font-size: 24px;
+}
+
+h4 {
+  font-size: 21px;
+}
+
+h5 {
+  font-size: 18px;
+}
+
+h6 {
+  font-size: 16px;
+}
+
 p {
   text-indent: 2em;
+  line-height: 2.2rem;
 }
 
 table {

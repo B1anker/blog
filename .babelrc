@@ -12,6 +12,7 @@
     }],
     "@babel/transform-runtime",
     "@babel/plugin-syntax-dynamic-import",
-    "react-hot-loader/babel"
+    "react-hot-loader/babel",
+    "lodash"
   ]
 }

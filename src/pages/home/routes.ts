@@ -1,4 +1,4 @@
-import AC from '@/components/AsyncComponent'
+import { lazy } from 'react'
 
 export default [
   {
@@ -6,20 +6,20 @@ export default [
     icon: 'home',
     path: '/post/:pid',
     exact: false,
-    component: AC(() => import('@/pages/home/article'))
+    component: lazy(() => import(/* webpackChunkName: "article" */ '@/pages/home/article'))
   },
   {
     name: '关于',
     icon: 'about',
     path: '/about',
     exact: false,
-    component: AC(() => import('@/pages/home/about'))
+    component: lazy(() => import(/* webpackChunkName: "about" */ '@/pages/home/about'))
   },
   {
     name: '归档',
     icon: 'archives',
     path: '/archives',
     exact: false,
-    component: AC(() => import('@/pages/home/archives'))
+    component: lazy(() => import(/* webpackChunkName: "archives" */'@/pages/home/archives'))
   }
 ]

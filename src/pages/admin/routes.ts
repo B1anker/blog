@@ -1,4 +1,4 @@
-import AC from '@/components/AsyncComponent'
+import { lazy } from 'react'
 
 export default [
   {
@@ -12,25 +12,25 @@ export default [
         path: '/admin/post/edit',
         noRender: true,
         exact: true,
-        component: AC(() => import('@/pages/admin/postEdit'))
+        component: lazy(() => import(/* webpackChunkName: "postEdit" */ './postEdit'))
       },
       {
         name: '编辑',
         icon: 'edit',
         path: '/admin/post/edit/:pid',
-        component: AC(() => import('@/pages/admin/postEdit'))
+        component: lazy(() => import(/* webpackChunkName: "postEdit" */ './postEdit'))
       },
       {
         name: '列表',
         icon: 'table',
         path: '/admin/post/list',
-        component: AC(() => import('./list'))
+        component: lazy(() => import(/* webpackChunkName: "list" */ './list'))
       },
       {
         name: '分类',
         icon: 'bars',
         path: '/admin/post/category',
-        component: AC(() => import('./category'))
+        component: lazy(() => import(/* webpackChunkName: "category" */ './category'))
       }
     ]
   }
