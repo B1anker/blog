@@ -22,8 +22,10 @@ interface EditorState {
   value: string
 }
 
+let editor: CodeMirror.Editor
+
 export default class Editor extends Component<EditorProps, EditorState> {
-  private editor: CodeMirror.Editor | null = null
+  private initialled: boolean = false
   private editorRef: React.RefObject<HTMLDivElement> = React.createRef()
   private updateDebounced: () => void
 
@@ -39,22 +41,26 @@ export default class Editor extends Component<EditorProps, EditorState> {
   }
 
   public componentWillUnmount () {
-    this.editor!.off('change', this.updateDebounced)
+    editor!.off('change', this.updateDebounced)
   }
 
   public getSnapshotBeforeUpdate (prevProps) {
-    if (prevProps.height !== this.props.height) {
+    if (prevProps.height !== this.props.height || this.props.height) {
       return {
-        height: this.props.height
+        height: this.props.height,
+        value: this.props.value
       }
     }
     return {
-      height: 0
+      height: 0,
+      value: this.props.value
     }
   }
 
-  public componentDidUpdate (prevProps, prevState, { height }) {
-    if (height) {
+  public componentDidUpdate (prevProps, prevState, { height, value }) {
+    console.log(height, value)
+    if (height && !this.initialled && value) {
+      this.initialled = true
       this.initial()
     }
   }
@@ -68,9 +74,13 @@ export default class Editor extends Component<EditorProps, EditorState> {
     )
   }
 
+  public setValue (value) {
+    editor && editor.setValue(value)
+  }
+
   private initial () {
     if (this.editorRef.current) {
-      this.editor = CodeMirror(this.editorRef.current, {
+      editor = CodeMirror(this.editorRef.current, {
         value: this.props.value,
         mode: 'markdown',
         lineNumbers: true,
@@ -80,19 +90,14 @@ export default class Editor extends Component<EditorProps, EditorState> {
         keyMap: 'sublime',
         extraKeys: {
           Enter: 'newlineAndIndentContinueMarkdownList'
-        },
-        dragDrop: true,
-        onDragEvent (instance, event) {
-          console.log(instance, event)
-          return true
         }
       })
       this.updateDebounced = debounce(this.update, 300).bind(this)
-      this.editor!.on('change', this.updateDebounced)
+      editor!.on('change', this.updateDebounced)
     }
   }
 
   private update () {
-    this.props.onChange(this.editor!.getValue())
+    this.props.onChange(editor!.getValue())
   }
 }

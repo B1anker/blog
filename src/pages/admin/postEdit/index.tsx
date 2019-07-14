@@ -2,7 +2,7 @@ import Markdown from '@/components/admin/markdown'
 import Toolbar, { MenuItem } from '@/components/Toolbar'
 import ExtendComponent from '@/core/component'
 import { CategoryModel } from '@/models/category'
-import { PostModel } from '@/models/post'
+import { UpdatePostModel } from '@/models/post'
 import { Button, Icon, message, Tag } from 'antd'
 import defaulsDeep from 'lodash/defaultsDeep'
 import isEqual from 'lodash/isEqual'
@@ -271,7 +271,7 @@ export default class PostEdit extends ExtendComponent<
       submitting: true
     })
     try {
-      const model: PostModel = {
+      const model: UpdatePostModel = {
         title: this.state.toolbar.title,
         categories: this.state.toolbar.categories,
         content: this.state.markdownValue,

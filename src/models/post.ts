@@ -1,12 +1,17 @@
 import Model from '@/core/model'
 import { CategoryModel } from './category'
 
-export interface PostModel {
-  title: string
-  content: string
+export interface UpdatePostModel {
   id?: string
-  tags: string[]
+  title: string
   categories: CategoryModel[]
+  content: string
+  summary: string
+  tags: string[]
+}
+
+export interface PostModel extends UpdatePostModel {
+  tags: string[]
   created: number
   updated: number
   summary: string
