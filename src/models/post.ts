@@ -1,12 +1,16 @@
 import Model from '@/core/model'
+import { CategoryModel } from './category'
 
 export interface PostModel {
   title: string
   content: string
   id?: string
   tags: string[]
-  categories: number[]
+  categories: CategoryModel[]
+  created: number
+  updated: number
   summary: string
+  views: number
   key?: string
 }
 
@@ -31,6 +35,12 @@ class Post extends Model {
 
   public delPost (id) {
     return this.http.delete(`${this.modelName}/${id}`)
+  }
+
+  public view (id) {
+    return this.http.post(`${this.modelName}/view`, {
+      id
+    })
   }
 }
 

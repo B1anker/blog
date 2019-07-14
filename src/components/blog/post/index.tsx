@@ -1,4 +1,5 @@
 import CodeBlock from '@/components/admin/markdown/prism'
+import { PostModel } from '@/models/post'
 import moment from 'moment'
 import React, { Component } from 'react'
 import ReactMarkdown from 'react-markdown'
@@ -6,8 +7,12 @@ import { Link } from 'react-router-dom'
 import Popup from './popup'
 import { PostStyle } from './style'
 
+export interface InnerPost extends PostModel {
+  render: string
+}
+
 export interface PostProps {
-  post: any
+  post: InnerPost
   type: string
 }
 
@@ -43,7 +48,7 @@ export default class Post extends Component<PostProps, PostState> {
   }
 
   public render () {
-    const date = moment.unix(this.post.createTime)
+    const date = moment.unix(this.post.created)
     const readMore = (
       <div className="read-all">
         <Link className="btn"

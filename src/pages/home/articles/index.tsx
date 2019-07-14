@@ -18,7 +18,10 @@ interface ArticlesState {
   posts: any[]
 }
 
-export default class Articles extends ExtendComponent<ArticlesProps, ArticlesState> {
+export default class Articles extends ExtendComponent<
+  ArticlesProps,
+  ArticlesState
+> {
   constructor (props) {
     super(props)
     this.state = {
@@ -39,47 +42,41 @@ export default class Articles extends ExtendComponent<ArticlesProps, ArticlesSta
   }
 
   public render () {
-    const Posts = <div className="posts">
-      {
-        this.state.posts.length ? this.state.posts.map((post, index) => {
-          const innerPost = pick(post, [
-            'title',
-            'tags',
-            'subTitle',
-            'categories',
-            'count'
-          ])
-          Object.assign(innerPost, {
-            id: post.id,
-            render: this.type === 'summary' ? post.summary : post.content,
-            createTime: post.created,
-            updateTime: post.updated
+    const Posts = (
+      <div className="posts">
+        {this.state.posts.length ? (
+          this.state.posts.map((post, index) => {
+            const innerPost = Object.assign({
+              render: this.type === 'summary' ? post.summary : post.content
+            }, post)
+            return <Post post={innerPost} key={index} type={this.type} />
           })
-          return <Post
-            post={innerPost}
-            key={index}
-            type={this.type} />
-        }) : <div className="empty">暂无文章╮(╯_╰)╭</div>
-      }
-    </div>
+        ) : (
+          <div className="empty">暂无文章╮(╯_╰)╭</div>
+        )}
+      </div>
+    )
 
     return (
       <ArticleStyle className="articles">
-        {
-          this.state.loading ? <div className="loading">
-            <Spin wrapperClassName="spin"
+        {this.state.loading ? (
+          <div className="loading">
+            <Spin
+              wrapperClassName="spin"
               tip="加载文章中..."
-              indicator={<Icon type="loading" style={{ fontSize: 24 }} spin={true} />}
+              indicator={
+                <Icon type="loading" style={{ fontSize: 24 }} spin={true} />
+              }
             />
-          </div> : Posts
-        }
-        {
-          this.type !== 'summary' ? (
-            <div className="post-comment">
-              <Disqus />
-            </div>
-          ) : null
-        }
+          </div>
+        ) : (
+          Posts
+        )}
+        {this.type !== 'summary' ? (
+          <div className="post-comment">
+            <Disqus />
+          </div>
+        ) : null}
       </ArticleStyle>
     )
   }
@@ -95,6 +92,7 @@ export default class Articles extends ExtendComponent<ArticlesProps, ArticlesSta
         posts = data.list
       } else {
         const { data } = await this.$models.post.fetchPost(this.props.pid)
+        this.$models.post.view(this.props.pid)
         posts = [data.post]
       }
       this.setState({
