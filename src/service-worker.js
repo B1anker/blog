@@ -3,7 +3,7 @@ importScripts('https://storage.googleapis.com/workbox-cdn/releases/4.1.0/workbox
 if (workbox) {
   const url = new URL(location.href)
   const env = url.searchParams.get('env')
-  const cacheVersion = '2019-03-10v2'
+  const cacheVersion = '2019-07-18v1'
 
   self.addEventListener('install', function (event) {
     return event.waitUntil(self.skipWaiting())
@@ -26,12 +26,12 @@ if (workbox) {
   console.log('Workbox: ' + env)
   workbox.skipWaiting && workbox.skipWaiting()
   workbox.clientsClaim && workbox.clientsClaim()
-  workbox.routing.registerRoute(
-    new RegExp(`https?://b1anker.com/($|about)`),
-    new workbox.strategies.NetworkFirst({
-      cacheName: 'html/' + cacheVersion
-    })
-  )
+  // workbox.routing.registerRoute(
+  //   new RegExp(`https?://b1anker.com/(archives|about)`),
+  //   new workbox.strategies.NetworkFirst({
+  //     cacheName: 'html/' + cacheVersion
+  //   })
+  // )
 
   workbox.routing.registerRoute(
     /.*\.css/,
