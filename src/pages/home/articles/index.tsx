@@ -1,8 +1,8 @@
+import Comment from '@/components/blog/Comment'
 import Disqus from '@/components/blog/disqus'
 import Post from '@/components/blog/post'
 import ExtendComponent from '@/core/component'
 import { Icon, Spin } from 'antd'
-import pick from 'lodash/pick'
 import React from 'react'
 import ArticleStyle from './style'
 
@@ -74,7 +74,7 @@ export default class Articles extends ExtendComponent<
         )}
         {this.type !== 'summary' ? (
           <div className="post-comment">
-            <Disqus />
+            <Comment />
           </div>
         ) : null}
       </ArticleStyle>

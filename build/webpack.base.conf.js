@@ -84,7 +84,8 @@ module.exports = {
         include: [
           'highlightjs',
           'codemirror',
-          'antd'
+          'antd',
+          'gitalk'
         ]
           .map(path => resolve(`node_modules/${path}`))
           .concat(resolve('src/styles/lib'))
@@ -104,7 +105,8 @@ module.exports = {
         include: [
           'highlightjs',
           'codemirror',
-          'antd'
+          'antd',
+          'gitalk'
         ]
           .map((path) => resolve(`node_modules/${path}`))
           .concat(resolve('src/styles/lib'))
