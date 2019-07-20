@@ -1,5 +1,6 @@
 export {
   LoadingOutline,
   FullscreenOutline,
-  FullscreenExitOutline
+  FullscreenExitOutline,
+  CloseOutline
 } from '@ant-design/icons'

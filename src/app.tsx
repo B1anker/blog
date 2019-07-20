@@ -19,7 +19,8 @@ const App = () => (
               return <Route path={path}
                 exact={exact}
                 component={component}
-                key={name}/>
+                key={name}
+              />
             })
           }
         </Switch>

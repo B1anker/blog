@@ -1,16 +1,30 @@
 {
   "defaultSeverity": "error",
-  "extends": ["tslint:recommended", "tslint-react"],
+  "extends": [
+    "tslint:recommended",
+    "tslint-react",
+    "tslint-react-hooks"
+  ],
   "jsRules": {
     "no-unused-expression": true
   },
   "rules": {
     "space-before-function-paren": true,
     "no-console": false,
-    "quotemark": [true, "single", "jsx-double"],
+    "quotemark": [
+      true,
+      "single",
+      "jsx-double"
+    ],
     "no-var-requires": false,
-    "semicolon": [true, "never"],
-    "interface-name": [true, "never-prefix"],
+    "semicolon": [
+      true,
+      "never"
+    ],
+    "interface-name": [
+      true,
+      "never-prefix"
+    ],
     "object-literal-sort-keys": false,
     "trailing-comma": false,
     "max-line-length": false,
@@ -25,7 +39,8 @@
     "jsx-wrap-multiline": false,
     "max-classes-per-file": false,
     "no-unused-expression": false,
-    "prefer-conditional-expression": false
+    "prefer-conditional-expression": false,
+    "react-hooks-nesting": "error"
   },
   "rulesDirectory": []
 }

@@ -50,10 +50,7 @@ export default class Admin extends ExtendComponent<AdminProps, AdminState> {
 
   public render () {
     const menu = (
-      <Menu
-        className={styles.menu}
-        selectedKeys={[]}
-      >
+      <Menu className={styles.menu} selectedKeys={[]}>
         <Menu.Item disabled={true}>
           <Icon type="user" />
           个人中心
@@ -61,10 +58,6 @@ export default class Admin extends ExtendComponent<AdminProps, AdminState> {
         <Menu.Item disabled={true}>
           <Icon type="setting" />
           设置
-        </Menu.Item>
-        <Menu.Item key="triggerError">
-          <Icon type="close-circle" />
-          触发报错
         </Menu.Item>
         <Menu.Divider />
         <Menu.Item key="logout">
@@ -170,8 +163,7 @@ export default class Admin extends ExtendComponent<AdminProps, AdminState> {
                 {routes.map((route) => {
                   const { children, redirect, path } = route
                   if (this.props.location.pathname === path && redirect) {
-                    return <Redirect to={redirect}
-                      key={path} />
+                    return <Redirect to={redirect} key={path} />
                   }
                   return children.map((child) => (
                     <Route

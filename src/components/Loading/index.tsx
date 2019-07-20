@@ -1,4 +1,6 @@
 import { Icon, Spin } from 'antd'
+import isFunction from 'lodash/isFunction'
+import omit from 'lodash/omit'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -11,10 +13,16 @@ const LoadingStyle = styled.div`
   transform: translate(-50%, -50%);
 `
 
-const Loading = (props) => {
+interface LoadingProps {
+  child?: () => JSX.Element | React.ElementType
+}
+
+const Loading = (props: LoadingProps) => {
   return (
     <LoadingStyle>
-      <Spin {...props} indicator={LoadingIcon} />
+      <Spin {...(omit(props, 'child'))} indicator={LoadingIcon} >
+        { isFunction(props.child) && props.child() }
+      </Spin>
     </LoadingStyle>
   )
 }

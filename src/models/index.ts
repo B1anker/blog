@@ -4,6 +4,7 @@ import archives from './archives'
 import auth from './auth'
 import category from './category'
 import post from './post'
+import upload from './upload'
 import user from './user'
 
 export const $models = {
@@ -11,7 +12,8 @@ export const $models = {
   user,
   auth,
   category,
-  archives
+  archives,
+  upload
 }
 
 export default () => {

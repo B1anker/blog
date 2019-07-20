@@ -16,6 +16,8 @@ interface EditorProps {
   onChange: (snapshot: any) => void
   value: string
   height: number
+  pid?: string
+  onDrop: (files: File[], cursor: CodeMirror.Position) => void
 }
 
 interface EditorState {
@@ -23,8 +25,19 @@ interface EditorState {
 }
 
 let editor: CodeMirror.Editor
+let line: number = 0
+let ch: number = 0
 
 export default class Editor extends Component<EditorProps, EditorState> {
+  public static getDerivedStateFromProps (nextProps: EditorProps) {
+    if (editor) {
+      editor.setValue(nextProps.value);
+      (editor as any).setCursor({line, ch})
+    }
+    return {
+      value: nextProps.value
+    }
+  }
   private initialled: boolean = false
   private editorRef: React.RefObject<HTMLDivElement> = React.createRef()
   private updateDebounced: () => void
@@ -41,7 +54,7 @@ export default class Editor extends Component<EditorProps, EditorState> {
   }
 
   public componentWillUnmount () {
-    editor!.off('change', this.updateDebounced)
+    editor && editor.off('change', this.updateDebounced)
   }
 
   public getSnapshotBeforeUpdate (prevProps) {
@@ -58,16 +71,23 @@ export default class Editor extends Component<EditorProps, EditorState> {
   }
 
   public componentDidUpdate (prevProps, prevState, { height, value }) {
-    console.log(height, value)
-    if (height && !this.initialled && value) {
-      this.initialled = true
-      this.initial()
+    if (this.props.pid) {
+      if (height && !this.initialled && value) {
+        this.initialled = true
+        this.initial()
+      }
+    } else {
+      if (height && !this.initialled) {
+        this.initialled = true
+        this.initial()
+      }
     }
   }
 
   public render () {
     return (
-      <EditorStyle id="CodeMirror"
+      <EditorStyle
+        id="CodeMirror"
         ref={this.editorRef}
         height={this.props.height}
       />
@@ -85,7 +105,7 @@ export default class Editor extends Component<EditorProps, EditorState> {
         mode: 'markdown',
         lineNumbers: true,
         showCursorWhenSelecting: true,
-        lineWrapping: true,  // 长句子折行
+        lineWrapping: true, // 长句子折行
         theme: 'material',
         keyMap: 'sublime',
         extraKeys: {
@@ -93,11 +113,28 @@ export default class Editor extends Component<EditorProps, EditorState> {
         }
       })
       this.updateDebounced = debounce(this.update, 300).bind(this)
-      editor!.on('change', this.updateDebounced)
+      editor.on('change', this.updateDebounced)
+      editor.on('drop', (editor: CodeMirror.Editor, e) => {
+        this.uploadFiles(editor.getDoc().getCursor(), e.dataTransfer.files)
+        this.setCursor()
+      })
     }
   }
 
+  private uploadFiles (cursor: CodeMirror.Position, files: File[]) {
+    this.props.onDrop(files, cursor)
+  }
+
+  private setCursor () {
+    const cursor = editor.getDoc().getCursor()
+    line = cursor.line
+    ch = cursor.ch
+  }
+
   private update () {
-    this.props.onChange(editor!.getValue())
+    if (this.props.value !== editor.getValue()) {
+      this.setCursor()
+      this.props.onChange(editor.getValue())
+    }
   }
 }

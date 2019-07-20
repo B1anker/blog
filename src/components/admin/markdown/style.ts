@@ -152,9 +152,65 @@ const RendererStyle = styled.div`
   ${CodeStyle}
 `
 
+const UploadImageStyle = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  .upload-image-item {
+    margin-top: 12px;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+`
+
+const UploadImageItemStyle = styled.div`
+  position: relative;
+  padding: 8px;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+
+  .preview {
+    display: inline-block;
+    position: relative;
+    width: 64px;
+    height: 64px;
+    vertical-align: middle;
+
+    img {
+      width: 64px;
+      height: 64px;
+      object-fit: cover;
+    }
+  }
+
+
+  .desc {
+    width: 370px;
+    display: inline-block;
+    margin-left: 16px;
+    vertical-align: middle;
+  }
+
+  .name {
+    display: block;
+    width: 334px;
+  }
+
+  .delete {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+  }
+
+`
+
 export {
   CodeStyle,
   EditorStyle,
   MarkDownStyle,
-  RendererStyle
+  RendererStyle,
+  UploadImageStyle,
+  UploadImageItemStyle
 }

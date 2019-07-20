@@ -1,5 +1,4 @@
-
-const qiniu = require("qiniu")
+const qiniu = require('qiniu')
 const qiniuKey = require('../config/key')
 const fs = require('fs')
 const path = require('path')
@@ -16,32 +15,32 @@ const mac = new qiniu.auth.digest.Mac(
 const options = {
   scope: 'cdn-server'
 }
-var config = new qiniu.conf.Config();
-config.zone = qiniu.zone.Zone_z2;
+var config = new qiniu.conf.Config()
+config.zone = qiniu.zone.Zone_z2
 const putPolicy = new qiniu.rs.PutPolicy(options)
 const uploadToken = putPolicy.uploadToken(mac)
-const putExtra = new qiniu.form_up.PutExtra();
+const putExtra = new qiniu.form_up.PutExtra()
 const formUploader = new qiniu.form_up.FormUploader(config)
 //构造上传函数
 function uploadFile(uploadToken, key, localFile) {
-  formUploader.putFile(uploadToken, key, localFile, putExtra, function(respErr,
-    respBody, respInfo) {
+  formUploader.putFile(uploadToken, key, localFile, putExtra, function(
+    respErr,
+    respBody,
+    respInfo
+  ) {
     if (respErr) {
-      throw respErr;
+      throw respErr
     }
     if (respInfo.statusCode == 200) {
-      console.log(respBody);
+      console.log(respBody)
     } else {
-      console.log(respInfo.statusCode, respBody);
+      console.log(respInfo.statusCode, respBody)
     }
-  });
+  })
 }
 
-
 const addPrefixToFileName = (prefix, file) => `${prefix}/${file}`
-const dirs = [
-  resolve('dist/static')
-]
+const dirs = [resolve('dist/static')]
 
 const files = []
 dirs.forEach((dir) => {
