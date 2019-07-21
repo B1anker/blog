@@ -1,5 +1,5 @@
 const qiniu = require('qiniu')
-const qiniuKey = require('../config/key')
+const qiniuKey = require('/root/confs/qiniu')
 const fs = require('fs')
 const path = require('path')
 
