@@ -1,22 +1,11 @@
 import { stage } from '@/styles/styled/content'
+import { center, radius } from '@/styles/styled/util'
 import styled from 'styled-components'
 import { CodeStyle } from '../../admin/markdown/style'
 
 const BLUE = '#97dffd'
 const ORANGE = '#ff3f1a'
 const PURPLE = '#8378EA'
-
-const center = (justify: string) => {
-  return `
-    display: flex;
-    justify-content: ${justify};
-    align-items: center;
-  `
-}
-
-const border = (border) => {
-  return `border-radius: ${border};`
-}
 
 const PostStyle = styled.article`
   ${stage}
@@ -97,7 +86,7 @@ const PostStyle = styled.article`
   }
 
   .post-badage {
-    ${border('0 4px 4px 0')};
+    ${radius('0 4px 4px 0')};
     position: absolute;
     left: -16px;
     top: 105px;

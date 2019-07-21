@@ -13,7 +13,7 @@ const SECOND_GAP = 1000
 
 export default class MyFooter extends Component<{}, MyFooterState> {
   private blogStartTimestamp: number = new Date(BLOG_START_DATE).getTime()
-  private timer: NodeJS.Timer
+  private timer: number
   constructor (props) {
     super(props)
     this.state = {

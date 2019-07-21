@@ -37,7 +37,7 @@ class Nav extends Component<NavProps, NavState> {
         icon: 'cutlery'
       }, {
         name: '留言板',
-        route: '/comment',
+        route: '/message',
         icon: 'pencil'
       }, {
         name: '关于',

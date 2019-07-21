@@ -21,5 +21,12 @@ export default [
     path: '/archives',
     exact: false,
     component: lazy(() => import(/* webpackChunkName: "archives" */'@/pages/home/archives'))
+  },
+  {
+    name: '留言板',
+    icon: 'message',
+    path: '/message',
+    exact: false,
+    component: lazy(() => import(/* webpackChunkName: "message" */'@/pages/home/message'))
   }
 ]
