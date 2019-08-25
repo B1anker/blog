@@ -12,7 +12,9 @@ class Category extends Model {
   private modelName = '/category'
 
   public getList () {
-    return this.http.get<{ msg: string; list: CategoryModel[] }>(`${this.modelName}`)
+    return this.http.get<{ msg: string; list: CategoryModel[] }>(
+      `${this.modelName}`
+    )
   }
 
   public get (cid: number) {

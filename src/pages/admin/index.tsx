@@ -1,5 +1,5 @@
 import ExtendComponent from '@/core/component'
-import { Avatar, Col, Dropdown, Icon, Layout, Menu, Row } from 'antd'
+import { Avatar, Col, Dropdown, Icon, Layout, Menu, message, Row } from 'antd'
 import React from 'react'
 import { RouteComponentProps } from 'react-router'
 import { Redirect, Route, Switch } from 'react-router-dom'
@@ -37,7 +37,12 @@ export default class Admin extends ExtendComponent<AdminProps, AdminState> {
     )
   }
 
-  public componentDidMount () {
+  public async componentDidMount () {
+    try {
+      await this.$models.auth.check()
+    } catch (err) {
+      this.push('/login')
+    }
     setTimeout(() => {
       if (this.contentEl && this.contentEl.parentElement) {
         this.contentEl.style.height =
@@ -60,7 +65,7 @@ export default class Admin extends ExtendComponent<AdminProps, AdminState> {
           设置
         </Menu.Item>
         <Menu.Divider />
-        <Menu.Item key="logout">
+        <Menu.Item key="logout" onClick={() => this.handleLogout()}>
           <Icon type="logout" />
           退出登录
         </Menu.Item>
@@ -186,5 +191,17 @@ export default class Admin extends ExtendComponent<AdminProps, AdminState> {
     this.setState({
       collapsed: !this.state.collapsed
     })
+  }
+
+  private async handleLogout () {
+    message.info('正在退出...')
+    try {
+      await this.$models.auth.logout()
+      message.success('退出登录成功！')
+      this.push('/login')
+    } catch (err) {
+      message.error('退出登录失败！')
+      throw err
+    }
   }
 }

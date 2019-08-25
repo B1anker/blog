@@ -23,7 +23,9 @@ class Post extends Model {
   private modelName = '/post'
 
   public fetchPostList () {
-    return this.http.get<{ msg: string; list: PostModel[] }>(`${this.modelName}`)
+    return this.http.get<{ msg: string; list: PostModel[] }>(
+      `${this.modelName}`
+    )
   }
 
   public fetchPost (pid) {

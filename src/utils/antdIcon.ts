@@ -2,5 +2,9 @@ export {
   LoadingOutline,
   FullscreenOutline,
   FullscreenExitOutline,
-  CloseOutline
+  CloseOutline,
+  CheckCircleFill,
+  InfoCircleFill,
+  ExclamationCircleFill,
+  CloseCircleFill
 } from '@ant-design/icons'

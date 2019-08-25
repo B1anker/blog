@@ -20,6 +20,14 @@ export class UserModel extends Model {
   public login (data: LoginModel) {
     return this.http.post<{ data: User }>(`${this.modelName}/login`, data)
   }
+
+  public logout () {
+    return this.http.post(`${this.modelName}/logout`)
+  }
+
+  public check () {
+    return this.http.post(`${this.modelName}/check`)
+  }
 }
 
 export default new UserModel()

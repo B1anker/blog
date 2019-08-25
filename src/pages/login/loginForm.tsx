@@ -3,8 +3,6 @@ import { Button, Checkbox, Form, Icon, Input } from 'antd'
 import { FormComponentProps } from 'antd/lib/form'
 import React from 'react'
 
-import style from './style.less'
-
 const FormItem = Form.Item
 export interface LoginFormProps extends FormComponentProps {
   login: (account: string, password: string, remember?: boolean) => void
@@ -25,57 +23,57 @@ export class LoginForm extends ExtendComponent<LoginFormProps, LoginFormState> {
   public render () {
     const { getFieldDecorator } = this.props.form
     return (
-      <Form onSubmit={(e) => {
-        this.handleSubmit(e)
-      }}>
+      <Form className="form"
+        onSubmit={(e) => {
+          this.handleSubmit(e)
+        }}
+      >
         <FormItem hasFeedback={true}>
-          {
-            getFieldDecorator('account', {
-              rules: [{
-                required: true, message: '请输入用户名!'
-              }, {
+          {getFieldDecorator('account', {
+            rules: [
+              {
+                required: true,
+                message: '请输入用户名!'
+              },
+              {
                 validator: this.checkaccount
-              }],
-              validateTrigger: ['onBlur', 'onChange']
-            })(
-              <Input prefix={
-                  <Icon type="user"
-                    style={{ color: 'rgba(0,0,0,.25)' }} />
-                }
-                size="large"
-                placeholder="请输入账号" />
-            )
-          }
+              }
+            ],
+            validateTrigger: ['onBlur', 'onChange']
+          })(
+            <Input
+              prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+              size="large"
+              placeholder="请输入账号"
+            />
+          )}
         </FormItem>
         <FormItem hasFeedback={true}>
-          {
-            getFieldDecorator('password', {
-              rules: [{ required: true, message: '请输入密码！' }],
-              validateTrigger: ['onBlur', 'onChange']
-            })(
-              <Input prefix={
-                <Icon type="lock"
-                  style={{ color: 'rgba(0,0,0,.25)' }} />}
-                type="password"
-                size="large"
-                placeholder="请输入密码" />
-            )
-          }
+          {getFieldDecorator('password', {
+            rules: [{ required: true, message: '请输入密码！' }],
+            validateTrigger: ['onBlur', 'onChange']
+          })(
+            <Input
+              prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+              type="password"
+              size="large"
+              placeholder="请输入密码"
+            />
+          )}
         </FormItem>
         <FormItem>
-          {
-            getFieldDecorator('remember', {
-              valuePropName: 'checked',
-              initialValue: true,
-            })(
-              <Checkbox>记住登录</Checkbox>
-            )}
-            <Button type="primary"
-              htmlType="submit"
-              className={style.submit}
-              loading={this.state.pending}>
-              Log in
-            </Button>
+          {getFieldDecorator('remember', {
+            valuePropName: 'checked',
+            initialValue: true
+          })(<Checkbox><span className="remember-text">记住登录</span></Checkbox>)}
+          <Button
+            type="primary"
+            htmlType="submit"
+            className="submit"
+            loading={this.state.pending}
+          >
+            Log in
+          </Button>
         </FormItem>
       </Form>
     )
@@ -92,8 +90,8 @@ export class LoginForm extends ExtendComponent<LoginFormProps, LoginFormState> {
   }
 
   public handleSubmit (e) {
-    e.preventDefault()
-    this.props.form.validateFields(async (err, values) => {
+     e.preventDefault()
+     this.props.form.validateFields(async (err, values) => {
       if (!err) {
         if (this.state.pending) {
           return
@@ -102,7 +100,11 @@ export class LoginForm extends ExtendComponent<LoginFormProps, LoginFormState> {
           pending: true
         })
         try {
-          await this.props.login(values.account, values.password, values.remember)
+          await this.props.login(
+            values.account,
+            values.password,
+            values.remember
+          )
           if (!this.unmount) {
             this.setState({
               pending: false

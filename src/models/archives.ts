@@ -10,7 +10,9 @@ class Archives extends Model {
   private modelName = '/archives'
 
   public getTimeline () {
-    return this.http.get<{ msg: string; archives: ArchiveModel[] }>(`${this.modelName}/timeline`)
+    return this.http.get<{ msg: string; archives: ArchiveModel[] }>(
+      `${this.modelName}/timeline`
+    )
   }
 }
 

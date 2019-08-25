@@ -6,7 +6,9 @@ interface BaseP {
   history?: any
 }
 
-export type ExtendComponentProps<P> = Readonly<{ children?: ReactNode }> & Readonly<P> & Readonly<BaseP>
+export type ExtendComponentProps<P> = Readonly<{ children?: ReactNode }> &
+  Readonly<P> &
+  Readonly<BaseP>
 
 class ExtendComponent<P = any, S = any, SS = any> extends Component<P, S, SS> {
   public $models = $models
