@@ -6,7 +6,7 @@ const axios = require('axios').default
 const uploadIndex = () => {
   axios
     .put(
-      'htts://b1anker.com/api/v1/workflow/update/blog/index',
+      'https://b1anker.com/api/v1/workflow/update/blog/index',
       {
         template: fs.readFileSync(
           path.resolve(__dirname, '../dist/index.html'),
