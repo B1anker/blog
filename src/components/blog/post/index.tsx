@@ -1,11 +1,11 @@
-import CodeBlock from '@/components/admin/markdown/prism'
+import CodeBlock from '@/components/Admin/Markdown/Prism'
 import { PostModel } from '@/models/post'
 import moment from 'moment'
 import React, { Component } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { Link } from 'react-router-dom'
-import Popup from './popup'
 import { PostStyle } from './style'
+import Popup from './popup'
 
 export interface InnerPost extends PostModel {
   render: string

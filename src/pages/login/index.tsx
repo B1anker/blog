@@ -7,7 +7,7 @@ import LoginStyle from './style'
 
 import ExtendComponent from '@/core/component'
 
-import LoginForm from './loginForm'
+import LoginForm from './LoginForm'
 
 interface LoginState {
   loginState: string

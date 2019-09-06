@@ -1,6 +1,5 @@
-import Comment from '@/components/blog/Comment'
-import Disqus from '@/components/blog/disqus'
-import Post from '@/components/blog/post'
+import Comment from '@/components/Blog/Comment'
+import Post from '@/components/Blog/post'
 import ExtendComponent from '@/core/component'
 import { Icon, Spin } from 'antd'
 import React from 'react'

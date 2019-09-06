@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Navigator from '../navigator'
+import Navigator from '../Navigator'
 import { Blur, Poster } from './style'
 
 export default class Header extends Component {

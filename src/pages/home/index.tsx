@@ -1,7 +1,7 @@
-import MyFooter from '@/components/blog/footer'
-import Header from '@/components/blog/header'
-import Profile from '@/components/blog/profile'
-import Scroll from '@/components/blog/scroll'
+import MyFooter from '@/components/Blog/footer'
+import Header from '@/components/Blog/header'
+import Profile from '@/components/Blog/profile'
+import Scroll from '@/components/Blog/scroll'
 import ExtendComponent from '@/core/component'
 import React from 'react'
 import {
@@ -9,7 +9,7 @@ import {
   RouteComponentProps,
   Switch
 } from 'react-router-dom'
-import Articles from './articles'
+import Articles from './Articles'
 import routes from './routes'
 import { MainContentStyle } from './style'
 

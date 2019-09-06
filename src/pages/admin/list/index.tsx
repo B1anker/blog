@@ -4,7 +4,7 @@ import { Button, message, Popconfirm, Table, Tag } from 'antd'
 import { ColumnProps } from 'antd/lib/table'
 import moment from 'moment'
 import React from 'react'
-import { tagsColorList } from '../postEdit'
+import { tagsColorList } from '../PostEdit'
 import { OperateButtons } from './style'
 
 interface Column extends PostModel {

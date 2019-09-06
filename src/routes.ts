@@ -6,34 +6,34 @@ export default [
     icon: 'home',
     path: '/',
     exact: true,
-    component: lazy(() => import(/* webpackChunkName: "home" */ '@/pages/home'))
+    component: lazy(() => import(/* webpackChunkName: "home" */ '@/pages/Home'))
   },
   {
     name: '登录页',
     path: '/login',
     exact: false,
-    component: lazy(() => import(/* webpackChunkName: "login" */ '@/pages/login'))
+    component: lazy(() => import(/* webpackChunkName: "login" */ '@/pages/Login'))
   },
   {
     name: '管理员页',
     icon: 'admin',
     path: '/admin',
     exact: false,
-    component: lazy(() => import(/* webpackChunkName: "admin" */ '@/pages/admin'))
+    component: lazy(() => import(/* webpackChunkName: "admin" */ '@/pages/Admin'))
   },
   {
     name: '工具页',
     icon: 'tool',
     path: '/tools',
     exact: false,
-    component: lazy(() => import(/* webpackChunkName: "tools" */ '@/pages/tools'))
+    component: lazy(() => import(/* webpackChunkName: "tools" */ '@/pages/Tools'))
   },
   {
     name: '首页',
     icon: 'home',
     path: '/',
     exact: false,
-    component: lazy(() => import(/* webpackChunkName: "home" */ '@/pages/home'))
+    component: lazy(() => import(/* webpackChunkName: "home" */ '@/pages/Home'))
   },
   {
     name: '404',

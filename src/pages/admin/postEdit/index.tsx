@@ -1,4 +1,4 @@
-import Markdown from '@/components/admin/markdown'
+import Markdown from '@/components/Admin/Markdown'
 import Toolbar, { MenuItem } from '@/components/Toolbar'
 import ExtendComponent from '@/core/component'
 import { CategoryModel } from '@/models/category'

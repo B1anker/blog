@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ReactMarkdown from 'react-markdown'
-import CodeBlock from './prism'
+import CodeBlock from './Prism'
 import { RendererStyle } from './style'
 
 interface RendererProps {

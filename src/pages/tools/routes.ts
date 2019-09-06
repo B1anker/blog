@@ -6,6 +6,6 @@ export default [
     icon: 'face',
     path: '/tools/face',
     exact: true,
-    component: lazy(() => import(/* webpackChunkName: "face" */ './face'))
+    component: lazy(() => import(/* webpackChunkName: "face" */ './Face'))
   }
 ]

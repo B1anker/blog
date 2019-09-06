@@ -1,7 +1,7 @@
 import ExtendComponent from '@/core/component'
 import React from 'react'
 import { RouteComponentProps } from 'react-router-dom'
-import Articles from '../articles'
+import Articles from '../Articles'
 
 interface RouteParmas {
   pid?: string

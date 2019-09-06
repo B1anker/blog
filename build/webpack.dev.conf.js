@@ -1,10 +1,10 @@
-const webpack = require("webpack")
-const HtmlWebPackPlugin = require("html-webpack-plugin")
-const path = require("path")
+const webpack = require('webpack')
+const HtmlWebPackPlugin = require('html-webpack-plugin')
+const path = require('path')
 const baseWebpackConfig = require('./webpack.base.conf')
 const merge = require('webpack-merge')
-const config = require("../config")
-const utils = require("./utils")
+const config = require('../config')
+const utils = require('./utils')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
@@ -12,7 +12,7 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 const fs = require('fs')
 
 const resolve = (dir) => {
-  return path.join(__dirname, "..", dir)
+  return path.join(__dirname, '..', dir)
 }
 
 const HOST = process.env.HOST
@@ -21,12 +21,20 @@ const PORT = process.env.PORT && Number(process.env.PORT)
 
 const devWebpackConfig = merge(baseWebpackConfig, {
   devtool: config.dev.devtool,
+  resolve: {
+    alias: {
+      'react-dom': '@hot-loader/react-dom'
+    }
+  },
   devServer: {
     clientLogLevel: 'warning',
     historyApiFallback: {
       rewrites: [
-        { from: /.*/, to: path.posix.join(config.dev.assetsPublicPath, 'index.html') },
-      ],
+        {
+          from: /.*/,
+          to: path.posix.join(config.dev.assetsPublicPath, 'index.html')
+        }
+      ]
     },
     // inline: true,
     hot: true,
@@ -65,8 +73,8 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     new webpack.NamedModulesPlugin(), // HMR shows correct file names in console on update.
     new webpack.NoEmitOnErrorsPlugin(),
     new HtmlWebPackPlugin({
-      template: "index.html",
-      filename: "index.html",
+      template: 'index.html',
+      filename: 'index.html',
       inject: true
     }),
     // copy custom static assets
@@ -92,14 +100,18 @@ module.exports = new Promise((resolve, reject) => {
       devWebpackConfig.devServer.port = port
 
       // Add FriendlyErrorsPlugin
-      devWebpackConfig.plugins.push(new FriendlyErrorsPlugin({
-        compilationSuccessInfo: {
-          messages: [`Your application is running here: http://${devWebpackConfig.devServer.host}:${port}`],
-        },
-        onErrors: config.dev.notifyOnErrors
-        ? utils.createNotifierCallback()
-        : undefined
-      }))
+      devWebpackConfig.plugins.push(
+        new FriendlyErrorsPlugin({
+          compilationSuccessInfo: {
+            messages: [
+              `Your application is running here: http://${devWebpackConfig.devServer.host}:${port}`
+            ]
+          },
+          onErrors: config.dev.notifyOnErrors
+            ? utils.createNotifierCallback()
+            : undefined
+        })
+      )
 
       resolve(devWebpackConfig)
     }

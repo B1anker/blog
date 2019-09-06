@@ -1,4 +1,4 @@
-import Comment from '@/components/blog/Comment'
+import Comment from '@/components/Blog/Comment'
 import React from 'react'
 import { MessageStyle } from './style'
 

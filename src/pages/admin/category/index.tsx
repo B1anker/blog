@@ -6,7 +6,7 @@ import { ColumnProps } from 'antd/lib/table'
 import defaultsDeep from 'lodash/defaultsDeep'
 import moment from 'moment'
 import React from 'react'
-import EditableCell, { EditableRow } from './editableCell'
+import EditableCell, { EditableRow } from './EditableCell'
 import { CategoryStyle } from './style'
 
 const defaultMenu: MenuItem[] = [

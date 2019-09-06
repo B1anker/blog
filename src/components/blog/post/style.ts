@@ -1,7 +1,7 @@
 import { stage } from '@/styles/styled/content'
 import { center, radius } from '@/styles/styled/util'
 import styled from 'styled-components'
-import { CodeStyle } from '../../admin/markdown/style'
+import { CodeStyle } from '../../Admin/Markdown/style'
 
 const BLUE = '#97dffd'
 const ORANGE = '#ff3f1a'

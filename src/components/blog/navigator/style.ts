@@ -55,7 +55,7 @@ const MenuItem = styled.li`
     color: #666;
     line-height: ${ NavItemHeight };
     transition: all ease .5s;
-    text-decoration: none
+    text-decoration: none;
 
     &:hover {
       background: hsla(0, 0%, 100%, .7);

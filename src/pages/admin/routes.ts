@@ -12,25 +12,25 @@ export default [
         path: '/admin/post/edit',
         noRender: true,
         exact: true,
-        component: lazy(() => import(/* webpackChunkName: "postEdit" */ './postEdit'))
+        component: lazy(() => import(/* webpackChunkName: "postEdit" */ './PostEdit'))
       },
       {
         name: '编辑',
         icon: 'edit',
         path: '/admin/post/edit/:pid',
-        component: lazy(() => import(/* webpackChunkName: "postEdit" */ './postEdit'))
+        component: lazy(() => import(/* webpackChunkName: "postEdit" */ './PostEdit'))
       },
       {
         name: '列表',
         icon: 'table',
         path: '/admin/post/list',
-        component: lazy(() => import(/* webpackChunkName: "list" */ './list'))
+        component: lazy(() => import(/* webpackChunkName: "list" */ './List'))
       },
       {
         name: '分类',
         icon: 'bars',
         path: '/admin/post/category',
-        component: lazy(() => import(/* webpackChunkName: "category" */ './category'))
+        component: lazy(() => import(/* webpackChunkName: "category" */ './Category'))
       }
     ]
   }
