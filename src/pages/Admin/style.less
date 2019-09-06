@@ -1,0 +1,56 @@
+@import "~antd/lib/style/themes/default.less";
+
+.layout {
+  height: 100%;
+}
+
+.logo {
+  height: 64px;
+}
+
+.header {
+  background: white;
+  padding: 0 17px 0 0;
+}
+
+.trigger {
+  font-size: 18px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: color .3s;
+}
+
+.content {
+  height: 100%;
+}
+
+.action {
+  cursor: pointer;
+  padding: 0 12px;
+  display: inline-block;
+  transition: all .3s;
+  height: 100%;
+  > i {
+    font-size: 16px;
+    vertical-align: middle;
+    color: @text-color;
+  }
+  &:hover,
+  &:global(.ant-popover-open) {
+    background: @primary-1;
+  }
+}
+
+.avatar {
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+.menu {
+  :global(.anticon) {
+    margin-right: 8px;
+  }
+  :global(.ant-dropdown-menu-item) {
+    width: 160px;
+  }
+}
