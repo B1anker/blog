@@ -31,7 +31,8 @@ if (process.env['QINIU_ACCESS_KEY'] && process.env['QINIU_SECRET_KEY']) {
       respInfo
     ) {
       if (respErr) {
-        throw respErr
+        console.log(respErr)
+        console.log(`${key}上传失败`)
       }
       if (respInfo.statusCode == 200) {
         console.log(respBody)
