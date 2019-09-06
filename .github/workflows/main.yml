@@ -2,22 +2,25 @@ name: CI
 
 on:
   push:
-   bracheds:
+   branches:
    - master
 
 jobs:
   build:
     name: build client page
     runs-on: ubuntu-latest
-    
+
     steps:
     - name: setup node environment
       uses: actions/setup-node@v1
       with:
         node-version: 10
+
     - name: Check out source code
       uses: actions/checkout@v1
+
     - name: Run install
       run: npm install
+
     - name: Run build
       run: npm run build
