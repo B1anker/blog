@@ -1,6 +1,6 @@
 FROM node:10
 LABEL Version="1.0"
-LABEL Name="blog"
+LABEL Name="blog-client"
 LABEL Maintainer="b1anker"
 WORKDIR /root/blog
 COPY . .

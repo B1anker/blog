@@ -7,20 +7,28 @@ on:
 
 jobs:
   build:
-    name: build client page
+    name: 构建博客页面
     runs-on: ubuntu-latest
 
     steps:
-    - name: setup node environment
+    - name: 设置node环境
       uses: actions/setup-node@v1
       with:
         node-version: 10
 
-    - name: Check out source code
+    - name: 拉取代码
       uses: actions/checkout@v1
 
-    - name: Run install
+    - name: 安装依赖
       run: npm install
 
-    - name: Run build
+    - name: 构建编译
       run: npm run build
+
+    - name: 上传
+      env:
+        QINIU_ACCESS_KEY: ${{ secrets.QINIU_ACCESS_KEY }}
+        QINIU_SECRET_KEY: ${{ secrets.QINIU_SECRET_KEY }}
+      run: |
+        env
+        echo QINIU_ACCESS_KEY:$QINIU_ACCESS_KEY

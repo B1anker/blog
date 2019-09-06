@@ -4,8 +4,8 @@ import moment from 'moment'
 import React, { Component } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { Link } from 'react-router-dom'
+import Popup from './Popup'
 import { PostStyle } from './style'
-import Popup from './popup'
 
 export interface InnerPost extends PostModel {
   render: string

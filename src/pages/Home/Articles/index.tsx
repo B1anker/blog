@@ -1,5 +1,5 @@
 import Comment from '@/components/Blog/Comment'
-import Post from '@/components/Blog/post'
+import Post from '@/components/Blog/Post'
 import ExtendComponent from '@/core/component'
 import { Icon, Spin } from 'antd'
 import React from 'react'
