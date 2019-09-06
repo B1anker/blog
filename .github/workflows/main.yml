@@ -29,6 +29,4 @@ jobs:
       env:
         QINIU_ACCESS_KEY: ${{ secrets.QINIU_ACCESS_KEY }}
         QINIU_SECRET_KEY: ${{ secrets.QINIU_SECRET_KEY }}
-      run: |
-        env
-        echo QINIU_ACCESS_KEY:$QINIU_ACCESS_KEY
+      run: npm run up
