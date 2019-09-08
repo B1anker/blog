@@ -29,7 +29,7 @@ const uploadIndex = () => {
     })
     .catch((err) => {
       signale.error('更新index.html失败')
-      signale.error(err)
+      throw err
     })
 }
 
