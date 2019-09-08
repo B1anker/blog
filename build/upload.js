@@ -20,7 +20,7 @@ const uploadIndex = () => {
       {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${proccess.BEARER_TOKEN}`
+          'Authorization': `Bearer ${process.env.BEARER_TOKEN}`
         }
       }
     )
