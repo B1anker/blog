@@ -6,25 +6,27 @@ const { Signale } = require('signale')
 
 const signale = new Signale()
 const uploadIndex = () => {
+  const template = fs.readFileSync(
+    path.resolve(__dirname, '../dist/index.html'),
+    {
+      encoding: 'utf8'
+    }
+  )
   axios
     .put(
       'https://b1anker.com/api/v1/workflow/update/blog/index',
       {
-        template: fs.readFileSync(
-          path.resolve(__dirname, '../dist/index.html'),
-          {
-            encoding: 'utf8'
-          }
-        )
+        template
       },
       {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${process.env.BEARER_TOKEN}`
+          Authorization: `Bearer ${process.env.BEARER_TOKEN}`
         }
       }
     )
     .then((res) => {
+      signale.info(template)
       signale.success('更新index.html成功')
     })
     .catch((err) => {
@@ -134,13 +136,13 @@ if (process.env['QINIU_ACCESS_KEY'] && process.env['QINIU_SECRET_KEY']) {
             file,
             config
           })
-          signale.success(`${key}上传成功`);
-        } catch(err) {
-          signale.error(`${key}上传失败`);
+          signale.success(`${key}上传成功`)
+        } catch (err) {
+          signale.error(`${key}上传失败`)
           signale.error(err)
         }
       } else {
-        signale.success(`${key}已存在，跳过上传`);
+        signale.success(`${key}已存在，跳过上传`)
       }
     })
   ).then(() => {
