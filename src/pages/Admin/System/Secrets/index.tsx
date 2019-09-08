@@ -14,6 +14,7 @@ import { ColumnProps } from 'antd/lib/table'
 import defaultsDeep from 'lodash/defaultsDeep'
 import moment from 'moment'
 import React, { useEffect, useState } from 'react'
+import AddSecretModal from './AddSecretModal'
 import EditableCell, { EditableFormRow } from './EditableCell'
 import { SecretsStyle } from './style'
 
@@ -43,6 +44,10 @@ let originDataSource: Array<SecretModel & { index: number }> = []
 
 const Secrets = () => {
   const [dataSource, setDataSource] = useState<SecretModel[]>([])
+  const [mode, setMode] = useState<'add' | 'edit'>('add')
+  const [addSecretModalVisible, setAddSecretModalVisible] = useState<boolean>(
+    false
+  )
   const [loading, setLoading] = useState<boolean>(true)
   const [toolbar, setToolbar] = useState<any>(setInitialToolbarOfState(menu))
 
@@ -80,16 +85,8 @@ const Secrets = () => {
     message.success('修改成功！')
   }
 
-  const handleAdd = () => {
-    const newData = {
-      key: dataSource.length.toString(),
-      name: '123',
-      created: 0,
-      updated: 0,
-      id: '',
-      desc: ''
-    }
-    setDataSource([...dataSource, newData])
+  const openAddSecretModal = () => {
+    setAddSecretModalVisible(true)
   }
 
   const handleDelete = async (index: number) => {
@@ -113,6 +110,23 @@ const Secrets = () => {
     setDataSource(
       originDataSource.filter(({ key }) => !value || key.includes(value))
     )
+  }
+
+  const handleAddSecretCancel = () => {
+    setAddSecretModalVisible(false)
+  }
+
+  const handleAddSecretOk = () => {
+    setLoading(true)
+    secretsApi.getSecrets().then((response) => {
+      const secrets = response.data.list.map((secret, index) => {
+        return { ...secret, index }
+      })
+      originDataSource = secrets
+      setDataSource(originDataSource)
+      setLoading(false)
+      setAddSecretModalVisible(false)
+    })
   }
 
   const columns: Column[] = [
@@ -201,7 +215,7 @@ const Secrets = () => {
         onChange={(key: string, value) => handleToolbarChange(key, value)}
         toolbar={toolbar}
         append={
-          <Button type="primary" onClick={() => handleAdd()}>
+          <Button type="primary" onClick={openAddSecretModal}>
             添加
           </Button>
         }
@@ -228,6 +242,12 @@ const Secrets = () => {
             })
           }
         })}
+      />
+      <AddSecretModal
+        visible={addSecretModalVisible}
+        mode={mode}
+        handleCancel={handleAddSecretCancel}
+        handleOk={handleAddSecretOk}
       />
     </SecretsStyle>
   )

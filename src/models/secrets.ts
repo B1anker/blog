@@ -7,6 +7,13 @@ export interface SecretModel {
   created: number
   updated: number
 }
+
+interface CreateSecretOptions {
+  key: string
+  value: string
+  desc?: string
+}
+
 interface UpdateSecretOptions {
   key: string
   desc?: string
@@ -22,10 +29,12 @@ class Secrets extends Model {
     )
   }
 
+  public createSecret (createSecretOptions: CreateSecretOptions) {
+    return this.http.post(`${this.modelName}`, createSecretOptions)
+  }
+
   public deleteSecret (key: string) {
-    return this.http.delete(
-      `${this.modelName}/${key}`
-    )
+    return this.http.delete(`${this.modelName}/${key}`)
   }
 
   public updateSecret ({ key, value, desc }: UpdateSecretOptions) {
