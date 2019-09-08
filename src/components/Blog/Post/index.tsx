@@ -1,5 +1,5 @@
 import CodeBlock from '@/components/Admin/Markdown/Prism'
-import { PostModel } from '@/models/post'
+import { PostModel } from '@/models/posts'
 import moment from 'moment'
 import React, { Component } from 'react'
 import ReactMarkdown from 'react-markdown'

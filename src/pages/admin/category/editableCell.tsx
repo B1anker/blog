@@ -86,13 +86,6 @@ export default class EditableCell extends ExtendComponent<
                         }}
                         onClick={() => this.save()}
                       />
-                      {/* <Icon type="close-circle"
-                        className="close"
-                        theme="filled"
-                        style={{
-                          color: '#f5222d'
-                        }}
-                      /> */}
                     </EditableInputStyle>
                   )}
                 </FormItem>

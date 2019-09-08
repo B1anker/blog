@@ -5,7 +5,7 @@ import { Icon, Spin } from 'antd'
 import React from 'react'
 import ArticleStyle from './style'
 
-import { PostModel } from '@/models/post'
+import { PostModel } from '@/models/posts'
 
 interface ArticlesProps {
   pathname: string
@@ -87,11 +87,11 @@ export default class Articles extends ExtendComponent<
     try {
       let posts: PostModel[] = []
       if (this.type === 'summary') {
-        const { data } = await this.$models.post.fetchPostList()
+        const { data } = await this.$models.posts.fetchPostList()
         posts = data.list
       } else {
-        const { data } = await this.$models.post.fetchPost(this.props.pid)
-        this.$models.post.view(this.props.pid)
+        const { data } = await this.$models.posts.fetchPost(this.props.pid)
+        this.$models.posts.view(this.props.pid)
         posts = [data.post]
       }
       this.setState({

@@ -6,5 +6,7 @@ export {
   CheckCircleFill,
   InfoCircleFill,
   ExclamationCircleFill,
-  CloseCircleFill
+  CloseCircleFill,
+  FileMarkdownOutline,
+  SettingOutline
 } from '@ant-design/icons'

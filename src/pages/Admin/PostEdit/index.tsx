@@ -2,7 +2,7 @@ import Markdown from '@/components/Admin/Markdown'
 import Toolbar, { MenuItem } from '@/components/Toolbar'
 import ExtendComponent from '@/core/component'
 import { CategoryModel } from '@/models/category'
-import { UpdatePostModel } from '@/models/post'
+import { UpdatePostModel } from '@/models/posts'
 import { Button, Icon, message, Tag } from 'antd'
 import defaulsDeep from 'lodash/defaultsDeep'
 import isEqual from 'lodash/isEqual'
@@ -108,7 +108,7 @@ export default class PostEdit extends ExtendComponent<
     this.getCategoryList()
     this.setMarkdownHeight()
     if (this.pid) {
-      const { data } = await this.$models.post.fetchPost(this.pid)
+      const { data } = await this.$models.posts.fetchPost(this.pid)
       const { post } = data
       this.setState({
         toolbar: {
@@ -279,10 +279,10 @@ export default class PostEdit extends ExtendComponent<
         tags: this.state.tags
       }
       if (this.mode === 'add') {
-        await this.$models.post.addPost(model)
+        await this.$models.posts.addPost(model)
       } else {
         model.id = this.pid
-        await this.$models.post.updatePost(model)
+        await this.$models.posts.updatePost(model)
       }
       this.finish()
     } catch (err) {

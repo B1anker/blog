@@ -1,6 +1,17 @@
-import { lazy } from 'react'
+import { ComponentType, lazy, LazyExoticComponent } from 'react'
 
-export default [
+interface Route {
+  name: string
+  icon?: string
+  component?: LazyExoticComponent<ComponentType<any>>
+  path: string
+  redirect?: string
+  noRender?: boolean
+  exact?: boolean
+  children?: Route[]
+}
+
+const routes: Route[] = [
   {
     name: '文章管理',
     icon: 'file-markdown',
@@ -33,5 +44,21 @@ export default [
         component: lazy(() => import(/* webpackChunkName: "category" */ './Category'))
       }
     ]
+  },
+  {
+    name: '系统管理',
+    icon: 'setting',
+    path: '/admin/system',
+    redirect: '/admin/system/secrets',
+    children: [
+      {
+        name: '秘钥管理',
+        path: '/admin/system/secrets',
+        exact: true,
+        component: lazy(() => import(/* webpackChunkName: "secrets" */ './System/Secrets'))
+      }
+    ]
   }
 ]
+
+export default routes

@@ -94,7 +94,7 @@ export default class Admin extends ExtendComponent<AdminProps, AdminState> {
                   <Menu.SubMenu
                     title={
                       <span>
-                        <Icon type={route.icon} />
+                        { route.icon && <Icon type={route.icon} /> }
                         <span>{route.name}</span>
                       </span>
                     }
@@ -116,7 +116,7 @@ export default class Admin extends ExtendComponent<AdminProps, AdminState> {
               }
               return (
                 <Menu.Item key={index}>
-                  <Icon type={route.icon} />
+                  { route.icon && <Icon type={route.icon} /> }
                   <span>{route.name}</span>
                 </Menu.Item>
               )
@@ -170,7 +170,7 @@ export default class Admin extends ExtendComponent<AdminProps, AdminState> {
                   if (this.props.location.pathname === path && redirect) {
                     return <Redirect to={redirect} key={path} />
                   }
-                  return children.map((child) => (
+                  return children && children.map((child) => (
                     <Route
                       path={child.path}
                       exact={child.exact}

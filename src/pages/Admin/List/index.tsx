@@ -1,5 +1,5 @@
 import ExtendComponent from '@/core/component'
-import { PostModel } from '@/models/post'
+import { PostModel } from '@/models/posts'
 import { Button, message, Popconfirm, Table, Tag } from 'antd'
 import { ColumnProps } from 'antd/lib/table'
 import moment from 'moment'
@@ -150,7 +150,7 @@ export default class List extends ExtendComponent<{}, ListState> {
     this.setState({
       loading: true
     })
-    const { data } = await this.$models.post.fetchPostList()
+    const { data } = await this.$models.posts.fetchPostList()
     data.list.forEach((l) => {
       l.key = l.id
     })
@@ -164,7 +164,7 @@ export default class List extends ExtendComponent<{}, ListState> {
 
   public async handleDelete (record: PostModel) {
     try {
-      await this.$models.post.delPost(record.id)
+      await this.$models.posts.delPost(record.id)
       message.success('删除成功')
     } catch (err) {
       throw err
