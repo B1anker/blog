@@ -26,10 +26,10 @@ const uploadIndex = () => {
       }
     )
     .then((res) => {
-      signale.info(template)
       signale.success('更新index.html成功')
     })
     .catch((err) => {
+      signale.info(template)
       signale.error('更新index.html失败')
       throw err
     })
