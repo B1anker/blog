@@ -141,7 +141,7 @@ export default class Admin extends ExtendComponent<AdminProps, AdminState> {
                     <span className={`${styles.action} ${styles.account}`}>
                       <Avatar
                         className={styles.avatar}
-                        src={require('../../assets/avatar.jpg')}
+                        src={require('@/assets/avatar.jpg')}
                       />
                       <span className={styles.name}>b1anker</span>
                     </span>

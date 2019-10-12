@@ -8,5 +8,6 @@ export {
   ExclamationCircleFill,
   CloseCircleFill,
   FileMarkdownOutline,
-  SettingOutline
+  SettingOutline,
+  PlusOutline
 } from '@ant-design/icons'

@@ -21,7 +21,7 @@ const ProfileStyle  = styled.div`
   }
 
   .avatar {
-    background-image: url(${require('@/assets/avartar.jpg')});
+    background-image: url(${require('@/assets/avatar.jpg')});
     border-radius: 50%;
     margin: 0 auto;
     width: ${AVATAR_SIZE};

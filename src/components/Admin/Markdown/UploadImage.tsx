@@ -1,5 +1,5 @@
 import upload from '@/models/upload'
-import { Modal } from 'antd'
+import { message, Modal } from 'antd'
 import defaultsDeep from 'lodash/defaultsDeep'
 import * as qiniu from 'qiniu-js'
 import { Subscription } from 'qiniu-js'
@@ -87,6 +87,8 @@ const UploadImage = (props: UploadImageProps) => {
         const newFilesData = Array.from(filesData)
         newFilesData[index].percent = ~~res.total.percent
         setFilesData(newFilesData)
+      }, (err: any) => {
+        message.error(`${filesData[index].name}: ${err.message}`)
       })
     })
   }
