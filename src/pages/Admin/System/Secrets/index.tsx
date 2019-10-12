@@ -2,13 +2,9 @@ import Toolbar, { MenuItem } from '@/components/Toolbar'
 import secretsApi, { SecretModel } from '@/models/secrets'
 import {
   Button,
-  Form,
-  Icon,
-  Input,
   message,
   Popconfirm,
-  Table,
-  Tag
+  Table
 } from 'antd'
 import { ColumnProps } from 'antd/lib/table'
 import defaultsDeep from 'lodash/defaultsDeep'

@@ -17,18 +17,17 @@ const Blur = styled.div`
 
 const Poster = styled.div`
   width: 100%;
-  height: 650px;
   background-image: url(${require('@/assets/poster.png')});
   background-size: cover;
   background-position: top;
   background-repeat: no-repeat;
 
   @media only screen and (min-width: 1600px) {
-    height: 700px;
+    height: 480px;
   }
 
   @media only screen and (min-width: 1920px) {
-    height: 800px;
+    height: 650px;
   }
 
   @media only screen and (max-width: 991px) {

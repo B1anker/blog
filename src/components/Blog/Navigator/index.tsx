@@ -1,3 +1,4 @@
+import analyze from '@/models/analyze'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -20,7 +21,7 @@ interface NavState {
 }
 
 class Nav extends Component<NavProps, NavState> {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       navList: [
@@ -53,11 +54,11 @@ class Nav extends Component<NavProps, NavState> {
     }
   }
 
-  get scrolled() {
+  get scrolled () {
     return this.props.system.scrolled
   }
 
-  public render() {
+  public render () {
     return (
       <Navigator className={this.scrolled ? 'site-nav active' : 'site-nav'}>
         <Menu id="menu" className="menu">

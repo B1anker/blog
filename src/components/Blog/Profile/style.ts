@@ -7,7 +7,7 @@ const SOCIAL_ITEM_SIZE = '40px'
 const ProfileStyle  = styled.div`
   width: 315px;
   padding: 20px;
-  max-height: 400px;
+  max-height: 420px;
   box-sizing: border-box;
   color: #555;
   background: #fff;
@@ -21,7 +21,7 @@ const ProfileStyle  = styled.div`
   }
 
   .avatar {
-    background-image: url(${require('@/assets/avartar-2.jpeg')});
+    background-image: url(${require('@/assets/avartar.jpg')});
     border-radius: 50%;
     margin: 0 auto;
     width: ${AVATAR_SIZE};
@@ -111,6 +111,11 @@ const ProfileStyle  = styled.div`
         }
       }
     }
+  }
+
+  .analyze {
+    margin-top: 6px;
+    text-align: center;
   }
 `
 

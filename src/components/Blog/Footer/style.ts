@@ -266,7 +266,7 @@ const FooterStyle = styled.footer`
     height: 368px;
     z-index: 1;
     position: absolute;
-    bottom: 48px;
+    bottom: 54px;
     width: 100%;
     pointer-events: none;
   }
